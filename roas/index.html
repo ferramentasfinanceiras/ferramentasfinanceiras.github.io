@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calculadora de ROAS | Retorno sobre Investimento em Anúncios</title>
+
+  <meta name="description" content="Calcule gratuitamente o ROAS de suas campanhas de publicidade. Descubra quanto sua empresa gera em receita para cada real investido em anúncios.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://ferramentasfinanceiras.github.io/roas/">
+
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W4NXFVNT');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+    crossorigin="anonymous">
+  </script>
+
+  <style>
+
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #e4e7ec;
+      --primary: #2457e6;
+      --primary-dark: #1946c4;
+      --success: #12805c;
+      --danger: #c43232;
+      --shadow: 0 10px 30px rgba(16,24,40,.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+
+    /* HEADER */
+
+    header {
+      margin-bottom: 24px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .breadcrumb a {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 760px;
+    }
+
+    /* ADS */
+
+    .ad-container {
+      min-height: 90px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* GRID */
+
+    .grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* CARD */
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin: 0 0 18px;
+    }
+
+    /* FORM */
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 650;
+      margin-bottom: 7px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .prefix {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid #d0d5dd;
+      border-radius: 10px;
+      padding: 12px 13px 12px 42px;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(36,87,230,.12);
+    }
+
+    .hint {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    /* BUTTONS */
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      width: 100%;
+      border: 1px solid #d0d5dd;
+      border-radius: 10px;
+      padding: 12px 13px;
+      font: inherit;
+      cursor: pointer;
+      font-weight: 700;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    /* RESULTS */
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .metric .value {
+      font-size: clamp(20px, 2.2vw, 27px);
+      font-weight: 800;
+      letter-spacing: -.4px;
+    }
+
+    .metric.highlight {
+      background: #f0f5ff;
+      border-color: #cddcff;
+    }
+
+    .metric.highlight .value {
+      color: var(--primary);
+    }
+
+    .metric.positive .value {
+      color: var(--success);
+    }
+
+    .metric.negative .value {
+      color: var(--danger);
+    }
+
+    /* INTERPRETATION */
+
+    .interpretation {
+      margin-top: 18px;
+      padding: 17px;
+      border-radius: 14px;
+      background: #f8f9fb;
+      border: 1px solid var(--border);
+    }
+
+    .interpretation strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .interpretation p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* TABLE */
+
+    .table-wrap {
+      margin-top: 18px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #eef0f3;
+      text-align: right;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    th {
+      background: #f8f9fb;
+      color: #475467;
+      font-weight: 700;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    /* INFO */
+
+    .info {
+      margin-top: 20px;
+    }
+
+    .info p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0 0 12px;
+    }
+
+    .formula {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #f8f9fb;
+      border: 1px solid var(--border);
+      text-align: center;
+      font-weight: 700;
+    }
+
+    /* FOOTER */
+
+    footer {
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .results {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .container {
+        padding: 22px 12px 36px;
+      }
+
+      .card {
+        padding: 16px;
+        border-radius: 14px;
+      }
+
+      .results {
+        grid-template-columns: 1fr;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe
+      src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+      height="0"
+      width="0"
+      style="display:none;visibility:hidden">
+    </iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+
+  <div class="container">
+
+    <!-- HEADER -->
+
+    <header>
+
+      <div class="breadcrumb">
+        <a href="/">Ferramentas Financeiras</a>
+        &nbsp;›&nbsp;
+        Calculadora de ROAS
+      </div>
+
+      <h1>Calculadora de ROAS</h1>
+
+      <p class="subtitle">
+        Descubra quanto sua empresa gera em receita para cada real
+        investido em publicidade.
+      </p>
+
+    </header>
+
+
+    <!-- ADVERTISEMENT -->
+
+    <div class="ad-container">
+
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5452382323898798"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true">
+      </ins>
+
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="grid">
+
+
+      <!-- FORM -->
+
+      <section class="card">
+
+        <h2>Dados da campanha</h2>
+
+
+        <div class="form-group">
+
+          <label for="investment">
+            Investimento em anúncios
+          </label>
+
+          <div class="input-wrapper">
+
+            <span class="prefix">R$</span>
+
+            <input
+              id="investment"
+              type="number"
+              min="0"
+              step="0.01"
+              value="5000">
+
+          </div>
+
+          <div class="hint">
+            Informe quanto foi gasto em mídia paga.
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="revenue">
+            Receita gerada
+          </label>
+
+          <div class="input-wrapper">
+
+            <span class="prefix">R$</span>
+
+            <input
+              id="revenue"
+              type="number"
+              min="0"
+              step="0.01"
+              value="20000">
+
+          </div>
+
+          <div class="hint">
+            Informe a receita atribuída às campanhas.
+          </div>
+
+        </div>
+
+
+        <div class="actions">
+
+          <button
+            class="btn-primary"
+            onclick="calculate()">
+
+            Calcular ROAS
+
+          </button>
+
+          <button
+            onclick="resetCalculator()">
+
+            Limpar
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- RESULTS -->
+
+      <section>
+
+        <div class="results">
+
+
+          <div class="metric highlight">
+
+            <div class="label">
+              ROAS
+            </div>
+
+            <div
+              class="value"
+              id="roasValue">
+
+              4,00x
+
+            </div>
+
+          </div>
+
+
+          <div class="metric positive">
+
+            <div class="label">
+              Receita gerada
+            </div>
+
+            <div
+              class="value"
+              id="revenueValue">
+
+              R$ 20.000,00
+
+            </div>
+
+          </div>
+
+
+          <div class="metric">
+
+            <div class="label">
+              Investimento em mídia
+            </div>
+
+            <div
+              class="value"
+              id="investmentValue">
+
+              R$ 5.000,00
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="interpretation">
+
+          <strong id="interpretationTitle">
+            Resultado da análise
+          </strong>
+
+          <p id="interpretationText">
+            Para cada R$ 1,00 investido em anúncios, a campanha gerou
+            R$ 4,00 em receita.
+          </p>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="card" style="margin-top:18px">
+
+          <h2>Resumo da campanha</h2>
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+
+                  <th>Indicador</th>
+
+                  <th>Valor</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody id="tableBody">
+
+                <tr>
+                  <td>Investimento em anúncios</td>
+                  <td>R$ 5.000,00</td>
+                </tr>
+
+                <tr>
+                  <td>Receita gerada</td>
+                  <td>R$ 20.000,00</td>
+                </tr>
+
+                <tr>
+                  <td>Receita por R$ 1 investido</td>
+                  <td>R$ 4,00</td>
+                </tr>
+
+                <tr>
+                  <td>ROAS</td>
+                  <td><strong>4,00x</strong></td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- ADVERTISEMENT -->
+
+    <div class="ad-container">
+
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5452382323898798"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true">
+      </ins>
+
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+    </div>
+
+
+    <!-- INFORMATION -->
+
+    <section class="card info">
+
+      <h2>Como calcular o ROAS?</h2>
+
+      <p>
+        ROAS significa <strong>Return on Advertising Spend</strong>,
+        ou Retorno sobre o Investimento em Publicidade. Essa métrica
+        mostra quanto de receita foi gerada para cada real investido
+        em anúncios.
+      </p>
+
+      <p>
+        Para calcular o ROAS, divida a receita atribuída à publicidade
+        pelo valor investido em anúncios.
+      </p>
+
+      <div class="formula">
+
+        ROAS = Receita gerada ÷ Investimento em anúncios
+
+      </div>
+
+      <p style="margin-top:16px">
+
+        Por exemplo, se uma empresa investe R$ 5.000 em anúncios e
+        gera R$ 20.000 em receita atribuída às campanhas, o ROAS é
+        de 4,00x.
+
+      </p>
+
+      <p>
+        Isso significa que cada R$ 1,00 investido em publicidade
+        gerou R$ 4,00 em receita.
+      </p>
+
+      <p>
+        É importante lembrar que ROAS não representa necessariamente
+        lucro. Para avaliar a rentabilidade real de uma operação,
+        também é necessário considerar custos de produto, impostos,
+        taxas, equipe e outras despesas.
+      </p>
+
+    </section>
+
+
+    <footer>
+
+      <p>
+        © 2026 Ferramentas Financeiras. Todos os direitos reservados.
+      </p>
+
+      <p>
+        <a href="/">
+          Voltar para todas as ferramentas
+        </a>
+      </p>
+
+    </footer>
+
+  </div>
+
+
+  <script>
+
+    function money(value) {
+
+      return value.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+
+    }
+
+
+    function multiple(value) {
+
+      return value.toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }) + 'x';
+
+    }
+
+
+    function calculate() {
+
+      const investment =
+        Math.max(
+          0,
+          Number(
+            document.getElementById('investment').value
+          ) || 0
+        );
+
+
+      const revenue =
+        Math.max(
+          0,
+          Number(
+            document.getElementById('revenue').value
+          ) || 0
+        );
+
+
+      let roas = 0;
+
+
+      if (investment > 0) {
+
+        roas = revenue / investment;
+
+      }
+
+
+      document.getElementById('roasValue').textContent =
+        multiple(roas);
+
+
+      document.getElementById('revenueValue').textContent =
+        money(revenue);
+
+
+      document.getElementById('investmentValue').textContent =
+        money(investment);
+
+
+      updateInterpretation(
+        roas,
+        investment,
+        revenue
+      );
+
+
+      updateTable(
+        investment,
+        revenue,
+        roas
+      );
+
+    }
+
+
+    function updateInterpretation(
+      roas,
+      investment,
+      revenue
+    ) {
+
+      const title =
+        document.getElementById('interpretationTitle');
+
+      const text =
+        document.getElementById('interpretationText');
+
+
+      if (investment <= 0) {
+
+        title.textContent =
+          'Informe um investimento válido';
+
+        text.textContent =
+          'Digite um valor de investimento em anúncios maior que zero para calcular o ROAS.';
+
+        return;
+
+      }
+
+
+      if (roas > 1) {
+
+        title.textContent =
+          'A campanha gerou mais receita do que o investimento em mídia';
+
+        text.textContent =
+          `Para cada R$ 1,00 investido em anúncios, foram gerados ${money(roas)} em receita. O ROAS da campanha foi de ${multiple(roas)}.`;
+
+      }
+
+      else if (roas === 1) {
+
+        title.textContent =
+          'Receita igual ao investimento em mídia';
+
+        text.textContent =
+          'A campanha gerou R$ 1,00 de receita para cada R$ 1,00 investido em anúncios.';
+
+      }
+
+      else {
+
+        title.textContent =
+          'A receita gerada foi menor que o investimento em mídia';
+
+        text.textContent =
+          `A campanha gerou ${multiple(roas)} de ROAS. Isso significa que cada R$ 1,00 investido gerou ${money(roas)} em receita.`;
+
+      }
+
+    }
+
+
+    function updateTable(
+      investment,
+      revenue,
+      roas
+    ) {
+
+      const tbody =
+        document.getElementById('tableBody');
+
+
+      const revenuePerReal =
+        investment > 0
+          ? revenue / investment
+          : 0;
+
+
+      tbody.innerHTML = `
+
+        <tr>
+
+          <td>
+            Investimento em anúncios
+          </td>
+
+          <td>
+            ${money(investment)}
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Receita gerada
+          </td>
+
+          <td>
+            ${money(revenue)}
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Receita por R$ 1 investido
+          </td>
+
+          <td>
+            ${money(revenuePerReal)}
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            ROAS
+          </td>
+
+          <td>
+            <strong>
+              ${multiple(roas)}
+            </strong>
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+
+
+    function resetCalculator() {
+
+      document.getElementById('investment').value =
+        5000;
+
+      document.getElementById('revenue').value =
+        20000;
+
+      calculate();
+
+    }
+
+
+    calculate();
+
+  </script>
+
+</body>
+</html>
