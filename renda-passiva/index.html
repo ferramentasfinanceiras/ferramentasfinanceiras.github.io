@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calculadora de Renda Passiva | Quanto Preciso Investir?</title>
+
+  <meta name="description" content="Calcule quanto você precisa investir para alcançar uma renda passiva mensal. Simule patrimônio necessário, rentabilidade e evolução dos investimentos.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://ferramentasfinanceiras.github.io/renda-passiva/">
+
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W4NXFVNT');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+    crossorigin="anonymous">
+  </script>
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #e4e7ec;
+      --primary: #2457e6;
+      --primary-dark: #1946c4;
+      --success: #12805c;
+      --shadow: 0 10px 30px rgba(16,24,40,.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* HEADER */
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+    }
+
+    nav a {
+      color: #475467;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* MAIN */
+
+    main {
+      padding-bottom: 50px;
+    }
+
+    .hero {
+      padding: 52px 0 28px;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 4vw, 42px);
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* ADS */
+
+    .ad-container {
+      min-height: 90px;
+      margin: 10px 0 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* GRID */
+
+    .grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .card h2 {
+      margin: 0 0 18px;
+      font-size: 18px;
+    }
+
+    /* FORM */
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .description {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      margin: 5px 0 0;
+    }
+
+    input,
+    button {
+      width: 100%;
+      border: 1px solid #d0d5dd;
+      border-radius: 10px;
+      padding: 12px 13px;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(36,87,230,.12);
+    }
+
+    .input-prefix {
+      position: relative;
+    }
+
+    .input-prefix span {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .input-prefix input {
+      padding-left: 38px;
+    }
+
+    .input-suffix {
+      position: relative;
+    }
+
+    .input-suffix span {
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .input-suffix input {
+      padding-right: 38px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: #fff;
+    }
+
+    .note {
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* RESULTS */
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 17px;
+    }
+
+    .metric.highlight {
+      background: #f0f5ff;
+      border-color: #cddcff;
+    }
+
+    .metric.positive {
+      background: #f0faf6;
+      border-color: #c8eadc;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .metric .value {
+      font-size: clamp(19px, 2.3vw, 27px);
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .metric.highlight .value {
+      color: var(--primary);
+    }
+
+    .metric.positive .value {
+      color: var(--success);
+    }
+
+    /* DETAILS */
+
+    .details {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .detail {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .detail-title {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      font-size: 17px;
+      font-weight: 750;
+    }
+
+    /* TABLE */
+
+    .table-card {
+      margin-top: 18px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      border-bottom: 1px solid #eef0f3;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    th {
+      background: #f8f9fb;
+      color: #475467;
+      font-weight: 700;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    /* INFO */
+
+    .info {
+      margin-top: 18px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .info h2 {
+      margin: 0 0 12px;
+      font-size: 21px;
+    }
+
+    .info h3 {
+      margin: 24px 0 8px;
+      font-size: 17px;
+    }
+
+    .info p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-copy,
+    .footer-links a {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .results {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        min-height: 64px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 40px 0 24px;
+      }
+
+      .results {
+        grid-template-columns: 1fr;
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .card {
+        padding: 17px;
+        border-radius: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe
+      src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+      height="0"
+      width="0"
+      style="display:none;visibility:hidden">
+    </iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+
+  <!-- HEADER -->
+
+  <header>
+    <div class="container header-inner">
+
+      <a href="/" class="logo">
+        Ferramentas<span>Financeiras</span>
+      </a>
+
+      <nav>
+        <a href="/">Ferramentas</a>
+        <a href="/sobre/">Sobre</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+      <div class="container">
+
+        <h1>Calculadora de Renda Passiva</h1>
+
+        <p>
+          Descubra quanto você precisa investir para alcançar uma renda
+          mensal por meio dos rendimentos do seu patrimônio.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- ADVERTISEMENT -->
+
+    <div class="container">
+
+      <div class="ad-container">
+
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5452382323898798"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true">
+        </ins>
+
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
+      </div>
+
+    </div>
+
+
+    <!-- CALCULATOR -->
+
+    <div class="container">
+
+      <div class="grid">
+
+        <!-- INPUTS -->
+
+        <section class="card">
+
+          <h2>Dados da simulação</h2>
+
+          <div class="form-group">
+
+            <label for="income">
+              Renda passiva desejada por mês
+            </label>
+
+            <div class="input-prefix">
+              <span>R$</span>
+              <input
+                id="income"
+                type="number"
+                min="0"
+                step="100"
+                value="5000">
+            </div>
+
+            <p class="description">
+              Quanto você gostaria de receber mensalmente em renda passiva.
+            </p>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="rate">
+              Rentabilidade esperada
+            </label>
+
+            <div class="input-suffix">
+              <input
+                id="rate"
+                type="number"
+                min="0"
+                step="0.01"
+                value="0.8">
+              <span>% ao mês</span>
+            </div>
+
+            <p class="description">
+              Informe uma estimativa de rendimento mensal do patrimônio.
+            </p>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="inflation">
+              Inflação estimada ao ano
+            </label>
+
+            <div class="input-suffix">
+              <input
+                id="inflation"
+                type="number"
+                min="0"
+                step="0.1"
+                value="4.5">
+              <span>%</span>
+            </div>
+
+            <p class="description">
+              Usada para estimar o poder de compra da renda ao longo do tempo.
+            </p>
+
+          </div>
+
+
+          <div class="actions">
+
+            <button
+              class="btn-primary"
+              onclick="calculate()">
+              Calcular
+            </button>
+
+            <button
+              class="btn-secondary"
+              onclick="resetCalculator()">
+              Limpar
+            </button>
+
+          </div>
+
+
+          <p class="note">
+            Esta calculadora apresenta uma estimativa matemática.
+            Rentabilidade, inflação, impostos e outros custos podem alterar
+            os resultados reais de um investimento.
+          </p>
+
+        </section>
+
+
+        <!-- RESULTS -->
+
+        <section>
+
+          <div class="results">
+
+            <div class="metric highlight">
+
+              <div class="label">
+                Patrimônio necessário
+              </div>
+
+              <div
+                class="value"
+                id="requiredCapital">
+                R$ 0,00
+              </div>
+
+            </div>
+
+
+            <div class="metric positive">
+
+              <div class="label">
+                Renda mensal
+              </div>
+
+              <div
+                class="value"
+                id="monthlyIncome">
+                R$ 0,00
+              </div>
+
+            </div>
+
+
+            <div class="metric">
+
+              <div class="label">
+                Renda anual
+              </div>
+
+              <div
+                class="value"
+                id="annualIncome">
+                R$ 0,00
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="details">
+
+            <div class="detail">
+
+              <div class="detail-title">
+                Rentabilidade mensal
+              </div>
+
+              <div
+                class="detail-value"
+                id="monthlyRate">
+                0,00%
+              </div>
+
+            </div>
+
+
+            <div class="detail">
+
+              <div class="detail-title">
+                Rentabilidade anual equivalente
+              </div>
+
+              <div
+                class="detail-value"
+                id="annualRate">
+                0,00%
+              </div>
+
+            </div>
+
+
+            <div class="detail">
+
+              <div class="detail-title">
+                Renda sobre patrimônio
+              </div>
+
+              <div
+                class="detail-value"
+                id="withdrawalRate">
+                0,00%
+              </div>
+
+            </div>
+
+
+            <div class="detail">
+
+              <div class="detail-title">
+                Renda anual sobre patrimônio
+              </div>
+
+              <div
+                class="detail-value"
+                id="annualWithdrawalRate">
+                0,00%
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- TABLE -->
+
+          <section class="card table-card">
+
+            <h2>
+              Impacto da inflação na renda desejada
+            </h2>
+
+            <div class="table-wrap">
+
+              <table>
+
+                <thead>
+
+                  <tr>
+                    <th>Ano</th>
+                    <th>Renda mensal necessária</th>
+                    <th>Renda anual necessária</th>
+                    <th>Patrimônio necessário</th>
+                  </tr>
+
+                </thead>
+
+                <tbody id="tableBody"></tbody>
+
+              </table>
+
+            </div>
+
+          </section>
+
+        </section>
+
+      </div>
+
+
+      <!-- SECOND AD -->
+
+      <div class="ad-container">
+
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5452382323898798"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true">
+        </ins>
+
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
+      </div>
+
+
+      <!-- INFORMATION -->
+
+      <section class="info">
+
+        <h2>
+          Como funciona a calculadora de renda passiva?
+        </h2>
+
+        <p>
+          A renda passiva é o dinheiro recebido regularmente a partir de um
+          patrimônio ou ativo, sem que seja necessário trabalhar diretamente
+          para gerar cada pagamento.
+        </p>
+
+        <p>
+          Para estimar o patrimônio necessário, a calculadora divide a renda
+          mensal desejada pela taxa de rendimento mensal informada.
+        </p>
+
+        <h3>
+          Exemplo
+        </h3>
+
+        <p>
+          Se você deseja receber R$ 5.000 por mês e considera uma rentabilidade
+          de 0,8% ao mês, o cálculo estima o patrimônio necessário para gerar
+          esse valor considerando essa taxa.
+        </p>
+
+        <h3>
+          Efeito da inflação
+        </h3>
+
+        <p>
+          A inflação reduz o poder de compra do dinheiro ao longo do tempo.
+          Por isso, a calculadora também apresenta uma estimativa de quanto
+          a renda mensal precisaria crescer para manter o mesmo poder de compra.
+        </p>
+
+        <h3>
+          Importante
+        </h3>
+
+        <p>
+          Os resultados são apenas estimativas matemáticas e não representam
+          promessa ou garantia de rentabilidade. Investimentos podem apresentar
+          riscos, oscilações, taxas, impostos e períodos de rentabilidade
+          negativa.
+        </p>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div class="footer-copy">
+        © 2026 Ferramentas Financeiras. Todos os direitos reservados.
+      </div>
+
+      <div class="footer-links">
+
+        <a href="/">
+          Ferramentas
+        </a>
+
+        <a href="/sobre/">
+          Sobre
+        </a>
+
+        <a href="/contato/">
+          Contato
+        </a>
+
+        <a href="/politica-de-privacidade/">
+          Política de Privacidade
+        </a>
+
+        <a href="/termos-de-uso/">
+          Termos de Uso
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- CALCULATOR SCRIPT -->
+
+  <script>
+
+    const money = value =>
+      value.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+
+
+    const percent = value =>
+      value.toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }) + '%';
+
+
+    function calculate() {
+
+      const income =
+        Math.max(
+          0,
+          Number(document.getElementById('income').value) || 0
+        );
+
+      const monthlyRate =
+        Math.max(
+          0,
+          Number(document.getElementById('rate').value) || 0
+        ) / 100;
+
+      const inflation =
+        Math.max(
+          0,
+          Number(document.getElementById('inflation').value) || 0
+        ) / 100;
+
+
+      /*
+       * Patrimônio necessário
+       *
+       * renda mensal / taxa mensal
+       */
+
+      const requiredCapital =
+        monthlyRate > 0
+          ? income / monthlyRate
+          : 0;
+
+
+      const annualIncome =
+        income * 12;
+
+
+      const effectiveAnnualRate =
+        Math.pow(1 + monthlyRate, 12) - 1;
+
+
+      const annualWithdrawalRate =
+        requiredCapital > 0
+          ? annualIncome / requiredCapital
+          : 0;
+
+
+      document.getElementById('requiredCapital').textContent =
+        money(requiredCapital);
+
+      document.getElementById('monthlyIncome').textContent =
+        money(income);
+
+      document.getElementById('annualIncome').textContent =
+        money(annualIncome);
+
+      document.getElementById('monthlyRate').textContent =
+        percent(monthlyRate * 100);
+
+      document.getElementById('annualRate').textContent =
+        percent(effectiveAnnualRate * 100);
+
+      document.getElementById('withdrawalRate').textContent =
+        percent(monthlyRate * 100);
+
+      document.getElementById('annualWithdrawalRate').textContent =
+        percent(annualWithdrawalRate * 100);
+
+
+      renderInflationTable(
+        income,
+        monthlyRate,
+        inflation
+      );
+
+    }
+
+
+    function renderInflationTable(
+      initialIncome,
+      monthlyRate,
+      inflation
+    ) {
+
+      const tbody =
+        document.getElementById('tableBody');
+
+      let html = '';
+
+
+      for (let year = 0; year <= 20; year++) {
+
+        const adjustedIncome =
+          initialIncome *
+          Math.pow(1 + inflation, year);
+
+        const adjustedAnnualIncome =
+          adjustedIncome * 12;
+
+        const capital =
+          monthlyRate > 0
+            ? adjustedIncome / monthlyRate
+            : 0;
+
+
+        html += `
+          <tr>
+            <td>${year === 0 ? 'Hoje' : year + ' anos'}</td>
+            <td>${money(adjustedIncome)}</td>
+            <td>${money(adjustedAnnualIncome)}</td>
+            <td>${money(capital)}</td>
+          </tr>
+        `;
+
+      }
+
+
+      tbody.innerHTML = html;
+
+    }
+
+
+    function resetCalculator() {
+
+      document.getElementById('income').value = 5000;
+
+      document.getElementById('rate').value = 0.8;
+
+      document.getElementById('inflation').value = 4.5;
+
+      calculate();
+
+    }
+
+
+    calculate();
+
+  </script>
+
+</body>
+</html>
