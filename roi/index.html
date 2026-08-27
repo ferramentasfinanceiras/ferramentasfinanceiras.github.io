@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de ROI | Retorno sobre Investimento</title>
+
+<meta name="description" content="Calcule o ROI de um investimento de forma simples e gratuita. Descubra o retorno percentual, lucro e resultado do seu investimento.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/roi/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous">
+</script>
+
+<style>
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #667085;
+  --border: #e4e7ec;
+  --primary: #2457e6;
+  --primary-dark: #1946c4;
+  --success: #12805c;
+  --danger: #d92d20;
+  --shadow: 0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 18px 48px;
+}
+
+header {
+  margin-bottom: 24px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.card h2 {
+  font-size: 18px;
+  margin: 0 0 18px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+  margin-bottom: 7px;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font: inherit;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(36,87,230,.12);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font: inherit;
+  cursor: pointer;
+  font-weight: 700;
+  background: #fff;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 14px;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.metric {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  background: #fff;
+}
+
+.metric .label {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.metric .value {
+  font-size: clamp(18px, 2.2vw, 25px);
+  font-weight: 800;
+  letter-spacing: -.4px;
+}
+
+.metric.highlight {
+  background: #f0f5ff;
+  border-color: #cddcff;
+}
+
+.metric.highlight .value {
+  color: var(--primary);
+}
+
+.metric.positive .value {
+  color: var(--success);
+}
+
+.metric.danger .value {
+  color: var(--danger);
+}
+
+.ad-container {
+  min-height: 90px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.info-card {
+  margin-top: 18px;
+}
+
+.info-card p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 0 12px;
+}
+
+.formula {
+  background: #f8f9fb;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-note {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    padding: 22px 12px 36px;
+  }
+
+  .card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .results {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="container">
+
+<header>
+<h1>Calculadora de ROI</h1>
+
+<p class="subtitle">
+Calcule o retorno sobre o investimento, descubra seu lucro e veja
+quanto você ganhou ou perdeu em relação ao valor investido.
+</p>
+</header>
+
+
+<div class="grid">
+
+<section class="card">
+
+<h2>Dados do investimento</h2>
+
+<div class="form-group">
+
+<label for="investment">
+Valor investido
+</label>
+
+<input
+id="investment"
+type="number"
+min="0"
+step="0.01"
+value="10000">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="returnAmount">
+Valor recebido / retorno
+</label>
+
+<input
+id="returnAmount"
+type="number"
+min="0"
+step="0.01"
+value="15000">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="additionalCosts">
+Custos adicionais
+</label>
+
+<input
+id="additionalCosts"
+type="number"
+min="0"
+step="0.01"
+value="0">
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Calcular ROI
+</button>
+
+<button
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+
+<p class="note">
+O ROI é calculado considerando o investimento inicial e os custos
+informados. Quanto maior o ROI, maior foi o retorno proporcional
+em relação ao capital investido.
+</p>
+
+</section>
+
+
+<section>
+
+<div class="results">
+
+<div class="metric highlight">
+
+<div class="label">
+ROI
+</div>
+
+<div class="value"
+id="roiValue">
+0,00%
+</div>
+
+</div>
+
+
+<div class="metric positive">
+
+<div class="label">
+Lucro líquido
+</div>
+
+<div class="value"
+id="profitValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+Retorno total
+</div>
+
+<div class="value"
+id="returnValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+Total investido
+</div>
+
+<div class="value"
+id="totalInvestment">
+R$ 0,00
+</div>
+
+</div>
+
+</div>
+
+
+<div class="ad-container">
+
+<ins
+class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true">
+</ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<div class="card info-card">
+
+<h2>Resultado da análise</h2>
+
+<div class="metric">
+
+<div class="label">
+Situação do investimento
+</div>
+
+<div class="value"
+id="status">
+-
+</div>
+
+</div>
+
+<p id="statusText" style="margin-top:16px;">
+Informe os valores para calcular o resultado.
+</p>
+
+</div>
+
+
+<div class="card info-card">
+
+<h2>Como o ROI é calculado?</h2>
+
+<p>
+ROI significa Return on Investment, ou Retorno sobre o Investimento.
+Ele mede quanto um investimento gerou de resultado em relação ao
+capital utilizado.
+</p>
+
+<div class="formula">
+
+<strong>ROI = (Lucro líquido ÷ Investimento total) × 100</strong>
+
+</div>
+
+<p style="margin-top:14px;">
+Por exemplo, se você investiu R$ 10.000 e recebeu R$ 15.000,
+o lucro foi de R$ 5.000. Nesse caso, o ROI foi de 50%.
+</p>
+
+<p>
+O ROI é útil para comparar investimentos, campanhas de marketing,
+projetos, aquisição de clientes e outras iniciativas que tenham
+um custo e um retorno mensurável.
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+
+<script>
+
+const money = value =>
+value.toLocaleString('pt-BR', {
+style: 'currency',
+currency: 'BRL'
+});
+
+
+const percent = value =>
+value.toLocaleString('pt-BR', {
+minimumFractionDigits: 2,
+maximumFractionDigits: 2
+}) + '%';
+
+
+function calculate() {
+
+const investment =
+Math.max(
+0,
+Number(
+document.getElementById('investment').value
+) || 0
+);
+
+
+const returnAmount =
+Math.max(
+0,
+Number(
+document.getElementById('returnAmount').value
+) || 0
+);
+
+
+const additionalCosts =
+Math.max(
+0,
+Number(
+document.getElementById('additionalCosts').value
+) || 0
+);
+
+
+const totalInvestment =
+investment + additionalCosts;
+
+
+const profit =
+returnAmount - totalInvestment;
+
+
+const roi =
+totalInvestment > 0
+? (profit / totalInvestment) * 100
+: 0;
+
+
+document.getElementById('roiValue').textContent =
+percent(roi);
+
+
+document.getElementById('profitValue').textContent =
+money(profit);
+
+
+document.getElementById('returnValue').textContent =
+money(returnAmount);
+
+
+document.getElementById('totalInvestment').textContent =
+money(totalInvestment);
+
+
+let status = '-';
+let statusText = '';
+
+
+if (totalInvestment === 0) {
+
+status = 'Informe os valores';
+
+statusText =
+'Informe um valor de investimento maior que zero.';
+
+}
+else if (profit > 0) {
+
+status = 'Investimento positivo';
+
+statusText =
+'O investimento apresentou retorno superior ao capital total investido.';
+
+}
+else if (profit === 0) {
+
+status = 'Empate';
+
+statusText =
+'O retorno foi exatamente igual ao valor total investido.';
+
+}
+else {
+
+status = 'Prejuízo';
+
+statusText =
+'O retorno foi inferior ao valor total investido.';
+
+}
+
+
+document.getElementById('status').textContent =
+status;
+
+
+document.getElementById('statusText').textContent =
+statusText;
+
+}
+
+
+function resetCalculator() {
+
+document.getElementById('investment').value = 10000;
+
+document.getElementById('returnAmount').value = 15000;
+
+document.getElementById('additionalCosts').value = 0;
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
