@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Planejamento Financeiro Pessoal | Ferramentas Financeiras</title>
+
+<meta name="description" content="Faça seu planejamento financeiro pessoal gratuitamente. Organize receitas, despesas, investimentos e veja quanto pode economizar por mês e ao longo do ano.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/planejamento-financeiro/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous"></script>
+
+<style>
+
+:root {
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e4e7ec;
+  --primary:#2457e6;
+  --primary-dark:#1946c4;
+  --success:#12805c;
+  --danger:#d92d20;
+  --shadow:0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,
+  BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+.container {
+  max-width:1180px;
+  margin:0 auto;
+  padding:32px 18px 48px;
+}
+
+header {
+  margin-bottom:24px;
+}
+
+h1 {
+  margin:0 0 8px;
+  font-size:clamp(28px,4vw,40px);
+  letter-spacing:-1px;
+}
+
+.subtitle {
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+  line-height:1.6;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:20px;
+  align-items:start;
+}
+
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+.card h2 {
+  font-size:18px;
+  margin:0 0 18px;
+}
+
+.form-group {
+  margin-bottom:16px;
+}
+
+label {
+  display:block;
+  font-size:13px;
+  font-weight:650;
+  margin-bottom:7px;
+}
+
+input {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 13px;
+  font:inherit;
+  background:#fff;
+  color:var(--text);
+  outline:none;
+}
+
+input:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(36,87,230,.12);
+}
+
+.actions {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+button {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 13px;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn-primary {
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
+}
+
+.btn-primary:hover {
+  background:var(--primary-dark);
+}
+
+.btn-secondary {
+  background:white;
+}
+
+.note {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+  margin-top:14px;
+}
+
+.results {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.metric {
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  background:#fff;
+}
+
+.metric .label {
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.metric .value {
+  font-size:clamp(18px,2.2vw,25px);
+  font-weight:800;
+  letter-spacing:-.4px;
+}
+
+.metric.highlight {
+  background:#f0f5ff;
+  border-color:#cddcff;
+}
+
+.metric.highlight .value {
+  color:var(--primary);
+}
+
+.metric.positive .value {
+  color:var(--success);
+}
+
+.metric.negative .value {
+  color:var(--danger);
+}
+
+.ad-container {
+  min-height:90px;
+  margin:20px 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.progress-card {
+  margin-top:18px;
+}
+
+.progress-label {
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
+.progress {
+  width:100%;
+  height:14px;
+  background:#eef0f3;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar {
+  height:100%;
+  width:0%;
+  background:var(--primary);
+  transition:width .3s ease;
+}
+
+.summary {
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.summary-box {
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  background:#fff;
+}
+
+.summary-box h3 {
+  margin:0 0 8px;
+  font-size:14px;
+}
+
+.summary-box p {
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.table-wrap {
+  margin-top:18px;
+  overflow-x:auto;
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px;
+  font-size:13px;
+}
+
+th,td {
+  padding:11px 12px;
+  border-bottom:1px solid #eef0f3;
+  text-align:right;
+  white-space:nowrap;
+}
+
+th:first-child,
+td:first-child {
+  text-align:left;
+}
+
+th {
+  background:#f8f9fb;
+  color:#475467;
+  font-weight:700;
+}
+
+tbody tr:last-child td {
+  border-bottom:0;
+}
+
+.footer-note {
+  margin-top:12px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+@media(max-width:900px) {
+
+  .grid {
+    grid-template-columns:1fr;
+  }
+
+  .results {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:520px) {
+
+  .container {
+    padding:22px 12px 36px;
+  }
+
+  .card {
+    padding:16px;
+    border-radius:14px;
+  }
+
+  .results {
+    grid-template-columns:1fr;
+  }
+
+  .summary {
+    grid-template-columns:1fr;
+  }
+
+  .actions {
+    flex-direction:column;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="container">
+
+<header>
+
+<h1>Planejamento Financeiro Pessoal</h1>
+
+<p class="subtitle">
+Organize suas receitas e despesas e descubra quanto você pode economizar
+todos os meses e acumular ao longo do ano.
+</p>
+
+</header>
+
+<!-- ADVERTISEMENT -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+<div class="grid">
+
+<!-- INPUTS -->
+
+<section class="card">
+
+<h2>Seu orçamento mensal</h2>
+
+<div class="form-group">
+
+<label for="income">
+Renda mensal líquida
+</label>
+
+<input
+id="income"
+type="number"
+min="0"
+step="0.01"
+value="8000">
+
+</div>
+
+<div class="form-group">
+
+<label for="housing">
+Moradia
+</label>
+
+<input
+id="housing"
+type="number"
+min="0"
+step="0.01"
+value="1500">
+
+</div>
+
+<div class="form-group">
+
+<label for="food">
+Alimentação
+</label>
+
+<input
+id="food"
+type="number"
+min="0"
+step="0.01"
+value="1200">
+
+</div>
+
+<div class="form-group">
+
+<label for="transport">
+Transporte
+</label>
+
+<input
+id="transport"
+type="number"
+min="0"
+step="0.01"
+value="600">
+
+</div>
+
+<div class="form-group">
+
+<label for="health">
+Saúde
+</label>
+
+<input
+id="health"
+type="number"
+min="0"
+step="0.01"
+value="400">
+
+</div>
+
+<div class="form-group">
+
+<label for="leisure">
+Lazer
+</label>
+
+<input
+id="leisure"
+type="number"
+min="0"
+step="0.01"
+value="400">
+
+</div>
+
+<div class="form-group">
+
+<label for="other">
+Outras despesas
+</label>
+
+<input
+id="other"
+type="number"
+min="0"
+step="0.01"
+value="500">
+
+</div>
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Calcular
+</button>
+
+<button
+class="btn-secondary"
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+<p class="note">
+Informe os valores médios que você recebe e gasta todos os meses.
+A ferramenta calcula sua capacidade estimada de economia.
+</p>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section>
+
+<div class="results">
+
+<div class="metric highlight">
+
+<div class="label">
+Renda mensal
+</div>
+
+<div class="value"
+id="incomeResult">
+R$ 0,00
+</div>
+
+</div>
+
+<div class="metric">
+
+<div class="label">
+Despesas mensais
+</div>
+
+<div class="value"
+id="expensesResult">
+R$ 0,00
+</div>
+
+</div>
+
+<div class="metric positive">
+
+<div class="label">
+Valor disponível
+</div>
+
+<div class="value"
+id="availableResult">
+R$ 0,00
+</div>
+
+</div>
+
+<div class="metric">
+
+<div class="label">
+Taxa de economia
+</div>
+
+<div class="value"
+id="savingRateResult">
+0,00%
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PROGRESS -->
+
+<div class="card progress-card">
+
+<h2>Quanto da sua renda você consegue guardar?</h2>
+
+<div class="progress-label">
+
+<span>
+Percentual economizado
+</span>
+
+<strong id="progressText">
+0%
+</strong>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+id="progressBar">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SUMMARY -->
+
+<div class="summary">
+
+<div class="summary-box">
+
+<h3>
+Economia mensal
+</h3>
+
+<p id="monthlySummary">
+R$ 0,00 disponíveis por mês.
+</p>
+
+</div>
+
+<div class="summary-box">
+
+<h3>
+Economia anual
+</h3>
+
+<p id="annualSummary">
+R$ 0,00 disponíveis em 12 meses.
+</p>
+
+</div>
+
+<div class="summary-box">
+
+<h3>
+Despesas anuais
+</h3>
+
+<p id="annualExpenses">
+R$ 0,00 em despesas estimadas.
+</p>
+
+</div>
+
+<div class="summary-box">
+
+<h3>
+Situação financeira
+</h3>
+
+<p id="statusSummary">
+Calculando...
+</p>
+
+</div>
+
+</div>
+
+
+<!-- TABLE -->
+
+<div class="card" style="margin-top:18px">
+
+<h2>
+Projeção para os próximos 12 meses
+</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Mês
+</th>
+
+<th>
+Renda
+</th>
+
+<th>
+Despesas
+</th>
+
+<th>
+Economia do mês
+</th>
+
+<th>
+Economia acumulada
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableBody"></tbody>
+
+</table>
+
+</div>
+
+<div class="footer-note">
+
+A projeção considera renda e despesas constantes durante os 12 meses.
+Não considera inflação, reajustes salariais, rendimentos de investimentos
+ou despesas extraordinárias.
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- ADVERTISEMENT -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<!-- INFORMATION -->
+
+<section class="card">
+
+<h2>
+Como usar o planejamento financeiro?
+</h2>
+
+<p class="footer-note">
+
+Comece informando sua renda líquida mensal e depois estime suas principais
+despesas. O simulador mostra quanto sobra todos os meses e quanto esse
+valor representa da sua renda.
+
+</p>
+
+<p class="footer-note">
+
+Uma taxa de economia positiva indica que suas receitas são superiores às
+despesas informadas. Caso suas despesas ultrapassem sua renda, o resultado
+será negativo e pode indicar a necessidade de revisar seu orçamento.
+
+</p>
+
+</section>
+
+</div>
+
+
+<script>
+
+const money = value =>
+value.toLocaleString('pt-BR',{
+style:'currency',
+currency:'BRL'
+});
+
+const percent = value =>
+value.toLocaleString('pt-BR',{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}) + '%';
+
+
+function getValue(id) {
+
+return Math.max(
+0,
+Number(document.getElementById(id).value) || 0
+);
+
+}
+
+
+function calculate() {
+
+const income = getValue('income');
+
+const housing = getValue('housing');
+
+const food = getValue('food');
+
+const transport = getValue('transport');
+
+const health = getValue('health');
+
+const leisure = getValue('leisure');
+
+const other = getValue('other');
+
+
+const expenses =
+housing +
+food +
+transport +
+health +
+leisure +
+other;
+
+
+const available =
+income - expenses;
+
+
+const savingRate =
+income > 0
+? (available / income) * 100
+: 0;
+
+
+const annualEconomy =
+available * 12;
+
+
+const annualExpenses =
+expenses * 12;
+
+
+document.getElementById('incomeResult')
+.textContent = money(income);
+
+
+document.getElementById('expensesResult')
+.textContent = money(expenses);
+
+
+document.getElementById('availableResult')
+.textContent = money(available);
+
+
+document.getElementById('savingRateResult')
+.textContent = percent(savingRate);
+
+
+document.getElementById('monthlySummary')
+.textContent =
+money(available) +
+' disponíveis por mês.';
+
+
+document.getElementById('annualSummary')
+.textContent =
+money(annualEconomy) +
+' disponíveis em 12 meses.';
+
+
+document.getElementById('annualExpenses')
+.textContent =
+money(annualExpenses) +
+' em despesas estimadas.';
+
+
+const progress =
+Math.max(0, Math.min(100, savingRate));
+
+
+document.getElementById('progressBar')
+.style.width = progress + '%';
+
+
+document.getElementById('progressText')
+.textContent = percent(Math.max(0,savingRate));
+
+
+const status =
+document.getElementById('statusSummary');
+
+
+if (income === 0) {
+
+status.textContent =
+'Informe sua renda mensal para calcular seu planejamento.';
+
+}
+else if (available < 0) {
+
+status.textContent =
+'Suas despesas estão acima da renda informada. Seu orçamento apresenta déficit.';
+
+}
+else if (savingRate < 10) {
+
+status.textContent =
+'Você está economizando uma parcela pequena da sua renda. Há espaço para melhorar sua margem financeira.';
+
+}
+else if (savingRate < 20) {
+
+status.textContent =
+'Seu orçamento apresenta uma capacidade moderada de economia.';
+
+}
+else {
+
+status.textContent =
+'Seu orçamento apresenta uma boa capacidade de economia mensal.';
+
+}
+
+
+renderTable(
+income,
+expenses,
+available
+);
+
+}
+
+
+function renderTable(
+income,
+expenses,
+available
+) {
+
+const tbody =
+document.getElementById('tableBody');
+
+
+let accumulated = 0;
+
+
+let html = '';
+
+
+for (
+let month = 1;
+month <= 12;
+month++
+) {
+
+accumulated += available;
+
+
+html += `
+
+<tr>
+
+<td>
+${month}
+</td>
+
+<td>
+${money(income)}
+</td>
+
+<td>
+${money(expenses)}
+</td>
+
+<td>
+${money(available)}
+</td>
+
+<td>
+<strong>
+${money(accumulated)}
+</strong>
+</td>
+
+</tr>
+
+`;
+
+}
+
+
+tbody.innerHTML = html;
+
+}
+
+
+function resetCalculator() {
+
+document.getElementById('income').value = 8000;
+
+document.getElementById('housing').value = 1500;
+
+document.getElementById('food').value = 1200;
+
+document.getElementById('transport').value = 600;
+
+document.getElementById('health').value = 400;
+
+document.getElementById('leisure').value = 400;
+
+document.getElementById('other').value = 500;
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
