@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora CLT x PJ | Compare Salário e Renda</title>
+
+<meta name="description" content="Compare CLT e PJ de forma simples. Calcule salário líquido, impostos, benefícios, férias, 13º e veja qual modelo pode ser mais vantajoso.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/clt-x-pj/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l':'&l='+l;j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous">
+</script>
+
+<style>
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #667085;
+  --border: #e4e7ec;
+  --primary: #2457e6;
+  --primary-dark: #1946c4;
+  --success: #12805c;
+  --danger: #d92d20;
+  --shadow: 0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 18px 48px;
+}
+
+header {
+  margin-bottom: 24px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.card h2 {
+  font-size: 18px;
+  margin: 0 0 18px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+  margin-bottom: 7px;
+}
+
+input,
+select,
+button {
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font: inherit;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(36,87,230,.12);
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.input-row input {
+  flex: 1;
+}
+
+.input-row select {
+  width: 125px;
+  flex: 0 0 125px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: #fff;
+}
+
+.note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 14px;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.metric {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  background: #fff;
+}
+
+.metric .label {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.metric .value {
+  font-size: clamp(19px, 2.2vw, 26px);
+  font-weight: 800;
+  letter-spacing: -.4px;
+}
+
+.metric.clt {
+  background: #f8f9fb;
+}
+
+.metric.pj {
+  background: #f0f5ff;
+  border-color: #cddcff;
+}
+
+.metric.pj .value {
+  color: var(--primary);
+}
+
+.metric.success .value {
+  color: var(--success);
+}
+
+.metric.danger .value {
+  color: var(--danger);
+}
+
+.table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+  font-size: 13px;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eef0f3;
+  text-align: right;
+  white-space: nowrap;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+th {
+  background: #f8f9fb;
+  color: #475467;
+  font-weight: 700;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.info {
+  margin-top: 18px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.info h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.info p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0 0 10px;
+}
+
+.ad-container {
+  min-height: 90px;
+  margin: 10px 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.result-message {
+  margin-top: 18px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f0f5ff;
+  border: 1px solid #cddcff;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.result-message strong {
+  color: var(--primary);
+}
+
+.footer {
+  margin-top: 25px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 22px 12px 36px;
+  }
+
+  .card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .results {
+    grid-template-columns: 1fr;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .input-row select {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="container">
+
+<header>
+
+<h1>Calculadora CLT x PJ</h1>
+
+<p class="subtitle">
+Compare quanto você pode receber como CLT ou PJ considerando
+salário líquido, impostos e benefícios.
+</p>
+
+</header>
+
+
+<!-- ADS -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<div class="grid">
+
+<!-- FORMULÁRIO -->
+
+<section class="card">
+
+<h2>Dados da comparação</h2>
+
+
+<div class="form-group">
+
+<label for="cltSalary">
+Salário bruto CLT
+</label>
+
+<input
+id="cltSalary"
+type="number"
+min="0"
+step="0.01"
+value="5000">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="pjSalary">
+Valor mensal PJ
+</label>
+
+<input
+id="pjSalary"
+type="number"
+min="0"
+step="0.01"
+value="8000">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="pjTax">
+Imposto PJ (%)
+</label>
+
+<input
+id="pjTax"
+type="number"
+min="0"
+max="100"
+step="0.01"
+value="6">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="cltBenefits">
+Benefícios CLT mensais
+</label>
+
+<input
+id="cltBenefits"
+type="number"
+min="0"
+step="0.01"
+value="800">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="pjCosts">
+Custos mensais do PJ
+</label>
+
+<input
+id="pjCosts"
+type="number"
+min="0"
+step="0.01"
+value="300">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="cltINSS">
+Desconto estimado de INSS (%)
+</label>
+
+<input
+id="cltINSS"
+type="number"
+min="0"
+max="100"
+step="0.01"
+value="9">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="irrf">
+IRRF estimado CLT (%)
+</label>
+
+<input
+id="irrf"
+type="number"
+min="0"
+max="100"
+step="0.01"
+value="10">
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Calcular
+</button>
+
+<button
+class="btn-secondary"
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+
+<p class="note">
+Esta ferramenta utiliza percentuais simplificados para estimativa.
+O cálculo real de impostos depende da situação individual,
+regime tributário, faixa salarial e outros fatores.
+</p>
+
+</section>
+
+
+<!-- RESULTADOS -->
+
+<section>
+
+<div class="results">
+
+<div class="metric clt">
+
+<div class="label">
+CLT líquido mensal
+</div>
+
+<div
+class="value"
+id="cltMonthly">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric pj">
+
+<div class="label">
+PJ líquido mensal
+</div>
+
+<div
+class="value"
+id="pjMonthly">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+CLT anual estimado
+</div>
+
+<div
+class="value"
+id="cltAnnual">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+PJ anual estimado
+</div>
+
+<div
+class="value"
+id="pjAnnual">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+Valor estimado de férias + 1/3
+</div>
+
+<div
+class="value"
+id="vacation">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric success">
+
+<div class="label">
+13º salário estimado
+</div>
+
+<div
+class="value"
+id="thirteenth">
+R$ 0,00
+</div>
+
+</div>
+
+</div>
+
+
+<div
+class="result-message"
+id="resultMessage">
+Preencha os valores e clique em <strong>Calcular</strong>.
+</div>
+
+
+<div class="card" style="margin-top:18px">
+
+<h2>Comparação anual</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Componente</th>
+
+<th>CLT</th>
+
+<th>PJ</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Renda líquida mensal</td>
+
+<td id="tableCltMonthly">
+R$ 0,00
+</td>
+
+<td id="tablePjMonthly">
+R$ 0,00
+</td>
+
+</tr>
+
+<tr>
+
+<td>Renda em 12 meses</td>
+
+<td id="tableClt12">
+R$ 0,00
+</td>
+
+<td id="tablePj12">
+R$ 0,00
+</td>
+
+</tr>
+
+<tr>
+
+<td>13º salário</td>
+
+<td id="table13Clt">
+R$ 0,00
+</td>
+
+<td>R$ 0,00</td>
+
+</tr>
+
+<tr>
+
+<td>Férias + 1/3</td>
+
+<td id="tableVacation">
+R$ 0,00
+</td>
+
+<td>R$ 0,00</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Total estimado</strong></td>
+
+<td>
+<strong id="tableTotalClt">
+R$ 0,00
+</strong>
+</td>
+
+<td>
+<strong id="tableTotalPj">
+R$ 0,00
+</strong>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- ADS -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<!-- INFORMAÇÕES -->
+
+<section class="info">
+
+<h2>CLT ou PJ: qual vale mais a pena?</h2>
+
+<p>
+A comparação entre CLT e PJ não deve considerar apenas o valor
+que cai na conta todos os meses. O trabalhador CLT normalmente
+possui direitos e benefícios como 13º salário, férias remuneradas
+com adicional de 1/3 e FGTS.
+</p>
+
+<p>
+No modelo PJ, o valor mensal recebido pode ser maior, mas o
+profissional precisa considerar impostos, custos contábeis,
+períodos sem faturamento, férias e outros custos que ficam sob
+sua responsabilidade.
+</p>
+
+<p>
+Por isso, uma proposta PJ aparentemente maior nem sempre representa
+uma vantagem financeira real. O ideal é comparar o valor anual
+estimado e considerar todos os benefícios e custos envolvidos.
+</p>
+
+</section>
+
+
+<div class="footer">
+
+<a href="/">
+← Voltar para Ferramentas Financeiras
+</a>
+
+<br><br>
+
+© 2026 Ferramentas Financeiras
+
+</div>
+
+</div>
+
+
+<script>
+
+const money = value =>
+value.toLocaleString('pt-BR', {
+style: 'currency',
+currency: 'BRL'
+});
+
+
+function calculate() {
+
+const cltSalary =
+Math.max(
+0,
+Number(document.getElementById('cltSalary').value) || 0
+);
+
+const pjSalary =
+Math.max(
+0,
+Number(document.getElementById('pjSalary').value) || 0
+);
+
+const pjTax =
+Math.max(
+0,
+Number(document.getElementById('pjTax').value) || 0
+) / 100;
+
+const cltBenefits =
+Math.max(
+0,
+Number(document.getElementById('cltBenefits').value) || 0
+);
+
+const pjCosts =
+Math.max(
+0,
+Number(document.getElementById('pjCosts').value) || 0
+);
+
+const cltINSS =
+Math.max(
+0,
+Number(document.getElementById('cltINSS').value) || 0
+) / 100;
+
+const irrf =
+Math.max(
+0,
+Number(document.getElementById('irrf').value) || 0
+) / 100;
+
+
+/*
+CLT
+
+Estimativa simplificada:
+
+salário bruto
+- INSS
+- IRRF
++ benefícios
+*/
+
+const inssValue =
+cltSalary * cltINSS;
+
+const taxable =
+Math.max(
+0,
+cltSalary - inssValue
+);
+
+const irrfValue =
+taxable * irrf;
+
+const cltNet =
+Math.max(
+0,
+cltSalary - inssValue - irrfValue
+);
+
+const cltMonthly =
+cltNet + cltBenefits;
+
+
+/*
+PJ
+
+valor recebido
+- impostos
+- custos
+*/
+
+const pjTaxValue =
+pjSalary * pjTax;
+
+const pjNet =
+Math.max(
+0,
+pjSalary - pjTaxValue - pjCosts
+);
+
+
+/*
+Valores anuais
+
+CLT:
+
+12 salários
++ 13º
++ férias + 1/3
+*/
+
+const thirteenth =
+cltNet;
+
+const vacation =
+cltNet / 3;
+
+const cltAnnual =
+(cltMonthly * 12)
++ thirteenth
++ vacation;
+
+
+/*
+PJ:
+
+12 meses
+*/
+
+const pjAnnual =
+pjNet * 12;
+
+
+/*
+Atualizar cards
+*/
+
+document.getElementById('cltMonthly').textContent =
+money(cltMonthly);
+
+document.getElementById('pjMonthly').textContent =
+money(pjNet);
+
+document.getElementById('cltAnnual').textContent =
+money(cltAnnual);
+
+document.getElementById('pjAnnual').textContent =
+money(pjAnnual);
+
+document.getElementById('vacation').textContent =
+money(vacation);
+
+document.getElementById('thirteenth').textContent =
+money(thirteenth);
+
+
+/*
+Tabela
+*/
+
+document.getElementById('tableCltMonthly').textContent =
+money(cltMonthly);
+
+document.getElementById('tablePjMonthly').textContent =
+money(pjNet);
+
+document.getElementById('tableClt12').textContent =
+money(cltMonthly * 12);
+
+document.getElementById('tablePj12').textContent =
+money(pjAnnual);
+
+document.getElementById('table13Clt').textContent =
+money(thirteenth);
+
+document.getElementById('tableVacation').textContent =
+money(vacation);
+
+document.getElementById('tableTotalClt').textContent =
+money(cltAnnual);
+
+document.getElementById('tableTotalPj').textContent =
+money(pjAnnual);
+
+
+/*
+Mensagem
+*/
+
+const difference =
+pjAnnual - cltAnnual;
+
+const message =
+document.getElementById('resultMessage');
+
+
+if (difference > 0) {
+
+message.innerHTML =
+`Pelos valores informados, o modelo <strong>PJ</strong>
+apresenta uma renda anual estimada
+<strong>${money(difference)}</strong> maior que a CLT.`;
+
+}
+else if (difference < 0) {
+
+message.innerHTML =
+`Pelos valores informados, o modelo <strong>CLT</strong>
+apresenta uma renda anual estimada
+<strong>${money(Math.abs(difference))}</strong> maior que a PJ.`;
+
+}
+else {
+
+message.innerHTML =
+`Pelos valores informados, os dois modelos apresentam
+uma renda anual estimada semelhante.`;
+
+}
+
+}
+
+
+function resetCalculator() {
+
+document.getElementById('cltSalary').value = 5000;
+
+document.getElementById('pjSalary').value = 8000;
+
+document.getElementById('pjTax').value = 6;
+
+document.getElementById('cltBenefits').value = 800;
+
+document.getElementById('pjCosts').value = 300;
+
+document.getElementById('cltINSS').value = 9;
+
+document.getElementById('irrf').value = 10;
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
