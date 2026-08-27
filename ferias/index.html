@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de Férias | Quanto Vou Receber nas Férias?</title>
+
+<meta name="description" content="Calcule quanto você vai receber nas férias, incluindo adicional de 1/3, salário, descontos e valor líquido estimado. Calculadora de férias gratuita.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/ferias/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous">
+</script>
+
+<style>
+
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #667085;
+  --border: #e4e7ec;
+  --primary: #2457e6;
+  --primary-dark: #1946c4;
+  --success: #12805c;
+  --shadow: 0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 18px 48px;
+}
+
+header {
+  margin-bottom: 24px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.card h2 {
+  font-size: 18px;
+  margin: 0 0 18px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+  margin-bottom: 7px;
+}
+
+input,
+select,
+button {
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font: inherit;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(36,87,230,.12);
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.input-row input {
+  flex: 1;
+}
+
+.input-row select {
+  width: 120px;
+  flex: 0 0 120px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: #fff;
+}
+
+.note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 14px;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.metric {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  background: #fff;
+}
+
+.metric .label {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.metric .value {
+  font-size: clamp(19px, 2.2vw, 26px);
+  font-weight: 800;
+  letter-spacing: -.4px;
+}
+
+.metric.highlight {
+  background: #f0f5ff;
+  border-color: #cddcff;
+}
+
+.metric.highlight .value {
+  color: var(--primary);
+}
+
+.metric.positive .value {
+  color: var(--success);
+}
+
+.table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  font-size: 13px;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eef0f3;
+  text-align: right;
+  white-space: nowrap;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+th {
+  background: #f8f9fb;
+  color: #475467;
+  font-weight: 700;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.ad-container {
+  min-height: 90px;
+  margin: 10px 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.info {
+  margin-top: 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.info h2 {
+  margin: 0 0 14px;
+  font-size: 20px;
+}
+
+.info h3 {
+  margin: 20px 0 8px;
+  font-size: 16px;
+}
+
+.info p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.result-message {
+  margin-top: 18px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f0f5ff;
+  border: 1px solid #cddcff;
+  color: #344054;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer {
+  margin-top: 30px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .container {
+    padding: 22px 12px 36px;
+  }
+
+  .card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .results {
+    grid-template-columns: 1fr;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .input-row select {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="container">
+
+<header>
+
+<h1>Calculadora de Férias</h1>
+
+<p class="subtitle">
+Calcule quanto você pode receber ao sair de férias,
+incluindo o adicional de 1/3 e descontos estimados.
+</p>
+
+</header>
+
+
+<!-- ADVERTISEMENT -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<div class="grid">
+
+
+<!-- FORM -->
+
+<section class="card">
+
+<h2>Dados das férias</h2>
+
+
+<div class="form-group">
+
+<label for="salary">
+Salário bruto mensal
+</label>
+
+<input
+id="salary"
+type="number"
+min="0"
+step="0.01"
+value="5000">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="days">
+Dias de férias
+</label>
+
+<select id="days">
+
+<option value="30">30 dias</option>
+<option value="20">20 dias</option>
+<option value="15">15 dias</option>
+<option value="10">10 dias</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="dependents">
+Número de dependentes
+</label>
+
+<input
+id="dependents"
+type="number"
+min="0"
+step="1"
+value="0">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="other">
+Outros valores / adicionais
+</label>
+
+<input
+id="other"
+type="number"
+min="0"
+step="0.01"
+value="0">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="discount">
+Desconto estimado (%)
+</label>
+
+<input
+id="discount"
+type="number"
+min="0"
+max="100"
+step="0.01"
+value="9">
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Calcular
+</button>
+
+<button
+class="btn-secondary"
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+
+<p class="note">
+A calculadora apresenta uma estimativa simplificada.
+O valor real pode variar conforme INSS, IRRF, dependentes,
+abono pecuniário e demais componentes da folha de pagamento.
+</p>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section>
+
+
+<div class="results">
+
+
+<div class="metric highlight">
+
+<div class="label">
+Valor das férias
+</div>
+
+<div
+class="value"
+id="vacationValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+Adicional de 1/3
+</div>
+
+<div
+class="value"
+id="oneThird">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+Valor bruto
+</div>
+
+<div
+class="value"
+id="grossValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric positive">
+
+<div class="label">
+Valor líquido estimado
+</div>
+
+<div
+class="value"
+id="netValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+</div>
+
+
+<div
+class="result-message"
+id="resultMessage">
+
+Preencha os dados e clique em
+<strong>Calcular</strong>.
+
+</div>
+
+
+<div class="card" style="margin-top:18px">
+
+<h2>Detalhamento</h2>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Descrição</th>
+
+<th>Valor</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Salário proporcional às férias</td>
+
+<td id="tableVacation">
+R$ 0,00
+</td>
+
+</tr>
+
+<tr>
+
+<td>Adicional constitucional de 1/3</td>
+
+<td id="tableThird">
+R$ 0,00
+</td>
+
+</tr>
+
+<tr>
+
+<td>Outros valores</td>
+
+<td id="tableOther">
+R$ 0,00
+</td>
+
+</tr>
+
+<tr>
+
+<td>Valor bruto</td>
+
+<td>
+<strong id="tableGross">
+R$ 0,00
+</strong>
+</td>
+
+</tr>
+
+<tr>
+
+<td>Descontos estimados</td>
+
+<td id="tableDiscount">
+R$ 0,00
+</td>
+
+</tr>
+
+<tr>
+
+<td>Valor líquido estimado</td>
+
+<td>
+<strong id="tableNet">
+R$ 0,00
+</strong>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- SECOND AD -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<!-- INFORMATION -->
+
+<section class="info">
+
+<h2>Como funciona o cálculo de férias?</h2>
+
+<p>
+Nas férias, o trabalhador recebe a remuneração correspondente
+ao período de descanso acrescida do adicional constitucional
+de um terço.
+</p>
+
+<p>
+Por exemplo, para quem recebe R$ 5.000 de salário e tira
+30 dias de férias, o cálculo básico considera os R$ 5.000
+referentes às férias mais R$ 1.666,67 correspondentes ao
+adicional de 1/3.
+</p>
+
+<h3>O que pode alterar o valor recebido?</h3>
+
+<p>
+O valor efetivamente recebido pode variar devido a descontos
+de INSS e Imposto de Renda, número de dependentes, adicionais,
+horas extras, comissões e outras verbas que fazem parte da
+remuneração.
+</p>
+
+<p>
+Por isso, o resultado desta ferramenta deve ser considerado
+uma estimativa e não substitui o cálculo oficial realizado
+pelo empregador ou profissional especializado.
+</p>
+
+</section>
+
+
+<div class="footer">
+
+<a href="/">
+← Voltar para Ferramentas Financeiras
+</a>
+
+<br><br>
+
+© 2026 Ferramentas Financeiras
+
+</div>
+
+</div>
+
+
+<script>
+
+const money = value =>
+value.toLocaleString('pt-BR', {
+style: 'currency',
+currency: 'BRL'
+});
+
+
+function calculate() {
+
+const salary =
+Math.max(
+0,
+Number(document.getElementById('salary').value) || 0
+);
+
+const days =
+Math.max(
+1,
+Number(document.getElementById('days').value) || 30
+);
+
+const other =
+Math.max(
+0,
+Number(document.getElementById('other').value) || 0
+);
+
+const discountRate =
+Math.max(
+0,
+Number(document.getElementById('discount').value) || 0
+) / 100;
+
+
+/*
+Valor proporcional aos dias de férias
+*/
+
+const vacationValue =
+salary / 30 * days;
+
+
+/*
+Adicional constitucional de 1/3
+*/
+
+const oneThird =
+vacationValue / 3;
+
+
+/*
+Valor bruto
+*/
+
+const gross =
+vacationValue +
+oneThird +
+other;
+
+
+/*
+Desconto estimado
+
+Aqui usamos o percentual informado
+pelo usuário como uma estimativa.
+*/
+
+const discount =
+gross * discountRate;
+
+
+/*
+Valor líquido
+*/
+
+const net =
+Math.max(
+0,
+gross - discount
+);
+
+
+/*
+Cards
+*/
+
+document.getElementById('vacationValue').textContent =
+money(vacationValue);
+
+document.getElementById('oneThird').textContent =
+money(oneThird);
+
+document.getElementById('grossValue').textContent =
+money(gross);
+
+document.getElementById('netValue').textContent =
+money(net);
+
+
+/*
+Tabela
+*/
+
+document.getElementById('tableVacation').textContent =
+money(vacationValue);
+
+document.getElementById('tableThird').textContent =
+money(oneThird);
+
+document.getElementById('tableOther').textContent =
+money(other);
+
+document.getElementById('tableGross').textContent =
+money(gross);
+
+document.getElementById('tableDiscount').textContent =
+money(discount);
+
+document.getElementById('tableNet').textContent =
+money(net);
+
+
+/*
+Mensagem
+*/
+
+const message =
+document.getElementById('resultMessage');
+
+message.innerHTML =
+`Para ${days} dias de férias, o valor bruto estimado é
+<strong>${money(gross)}</strong> e o valor líquido estimado é
+<strong>${money(net)}</strong>.`;
+
+}
+
+
+function resetCalculator() {
+
+document.getElementById('salary').value = 5000;
+
+document.getElementById('days').value = 30;
+
+document.getElementById('dependents').value = 0;
+
+document.getElementById('other').value = 0;
+
+document.getElementById('discount').value = 9;
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
