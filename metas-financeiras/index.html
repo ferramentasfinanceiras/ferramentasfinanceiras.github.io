@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de Metas Financeiras | Quanto Guardar por Mês</title>
+
+<meta name="description" content="Descubra quanto você precisa guardar por mês para alcançar sua meta financeira. Simule valor inicial, aportes, rentabilidade e prazo gratuitamente.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/metas-financeiras/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous"></script>
+
+<style>
+:root {
+  --bg:#f5f7fb;
+  --card:#fff;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e4e7ec;
+  --primary:#2457e6;
+  --primary-dark:#1946c4;
+  --success:#12805c;
+  --shadow:0 10px 30px rgba(16,24,40,.08);
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.container {
+  max-width:1180px;
+  margin:0 auto;
+  padding:32px 18px 48px;
+}
+
+header {
+  margin-bottom:24px;
+}
+
+h1 {
+  margin:0 0 8px;
+  font-size:clamp(28px,4vw,40px);
+  letter-spacing:-1px;
+}
+
+.subtitle {
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+  line-height:1.6;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:20px;
+  align-items:start;
+}
+
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+.card h2 {
+  font-size:18px;
+  margin:0 0 18px;
+}
+
+.form-group {
+  margin-bottom:16px;
+}
+
+label {
+  display:block;
+  font-size:13px;
+  font-weight:650;
+  margin-bottom:7px;
+}
+
+input,
+select,
+button {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 13px;
+  font:inherit;
+  background:#fff;
+  color:var(--text);
+  outline:none;
+}
+
+input:focus,
+select:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(36,87,230,.12);
+}
+
+.input-row {
+  display:flex;
+  gap:8px;
+}
+
+.input-row input {
+  flex:1;
+}
+
+.input-row select {
+  width:112px;
+  flex:0 0 112px;
+}
+
+.actions {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+button {
+  cursor:pointer;
+  font-weight:700;
+}
+
+.btn-primary {
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
+}
+
+.btn-primary:hover {
+  background:var(--primary-dark);
+}
+
+.btn-secondary {
+  background:#fff;
+}
+
+.note {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+  margin-top:14px;
+}
+
+.results {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.metric {
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  background:#fff;
+}
+
+.metric .label {
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.metric .value {
+  font-size:clamp(18px,2.2vw,25px);
+  font-weight:800;
+  letter-spacing:-.4px;
+}
+
+.metric.highlight {
+  background:#f0f5ff;
+  border-color:#cddcff;
+}
+
+.metric.highlight .value {
+  color:var(--primary);
+}
+
+.metric.positive .value {
+  color:var(--success);
+}
+
+.chart-wrap {
+  margin-top:18px;
+}
+
+canvas {
+  width:100%;
+  height:330px;
+  display:block;
+}
+
+.table-wrap {
+  margin-top:18px;
+  overflow-x:auto;
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:760px;
+  font-size:13px;
+}
+
+th,
+td {
+  padding:11px 12px;
+  border-bottom:1px solid #eef0f3;
+  text-align:right;
+  white-space:nowrap;
+}
+
+th:first-child,
+td:first-child {
+  text-align:left;
+}
+
+th {
+  background:#f8f9fb;
+  color:#475467;
+  font-weight:700;
+}
+
+tbody tr:last-child td {
+  border-bottom:0;
+}
+
+.ad-container {
+  min-height:90px;
+  margin:20px 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.info {
+  margin-top:20px;
+  line-height:1.7;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.info h2 {
+  color:var(--text);
+  font-size:20px;
+}
+
+.footer-note {
+  margin-top:12px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.back {
+  display:inline-block;
+  margin-bottom:18px;
+  color:var(--primary);
+  font-size:13px;
+  font-weight:700;
+}
+
+@media(max-width:900px) {
+  .grid {
+    grid-template-columns:1fr;
+  }
+
+  .results {
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:520px) {
+  .container {
+    padding:22px 12px 36px;
+  }
+
+  .card {
+    padding:16px;
+    border-radius:14px;
+  }
+
+  .results {
+    grid-template-columns:1fr;
+  }
+
+  .input-row {
+    flex-direction:column;
+  }
+
+  .input-row select {
+    width:100%;
+  }
+
+  .actions {
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="container">
+
+<a class="back" href="/">← Voltar para Ferramentas Financeiras</a>
+
+<header>
+  <h1>Calculadora de Metas Financeiras</h1>
+  <p class="subtitle">
+    Descubra quanto você precisa investir todos os meses para alcançar uma meta financeira.
+    Considere seu valor inicial, prazo e rentabilidade esperada.
+  </p>
+</header>
+
+<!-- ADVERTISEMENT -->
+<div class="ad-container">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-5452382323898798"
+       data-ad-slot="auto"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="grid">
+
+<section class="card">
+
+<h2>Defina sua meta</h2>
+
+<div class="form-group">
+<label for="target">Valor da meta</label>
+<input id="target" type="number" min="0" step="0.01" value="100000">
+</div>
+
+<div class="form-group">
+<label for="initial">Quanto você já possui</label>
+<input id="initial" type="number" min="0" step="0.01" value="10000">
+</div>
+
+<div class="form-group">
+<label for="rate">Rentabilidade esperada</label>
+
+<div class="input-row">
+<input id="rate" type="number" min="0" step="0.001" value="0.8">
+
+<select id="ratePeriod">
+<option value="month">Ao mês</option>
+<option value="year">Ao ano</option>
+</select>
+</div>
+</div>
+
+<div class="form-group">
+<label for="time">Prazo</label>
+
+<div class="input-row">
+<input id="time" type="number" min="1" step="1" value="5">
+
+<select id="timePeriod">
+<option value="year">Anos</option>
+<option value="month">Meses</option>
+</select>
+</div>
+</div>
+
+<div class="form-group">
+<label for="contribution">Aporte mensal</label>
+<input id="contribution" type="number" min="0" step="0.01" value="1000">
+</div>
+
+<div class="actions">
+<button class="btn-primary" onclick="calculate()">Calcular</button>
+<button class="btn-secondary" onclick="resetCalculator()">Limpar</button>
+</div>
+
+<p class="note">
+O aporte é considerado no final de cada mês. A rentabilidade é utilizada apenas
+como estimativa para a simulação e não representa garantia de retorno.
+</p>
+
+</section>
+
+<section>
+
+<div class="results">
+
+<div class="metric highlight">
+<div class="label">Valor projetado</div>
+<div class="value" id="finalValue">R$ 0,00</div>
+</div>
+
+<div class="metric">
+<div class="label">Meta</div>
+<div class="value" id="targetValue">R$ 0,00</div>
+</div>
+
+<div class="metric positive">
+<div class="label">Total investido</div>
+<div class="value" id="investedValue">R$ 0,00</div>
+</div>
+
+<div class="metric">
+<div class="label">Rendimento</div>
+<div class="value" id="interestValue">R$ 0,00</div>
+</div>
+
+</div>
+
+<div class="card chart-wrap">
+
+<h2>Evolução até a meta</h2>
+
+<canvas id="chart"></canvas>
+
+</div>
+
+<div class="card" style="margin-top:18px">
+
+<h2>Resumo da evolução</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Mês</th>
+<th>Aporte</th>
+<th>Rendimento</th>
+<th>Total investido</th>
+<th>Patrimônio</th>
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+
+</table>
+
+</div>
+
+<div class="footer-note" id="rateInfo"></div>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- ADVERTISEMENT -->
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+<section class="card info">
+
+<h2>Como funciona a calculadora de metas financeiras?</h2>
+
+<p>
+Definir uma meta financeira é uma das formas mais simples de transformar um
+objetivo em um plano concreto. Informe quanto você deseja acumular, quanto já
+possui, o prazo disponível e uma estimativa de rentabilidade.
+</p>
+
+<p>
+A calculadora projeta a evolução do patrimônio considerando juros compostos e
+aportes mensais. Dessa forma, você consegue visualizar quanto do patrimônio
+vem dos seus próprios aportes e quanto corresponde aos rendimentos.
+</p>
+
+<p>
+Se o valor projetado ficar abaixo da sua meta, você pode aumentar o aporte
+mensal, ampliar o prazo ou revisar a rentabilidade utilizada na simulação.
+</p>
+
+<p>
+Os resultados são estimativas matemáticas e não constituem recomendação de
+investimento. Rentabilidades futuras podem ser diferentes das utilizadas na
+simulação.
+</p>
+
+</section>
+
+</div>
+
+<script>
+
+const money = value =>
+value.toLocaleString('pt-BR',{
+style:'currency',
+currency:'BRL'
+});
+
+const percent = value =>
+value.toLocaleString('pt-BR',{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}) + '%';
+
+
+function getMonthlyRate(rate,period) {
+
+if(period === 'month') {
+return rate / 100;
+}
+
+return Math.pow(1 + rate / 100,1 / 12) - 1;
+
+}
+
+
+function calculate() {
+
+const target =
+Math.max(0,Number(document.getElementById('target').value) || 0);
+
+const initial =
+Math.max(0,Number(document.getElementById('initial').value) || 0);
+
+const contribution =
+Math.max(0,Number(document.getElementById('contribution').value) || 0);
+
+const rate =
+Math.max(0,Number(document.getElementById('rate').value) || 0);
+
+const ratePeriod =
+document.getElementById('ratePeriod').value;
+
+const time =
+Math.max(
+1,
+Math.floor(Number(document.getElementById('time').value) || 1)
+);
+
+const timePeriod =
+document.getElementById('timePeriod').value;
+
+const months =
+timePeriod === 'year'
+? time * 12
+: time;
+
+const monthlyRate =
+getMonthlyRate(rate,ratePeriod);
+
+let balance = initial;
+let invested = initial;
+
+const rows = [{
+month:0,
+contribution:0,
+interest:0,
+invested:initial,
+balance:initial
+}];
+
+
+for(let month=1;month<=months;month++) {
+
+const interest =
+balance * monthlyRate;
+
+balance += interest;
+balance += contribution;
+invested += contribution;
+
+rows.push({
+month,
+contribution,
+interest,
+invested,
+balance
+});
+
+}
+
+
+const finalValue = balance;
+
+const totalInterest =
+finalValue - invested;
+
+
+document.getElementById('finalValue').textContent =
+money(finalValue);
+
+document.getElementById('targetValue').textContent =
+money(target);
+
+document.getElementById('investedValue').textContent =
+money(invested);
+
+document.getElementById('interestValue').textContent =
+money(Math.max(0,totalInterest));
+
+
+const effectiveAnnual =
+Math.pow(1 + monthlyRate,12) - 1;
+
+document.getElementById('rateInfo').textContent =
+`Taxa mensal equivalente: ${percent(monthlyRate * 100)} · ` +
+`Taxa anual efetiva equivalente: ${percent(effectiveAnnual * 100)} · ` +
+`${months} meses simulados. ` +
+(finalValue >= target
+? 'Sua projeção alcança a meta.'
+: 'Sua projeção ainda não alcança a meta no prazo informado.');
+
+
+renderTable(rows);
+drawChart(rows,target);
+
+}
+
+
+function renderTable(rows) {
+
+const tbody =
+document.getElementById('tableBody');
+
+tbody.innerHTML =
+rows.map(r => `
+
+<tr>
+
+<td>
+${r.month === 0 ? 'Inicial' : r.month}
+</td>
+
+<td>
+${money(r.contribution)}
+</td>
+
+<td>
+${money(r.interest)}
+</td>
+
+<td>
+${money(r.invested)}
+</td>
+
+<td>
+<strong>${money(r.balance)}</strong>
+</td>
+
+</tr>
+
+`).join('');
+
+}
+
+
+function drawChart(rows,target) {
+
+const canvas =
+document.getElementById('chart');
+
+const ctx =
+canvas.getContext('2d');
+
+const dpr =
+window.devicePixelRatio || 1;
+
+const width =
+canvas.clientWidth;
+
+const height =
+330;
+
+canvas.width =
+width * dpr;
+
+canvas.height =
+height * dpr;
+
+ctx.setTransform(
+dpr,
+0,
+0,
+dpr,
+0,
+0
+);
+
+ctx.clearRect(
+0,
+0,
+width,
+height
+);
+
+const padding = {
+top:20,
+right:20,
+bottom:42,
+left:70
+};
+
+const chartW =
+width -
+padding.left -
+padding.right;
+
+const chartH =
+height -
+padding.top -
+padding.bottom;
+
+const maxValue =
+Math.max(
+...rows.map(r => r.balance),
+target,
+1
+);
+
+
+const x = i =>
+padding.left +
+(i / Math.max(rows.length - 1,1)) *
+chartW;
+
+
+const y = value =>
+padding.top +
+chartH -
+(value / maxValue) *
+chartH;
+
+
+ctx.font =
+'11px system-ui,sans-serif';
+
+ctx.fillStyle =
+'#667085';
+
+ctx.strokeStyle =
+'#eaecf0';
+
+ctx.lineWidth =
+1;
+
+
+for(let i=0;i<=5;i++) {
+
+const value =
+maxValue * i / 5;
+
+const yy =
+y(value);
+
+ctx.beginPath();
+
+ctx.moveTo(
+padding.left,
+yy
+);
+
+ctx.lineTo(
+width-padding.right,
+yy
+);
+
+ctx.stroke();
+
+ctx.textAlign =
+'right';
+
+ctx.fillText(
+shortMoney(value),
+padding.left - 9,
+yy + 4
+);
+
+}
+
+
+/* Linha da meta */
+
+const targetY =
+y(target);
+
+ctx.setLineDash([6,5]);
+
+ctx.strokeStyle =
+'#98a2b3';
+
+ctx.beginPath();
+
+ctx.moveTo(
+padding.left,
+targetY
+);
+
+ctx.lineTo(
+width-padding.right,
+targetY
+);
+
+ctx.stroke();
+
+ctx.setLineDash([]);
+
+
+/* Área */
+
+ctx.beginPath();
+
+rows.forEach((r,i)=>{
+
+const px =
+x(i);
+
+const py =
+y(r.balance);
+
+if(i===0)
+ctx.moveTo(px,py);
+else
+ctx.lineTo(px,py);
+
+});
+
+ctx.lineTo(
+x(rows.length-1),
+padding.top+chartH
+);
+
+ctx.lineTo(
+x(0),
+padding.top+chartH
+);
+
+ctx.closePath();
+
+ctx.fillStyle =
+'rgba(36,87,230,0.10)';
+
+ctx.fill();
+
+
+/* Linha */
+
+ctx.beginPath();
+
+rows.forEach((r,i)=>{
+
+const px =
+x(i);
+
+const py =
+y(r.balance);
+
+if(i===0)
+ctx.moveTo(px,py);
+else
+ctx.lineTo(px,py);
+
+});
+
+ctx.strokeStyle =
+'#2457e6';
+
+ctx.lineWidth =
+3;
+
+ctx.stroke();
+
+
+/* Labels */
+
+ctx.fillStyle =
+'#667085';
+
+ctx.textAlign =
+'center';
+
+const labelCount =
+Math.min(8,rows.length);
+
+const step =
+Math.max(
+1,
+Math.floor(
+(rows.length-1) /
+(labelCount-1 || 1)
+)
+);
+
+
+for(let i=0;i<rows.length;i+=step){
+
+ctx.fillText(
+`Mês ${rows[i].month}`,
+x(i),
+height-16
+);
+
+}
+
+
+if((rows.length-1)%step !== 0){
+
+ctx.fillText(
+`Mês ${rows.length-1}`,
+x(rows.length-1),
+height-16
+);
+
+}
+
+}
+
+
+function shortMoney(value) {
+
+if(value >= 1000000)
+return 'R$ ' +
+(value/1000000).toLocaleString(
+'pt-BR',
+{maximumFractionDigits:1}
+) +
+' mi';
+
+if(value >= 1000)
+return 'R$ ' +
+(value/1000).toLocaleString(
+'pt-BR',
+{maximumFractionDigits:0}
+) +
+' mil';
+
+return 'R$ ' +
+value.toLocaleString(
+'pt-BR',
+{maximumFractionDigits:0}
+);
+
+}
+
+
+function resetCalculator() {
+
+document.getElementById('target').value =
+100000;
+
+document.getElementById('initial').value =
+10000;
+
+document.getElementById('rate').value =
+0.8;
+
+document.getElementById('ratePeriod').value =
+'month';
+
+document.getElementById('time').value =
+5;
+
+document.getElementById('timePeriod').value =
+'year';
+
+document.getElementById('contribution').value =
+1000;
+
+calculate();
+
+}
+
+
+window.addEventListener(
+'resize',
+calculate
+);
+
+calculate();
+
+</script>
+
+</body>
+</html>
