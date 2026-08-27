@@ -1,1 +1,927 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Calculadora de 13º Salário 2026 | Ferramentas Financeiras</title>
+
+<meta name="description" content="Calcule seu 13º salário de forma simples e gratuita. Simule o valor bruto, primeira e segunda parcela e descontos do INSS.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/decimo-terceiro/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous">
+</script>
+
+<style>
+
+:root {
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e4e7ec;
+  --primary:#2457e6;
+  --primary-dark:#1946c4;
+  --success:#12805c;
+  --shadow:0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,
+  BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.container {
+  max-width:1180px;
+  margin:0 auto;
+  padding:32px 18px 48px;
+}
+
+header {
+  margin-bottom:24px;
+}
+
+h1 {
+  margin:0 0 8px;
+  font-size:clamp(28px,4vw,40px);
+  letter-spacing:-1px;
+}
+
+.subtitle {
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+  line-height:1.5;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:20px;
+  align-items:start;
+}
+
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+.card h2 {
+  font-size:18px;
+  margin:0 0 18px;
+}
+
+.form-group {
+  margin-bottom:16px;
+}
+
+label {
+  display:block;
+  font-size:13px;
+  font-weight:650;
+  margin-bottom:7px;
+}
+
+input,
+select,
+button {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 13px;
+  font:inherit;
+  background:#fff;
+  color:var(--text);
+  outline:none;
+}
+
+input:focus,
+select:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(36,87,230,.12);
+}
+
+.actions {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+button {
+  cursor:pointer;
+  font-weight:700;
+}
+
+.btn-primary {
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
+}
+
+.btn-primary:hover {
+  background:var(--primary-dark);
+}
+
+.btn-secondary {
+  background:#fff;
+}
+
+.note {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+  margin-top:14px;
+}
+
+.results {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.metric {
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  background:#fff;
+}
+
+.metric .label {
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.metric .value {
+  font-size:clamp(18px,2.2vw,25px);
+  font-weight:800;
+  letter-spacing:-.4px;
+}
+
+.metric.highlight {
+  background:#f0f5ff;
+  border-color:#cddcff;
+}
+
+.metric.highlight .value {
+  color:var(--primary);
+}
+
+.metric.positive .value {
+  color:var(--success);
+}
+
+.info {
+  margin-top:18px;
+}
+
+.info-box {
+  background:#f8f9fb;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:12px;
+}
+
+.info-box strong {
+  display:block;
+  margin-bottom:5px;
+  font-size:13px;
+}
+
+.info-box span {
+  color:var(--muted);
+  font-size:13px;
+}
+
+.table-wrap {
+  margin-top:18px;
+  overflow-x:auto;
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:600px;
+  font-size:13px;
+}
+
+th,
+td {
+  padding:12px;
+  border-bottom:1px solid #eef0f3;
+  text-align:right;
+}
+
+th:first-child,
+td:first-child {
+  text-align:left;
+}
+
+th {
+  background:#f8f9fb;
+  color:#475467;
+  font-weight:700;
+}
+
+tbody tr:last-child td {
+  border-bottom:0;
+}
+
+.ad-container {
+  min-height:90px;
+  margin:10px 0 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.footer-note {
+  margin-top:14px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+@media(max-width:900px) {
+
+  .grid {
+    grid-template-columns:1fr;
+  }
+
+  .results {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:520px) {
+
+  .container {
+    padding:22px 12px 36px;
+  }
+
+  .card {
+    padding:16px;
+    border-radius:14px;
+  }
+
+  .results {
+    grid-template-columns:1fr;
+  }
+
+  .actions {
+    flex-direction:column;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="container">
+
+<header>
+
+<h1>Calculadora de 13º Salário</h1>
+
+<p class="subtitle">
+Calcule quanto você pode receber de 13º salário, incluindo o valor bruto e uma estimativa das parcelas.
+</p>
+
+</header>
+
+
+<!-- ADS -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true">
+</ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<div class="grid">
+
+
+<!-- FORM -->
+
+<section class="card">
+
+<h2>Dados do salário</h2>
+
+
+<div class="form-group">
+
+<label for="salary">
+Salário bruto mensal
+</label>
+
+<input
+id="salary"
+type="number"
+min="0"
+step="0.01"
+value="5000">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="months">
+Meses trabalhados no ano
+</label>
+
+<select id="months">
+
+<option value="12">12 meses</option>
+<option value="11">11 meses</option>
+<option value="10">10 meses</option>
+<option value="9">9 meses</option>
+<option value="8">8 meses</option>
+<option value="7">7 meses</option>
+<option value="6">6 meses</option>
+<option value="5">5 meses</option>
+<option value="4">4 meses</option>
+<option value="3">3 meses</option>
+<option value="2">2 meses</option>
+<option value="1">1 mês</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="bonus">
+Outros valores habituais no salário (opcional)
+</label>
+
+<input
+id="bonus"
+type="number"
+min="0"
+step="0.01"
+value="0">
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Calcular
+</button>
+
+<button
+class="btn-secondary"
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+
+<p class="note">
+Cada mês trabalhado por pelo menos 15 dias normalmente conta como 1/12 do 13º salário.
+O cálculo apresentado é uma estimativa e não substitui o cálculo oficial da folha de pagamento.
+</p>
+
+</section>
+
+
+<!-- RESULTADOS -->
+
+<section>
+
+<div class="results">
+
+
+<div class="metric highlight">
+
+<div class="label">
+13º bruto
+</div>
+
+<div
+class="value"
+id="grossValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+1ª parcela
+</div>
+
+<div
+class="value"
+id="firstValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+2ª parcela estimada
+</div>
+
+<div
+class="value"
+id="secondValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric positive">
+
+<div class="label">
+Total estimado líquido
+</div>
+
+<div
+class="value"
+id="netValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="card info">
+
+<h2>Resumo do cálculo</h2>
+
+
+<div class="info-box">
+
+<strong>
+Base considerada
+</strong>
+
+<span id="baseInfo">
+R$ 0,00
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+<strong>
+Meses considerados
+</strong>
+
+<span id="monthsInfo">
+0 meses
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+<strong>
+Desconto estimado de INSS
+</strong>
+
+<span id="inssInfo">
+R$ 0,00
+</span>
+
+</div>
+
+
+<div class="info-box">
+
+<strong>
+Desconto estimado de IRRF
+</strong>
+
+<span id="irrfInfo">
+R$ 0,00
+</span>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Como o 13º é dividido</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Parcela</th>
+
+<th>Valor bruto</th>
+
+<th>Descontos</th>
+
+<th>Valor estimado</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<p class="footer-note">
+A primeira parcela normalmente corresponde a aproximadamente metade do valor bruto.
+Os descontos de INSS e IRRF, quando aplicáveis, são normalmente concentrados na segunda parcela.
+Os valores reais dependem das regras vigentes e da situação individual do trabalhador.
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- SEGUNDO AD -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true">
+</ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+const money = value =>
+value.toLocaleString('pt-BR',{
+style:'currency',
+currency:'BRL'
+});
+
+
+function calculate() {
+
+const salary =
+Math.max(
+0,
+Number(
+document.getElementById('salary').value
+) || 0
+);
+
+const months =
+Math.max(
+1,
+Math.min(
+12,
+Number(
+document.getElementById('months').value
+) || 1
+)
+);
+
+const bonus =
+Math.max(
+0,
+Number(
+document.getElementById('bonus').value
+) || 0
+);
+
+
+// Base utilizada para o cálculo
+
+const base = salary + bonus;
+
+
+// 13º proporcional
+
+const gross =
+base * (months / 12);
+
+
+// Primeira parcela
+
+const first =
+gross / 2;
+
+
+// Estimativa simplificada de INSS
+// A alíquota real depende das faixas progressivas vigentes.
+
+const inss =
+calculateINSS(gross);
+
+
+// Base aproximada para IRRF
+
+const irrfBase =
+Math.max(
+0,
+gross - inss
+);
+
+
+// Estimativa simplificada de IRRF
+
+const irrf =
+calculateIRRF(irrfBase);
+
+
+// Segunda parcela
+
+const second =
+Math.max(
+0,
+gross - first - inss - irrf
+);
+
+
+// Total líquido
+
+const net =
+first + second;
+
+
+document.getElementById('grossValue')
+.textContent = money(gross);
+
+document.getElementById('firstValue')
+.textContent = money(first);
+
+document.getElementById('secondValue')
+.textContent = money(second);
+
+document.getElementById('netValue')
+.textContent = money(net);
+
+document.getElementById('baseInfo')
+.textContent = money(base);
+
+document.getElementById('monthsInfo')
+.textContent =
+months === 1
+? '1 mês'
+: months + ' meses';
+
+document.getElementById('inssInfo')
+.textContent = money(inss);
+
+document.getElementById('irrfInfo')
+.textContent = money(irrf);
+
+
+document.getElementById('tableBody')
+.innerHTML = `
+
+<tr>
+
+<td>1ª parcela</td>
+
+<td>${money(first)}</td>
+
+<td>R$ 0,00</td>
+
+<td>${money(first)}</td>
+
+</tr>
+
+<tr>
+
+<td>2ª parcela</td>
+
+<td>${money(gross - first)}</td>
+
+<td>${money(inss + irrf)}</td>
+
+<td>${money(second)}</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Total</strong></td>
+
+<td><strong>${money(gross)}</strong></td>
+
+<td><strong>${money(inss + irrf)}</strong></td>
+
+<td><strong>${money(net)}</strong></td>
+
+</tr>
+
+`;
+
+}
+
+
+// Estimativa simplificada de INSS.
+// Deve ser atualizada conforme as faixas oficiais de cada ano.
+
+function calculateINSS(value) {
+
+if (value <= 0) return 0;
+
+
+// Estimativa progressiva aproximada.
+
+let inss = 0;
+
+let remaining = value;
+
+
+// Faixa 1
+
+const faixa1 = Math.min(1621, remaining);
+
+inss += faixa1 * 0.075;
+
+remaining -= faixa1;
+
+
+if (remaining <= 0) return inss;
+
+
+// Faixa 2
+
+const faixa2 = Math.min(2902, remaining);
+
+inss += faixa2 * 0.09;
+
+remaining -= faixa2;
+
+
+if (remaining <= 0) return inss;
+
+
+// Faixa 3
+
+const faixa3 = Math.min(2900, remaining);
+
+inss += faixa3 * 0.12;
+
+remaining -= faixa3;
+
+
+if (remaining <= 0) return inss;
+
+
+// Faixa 4
+
+inss += remaining * 0.14;
+
+
+return inss;
+
+}
+
+
+// Estimativa simplificada de IRRF.
+// O cálculo oficial possui deduções e regras específicas.
+
+function calculateIRRF(value) {
+
+if (value <= 0) return 0;
+
+
+// Faixas simplificadas
+
+if (value <= 2259.20) {
+return 0;
+}
+
+if (value <= 2826.65) {
+return value * 0.075 - 169.44;
+}
+
+if (value <= 3751.05) {
+return value * 0.15 - 381.44;
+}
+
+if (value <= 4664.68) {
+return value * 0.225 - 662.77;
+}
+
+return value * 0.275 - 896.00;
+
+}
+
+
+function resetCalculator() {
+
+document.getElementById('salary')
+.value = 5000;
+
+document.getElementById('months')
+.value = 12;
+
+document.getElementById('bonus')
+.value = 0;
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
