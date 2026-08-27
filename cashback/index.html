@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de Cashback | Ferramentas Financeiras</title>
+
+<meta name="description" content="Calcule quanto você recebe de cashback em uma compra e descubra o valor efetivamente pago após o cashback. Calculadora gratuita.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/cashback/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous">
+</script>
+
+<style>
+
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #667085;
+  --border: #e4e7ec;
+  --primary: #2457e6;
+  --primary-dark: #1946c4;
+  --success: #12805c;
+  --shadow: 0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* HEADER */
+
+header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+}
+
+nav a {
+  color: #475467;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+/* MAIN */
+
+main {
+  padding: 40px 0 60px;
+}
+
+.page-header {
+  margin-bottom: 26px;
+}
+
+.page-header h1 {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -1px;
+}
+
+.page-header p {
+  margin: 0;
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ADS */
+
+.ad-container {
+  min-height: 90px;
+  margin: 20px 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* GRID */
+
+.grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* CARD */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.card h2 {
+  margin: 0 0 20px;
+  font-size: 18px;
+}
+
+/* FORM */
+
+.form-group {
+  margin-bottom: 17px;
+}
+
+label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font: inherit;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(36,87,230,.12);
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input {
+  padding-right: 45px;
+}
+
+.input-suffix {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font: inherit;
+  cursor: pointer;
+  font-weight: 700;
+  background: #fff;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: #fff;
+}
+
+.note {
+  margin-top: 15px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* RESULTS */
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.metric {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.metric-label {
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.metric-value {
+  font-size: clamp(20px, 2.2vw, 27px);
+  font-weight: 800;
+  letter-spacing: -.4px;
+}
+
+.metric.highlight {
+  background: #f0f5ff;
+  border-color: #cddcff;
+}
+
+.metric.highlight .metric-value {
+  color: var(--primary);
+}
+
+.metric.positive {
+  background: #f0faf6;
+  border-color: #c7eadc;
+}
+
+.metric.positive .metric-value {
+  color: var(--success);
+}
+
+/* COMPARISON */
+
+.comparison {
+  margin-top: 18px;
+}
+
+.comparison-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.comparison-item {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  background: #fff;
+}
+
+.comparison-item h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.comparison-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.comparison-value {
+  margin-top: 8px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+/* INFO */
+
+.info {
+  margin-top: 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.info h2 {
+  margin: 0 0 14px;
+  font-size: 21px;
+}
+
+.info h3 {
+  margin: 22px 0 8px;
+  font-size: 17px;
+}
+
+.info p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* FOOTER */
+
+footer {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-copy {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.footer-links a {
+  color: #475467;
+  font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .header-inner {
+    min-height: 64px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  main {
+    padding: 28px 0 45px;
+  }
+
+  .card {
+    padding: 17px;
+    border-radius: 14px;
+  }
+
+  .results {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-box {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="container header-inner">
+
+<a href="/" class="logo">
+Ferramentas<span>Financeiras</span>
+</a>
+
+<nav>
+
+<a href="/">
+Ferramentas
+</a>
+
+<a href="/#sobre">
+Sobre
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main>
+
+<div class="container">
+
+<div class="page-header">
+
+<h1>
+Calculadora de Cashback
+</h1>
+
+<p>
+Calcule quanto você recebe de cashback em uma compra e descubra
+quanto ela realmente custa depois de considerar o dinheiro de volta.
+</p>
+
+</div>
+
+
+<!-- AD -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<div class="grid">
+
+
+<!-- FORM -->
+
+<section class="card">
+
+<h2>
+Dados da compra
+</h2>
+
+
+<div class="form-group">
+
+<label for="purchase">
+Valor da compra
+</label>
+
+<input
+id="purchase"
+type="number"
+min="0"
+step="0.01"
+value="1000">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="cashback">
+Percentual de cashback
+</label>
+
+<div class="input-wrapper">
+
+<input
+id="cashback"
+type="number"
+min="0"
+step="0.01"
+value="5">
+
+<span class="input-suffix">
+%
+</span>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="limit">
+Limite de cashback
+</label>
+
+<input
+id="limit"
+type="number"
+min="0"
+step="0.01"
+value="0">
+
+<p style="
+margin:6px 0 0;
+font-size:11px;
+color:#667085;
+line-height:1.4;
+">
+Digite 0 caso não exista limite de cashback.
+</p>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Calcular
+</button>
+
+<button
+class="btn-secondary"
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+
+<p class="note">
+O cálculo considera o cashback como um valor recebido de volta
+sobre o valor da compra. Caso exista um limite, ele será aplicado.
+</p>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section>
+
+<div class="results">
+
+
+<div class="metric highlight">
+
+<div class="metric-label">
+Cashback recebido
+</div>
+
+<div
+class="metric-value"
+id="cashbackValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric positive">
+
+<div class="metric-label">
+Custo efetivo
+</div>
+
+<div
+class="metric-value"
+id="effectiveValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="metric-label">
+Percentual efetivo
+</div>
+
+<div
+class="metric-value"
+id="effectivePercent">
+0,00%
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- COMPARISON -->
+
+<div class="card comparison">
+
+<h2>
+Resumo da compra
+</h2>
+
+<div class="comparison-box">
+
+<div class="comparison-item">
+
+<h3>
+Valor pago
+</h3>
+
+<div
+class="comparison-value"
+id="paidValue">
+R$ 0,00
+</div>
+
+<p>
+Valor desembolsado inicialmente.
+</p>
+
+</div>
+
+
+<div class="comparison-item">
+
+<h3>
+Valor após cashback
+</h3>
+
+<div
+class="comparison-value"
+id="afterCashback">
+R$ 0,00
+</div>
+
+<p>
+Custo efetivo considerando o cashback recebido.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- AD -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<!-- INFORMATION -->
+
+<section class="info">
+
+<h2>
+Como funciona o cashback?
+</h2>
+
+<p>
+Cashback significa receber de volta uma parte do dinheiro gasto
+em uma compra. O percentual de retorno varia de acordo com a
+empresa, cartão, programa de benefícios ou plataforma utilizada.
+</p>
+
+
+<h3>
+Como calcular o cashback?
+</h3>
+
+<p>
+Para calcular o cashback, multiplique o valor da compra pelo
+percentual de cashback. Por exemplo, uma compra de R$ 1.000 com
+5% de cashback gera R$ 50 de retorno.
+</p>
+
+
+<h3>
+O que é custo efetivo?
+</h3>
+
+<p>
+O custo efetivo representa quanto a compra realmente custa depois
+de considerar o cashback recebido. Se uma compra custa R$ 1.000
+e gera R$ 50 de cashback, o custo efetivo é de R$ 950.
+</p>
+
+
+<h3>
+Existe limite de cashback?
+</h3>
+
+<p>
+Alguns programas estabelecem um valor máximo de cashback por
+compra, período ou campanha. Quando existe um limite, o percentual
+calculado pode ser maior que o valor máximo permitido.
+</p>
+
+
+<h3>
+Cashback significa desconto?
+</h3>
+
+<p>
+Na prática, o cashback pode reduzir o custo efetivo de uma compra,
+mas normalmente o dinheiro não é descontado diretamente no momento
+do pagamento. O funcionamento depende das regras do programa
+utilizado.
+</p>
+
+
+<p>
+Esta calculadora apresenta uma estimativa matemática e não representa
+as regras específicas de qualquer programa de cashback.
+</p>
+
+</section>
+
+</div>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container footer-inner">
+
+<div class="footer-copy">
+© 2026 Ferramentas Financeiras. Todos os direitos reservados.
+</div>
+
+<div class="footer-links">
+
+<a href="/">
+Ferramentas
+</a>
+
+<a href="/sobre/">
+Sobre
+</a>
+
+<a href="/contato/">
+Contato
+</a>
+
+<a href="/politica-de-privacidade/">
+Política de Privacidade
+</a>
+
+<a href="/termos-de-uso/">
+Termos de Uso
+</a>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- CALCULATOR -->
+
+<script>
+
+const money = value =>
+value.toLocaleString(
+'pt-BR',
+{
+style: 'currency',
+currency: 'BRL'
+}
+);
+
+
+const percent = value =>
+value.toLocaleString(
+'pt-BR',
+{
+minimumFractionDigits: 2,
+maximumFractionDigits: 2
+}
+) + '%';
+
+
+function calculate() {
+
+const purchase =
+Math.max(
+0,
+Number(
+document.getElementById('purchase').value
+) || 0
+);
+
+
+const cashbackRate =
+Math.max(
+0,
+Number(
+document.getElementById('cashback').value
+) || 0
+);
+
+
+const limit =
+Math.max(
+0,
+Number(
+document.getElementById('limit').value
+) || 0
+);
+
+
+let cashback =
+purchase * cashbackRate / 100;
+
+
+/*
+Se houver limite maior que zero,
+aplica o limite ao cashback.
+*/
+
+if (
+limit > 0 &&
+cashback > limit
+) {
+
+cashback = limit;
+
+}
+
+
+const effectiveValue =
+Math.max(
+0,
+purchase - cashback
+);
+
+
+const effectivePercent =
+purchase > 0
+? cashback / purchase * 100
+: 0;
+
+
+document.getElementById(
+'cashbackValue'
+).textContent =
+money(cashback);
+
+
+document.getElementById(
+'effectiveValue'
+).textContent =
+money(effectiveValue);
+
+
+document.getElementById(
+'effectivePercent'
+).textContent =
+percent(effectivePercent);
+
+
+document.getElementById(
+'paidValue'
+).textContent =
+money(purchase);
+
+
+document.getElementById(
+'afterCashback'
+).textContent =
+money(effectiveValue);
+
+}
+
+
+function resetCalculator() {
+
+document.getElementById(
+'purchase'
+).value = 1000;
+
+document.getElementById(
+'cashback'
+).value = 5;
+
+document.getElementById(
+'limit'
+).value = 0;
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
