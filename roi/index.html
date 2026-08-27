@@ -1,662 +1,1006 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculadora de ROI | Retorno sobre Investimento</title>
+  <title>Calculadora de ROI | Retorno sobre Investimento</title>
 
-<meta name="description" content="Calcule o ROI de um investimento de forma simples e gratuita. Descubra o retorno percentual, lucro e resultado do seu investimento.">
+  <meta name="description" content="Calcule gratuitamente o ROI de um investimento, projeto, campanha ou negócio. Descubra quanto você ganhou em relação ao valor investido.">
 
-<meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow">
 
-<link rel="canonical" href="https://ferramentasfinanceiras.github.io/roi/">
+  <link rel="canonical" href="https://ferramentasfinanceiras.github.io/roi/">
 
-<!-- Google Tag Manager -->
-<script>
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W4NXFVNT');
-</script>
-<!-- End Google Tag Manager -->
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W4NXFVNT');
+  </script>
+  <!-- End Google Tag Manager -->
 
-<!-- Google AdSense -->
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
-crossorigin="anonymous">
-</script>
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+    crossorigin="anonymous">
+  </script>
 
-<style>
-:root {
-  --bg: #f5f7fb;
-  --card: #ffffff;
-  --text: #172033;
-  --muted: #667085;
-  --border: #e4e7ec;
-  --primary: #2457e6;
-  --primary-dark: #1946c4;
-  --success: #12805c;
-  --danger: #d92d20;
-  --shadow: 0 10px 30px rgba(16,24,40,.08);
-}
+  <style>
 
-* {
-  box-sizing: border-box;
-}
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #e4e7ec;
+      --primary: #2457e6;
+      --primary-dark: #1946c4;
+      --success: #12805c;
+      --danger: #c43232;
+      --shadow: 0 10px 30px rgba(16,24,40,.08);
+    }
 
-body {
-  margin: 0;
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.container {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 32px 18px 48px;
-}
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
 
-header {
-  margin-bottom: 24px;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-h1 {
-  margin: 0 0 8px;
-  font-size: clamp(28px, 4vw, 40px);
-  letter-spacing: -1px;
-}
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
 
-.subtitle {
-  color: var(--muted);
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.6;
-}
+    /* HEADER */
 
-.grid {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 20px;
-  align-items: start;
-}
+    header {
+      margin-bottom: 24px;
+    }
 
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  padding: 22px;
-}
+    .breadcrumb {
+      margin-bottom: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
 
-.card h2 {
-  font-size: 18px;
-  margin: 0 0 18px;
-}
+    .breadcrumb a {
+      color: var(--primary);
+      font-weight: 600;
+    }
 
-.form-group {
-  margin-bottom: 16px;
-}
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: -1px;
+    }
 
-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 650;
-  margin-bottom: 7px;
-}
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 760px;
+    }
 
-input {
-  width: 100%;
-  border: 1px solid #d0d5dd;
-  border-radius: 10px;
-  padding: 12px 13px;
-  font: inherit;
-  background: #fff;
-  color: var(--text);
-  outline: none;
-}
+    /* GRID */
 
-input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(36,87,230,.12);
-}
+    .grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
 
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
+    /* CARD */
 
-button {
-  width: 100%;
-  border: 1px solid #d0d5dd;
-  border-radius: 10px;
-  padding: 12px 13px;
-  font: inherit;
-  cursor: pointer;
-  font-weight: 700;
-  background: #fff;
-}
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
 
-.btn-primary {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-}
+    .card h2 {
+      font-size: 18px;
+      margin: 0 0 18px;
+    }
 
-.btn-primary:hover {
-  background: var(--primary-dark);
-}
+    /* FORM */
 
-.note {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.5;
-  margin-top: 14px;
-}
+    .form-group {
+      margin-bottom: 17px;
+    }
 
-.results {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 650;
+      margin-bottom: 7px;
+    }
 
-.metric {
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 16px;
-  background: #fff;
-}
+    .input-wrapper {
+      position: relative;
+    }
 
-.metric .label {
-  color: var(--muted);
-  font-size: 12px;
-  margin-bottom: 7px;
-}
+    .prefix {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 14px;
+      pointer-events: none;
+    }
 
-.metric .value {
-  font-size: clamp(18px, 2.2vw, 25px);
-  font-weight: 800;
-  letter-spacing: -.4px;
-}
+    input {
+      width: 100%;
+      border: 1px solid #d0d5dd;
+      border-radius: 10px;
+      padding: 12px 13px 12px 42px;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
 
-.metric.highlight {
-  background: #f0f5ff;
-  border-color: #cddcff;
-}
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(36,87,230,.12);
+    }
 
-.metric.highlight .value {
-  color: var(--primary);
-}
+    .hint {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
 
-.metric.positive .value {
-  color: var(--success);
-}
+    /* BUTTONS */
 
-.metric.danger .value {
-  color: var(--danger);
-}
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
 
-.ad-container {
-  min-height: 90px;
-  margin: 20px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
+    button {
+      width: 100%;
+      border: 1px solid #d0d5dd;
+      border-radius: 10px;
+      padding: 12px 13px;
+      font: inherit;
+      cursor: pointer;
+      font-weight: 700;
+      background: #fff;
+      color: var(--text);
+    }
 
-.info-card {
-  margin-top: 18px;
-}
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
 
-.info-card p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.7;
-  margin: 0 0 12px;
-}
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
 
-.formula {
-  background: #f8f9fb;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
-  margin-top: 14px;
-  font-size: 14px;
-  line-height: 1.6;
-}
+    /* RESULTS */
 
-.footer-note {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 12px;
-}
+    .results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+    .metric {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
+    }
 
-  .results {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+    .metric .label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
 
-@media (max-width: 520px) {
-  .container {
-    padding: 22px 12px 36px;
-  }
+    .metric .value {
+      font-size: clamp(20px, 2.2vw, 27px);
+      font-weight: 800;
+      letter-spacing: -.4px;
+    }
 
-  .card {
-    padding: 16px;
-    border-radius: 14px;
-  }
+    .metric.highlight {
+      background: #f0f5ff;
+      border-color: #cddcff;
+    }
 
-  .results {
-    grid-template-columns: 1fr;
-  }
+    .metric.highlight .value {
+      color: var(--primary);
+    }
 
-  .actions {
-    flex-direction: column;
-  }
-}
-</style>
+    .metric.positive .value {
+      color: var(--success);
+    }
+
+    .metric.negative .value {
+      color: var(--danger);
+    }
+
+    /* INTERPRETATION */
+
+    .interpretation {
+      margin-top: 18px;
+      padding: 17px;
+      border-radius: 14px;
+      background: #f8f9fb;
+      border: 1px solid var(--border);
+    }
+
+    .interpretation strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .interpretation p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* TABLE */
+
+    .table-wrap {
+      margin-top: 18px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #eef0f3;
+      text-align: right;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    th {
+      background: #f8f9fb;
+      color: #475467;
+      font-weight: 700;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    /* INFO */
+
+    .info {
+      margin-top: 20px;
+    }
+
+    .info p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0 0 12px;
+    }
+
+    .formula {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #f8f9fb;
+      border: 1px solid var(--border);
+      text-align: center;
+      font-weight: 700;
+    }
+
+    /* ADS */
+
+    .ad-container {
+      min-height: 90px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* FOOTER */
+
+    footer {
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .results {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .container {
+        padding: 22px 12px 36px;
+      }
+
+      .card {
+        padding: 16px;
+        border-radius: 14px;
+      }
+
+      .results {
+        grid-template-columns: 1fr;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+    }
+
+  </style>
+
 </head>
 
 <body>
 
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-<iframe
-src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
-height="0"
-width="0"
-style="display:none;visibility:hidden">
-</iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe
+      src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+      height="0"
+      width="0"
+      style="display:none;visibility:hidden">
+    </iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
 
-<div class="container">
+  <div class="container">
 
-<header>
-<h1>Calculadora de ROI</h1>
+    <!-- HEADER -->
 
-<p class="subtitle">
-Calcule o retorno sobre o investimento, descubra seu lucro e veja
-quanto você ganhou ou perdeu em relação ao valor investido.
-</p>
-</header>
+    <header>
 
+      <div class="breadcrumb">
+        <a href="/">Ferramentas Financeiras</a>
+        &nbsp;›&nbsp;
+        Calculadora de ROI
+      </div>
 
-<div class="grid">
+      <h1>Calculadora de ROI</h1>
 
-<section class="card">
+      <p class="subtitle">
+        Calcule o retorno sobre investimento de uma campanha, projeto,
+        negócio ou qualquer outro investimento.
+      </p>
 
-<h2>Dados do investimento</h2>
+    </header>
 
-<div class="form-group">
 
-<label for="investment">
-Valor investido
-</label>
+    <!-- ADVERTISEMENT -->
 
-<input
-id="investment"
-type="number"
-min="0"
-step="0.01"
-value="10000">
+    <div class="ad-container">
 
-</div>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5452382323898798"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true">
+      </ins>
 
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
-<div class="form-group">
+    </div>
 
-<label for="returnAmount">
-Valor recebido / retorno
-</label>
 
-<input
-id="returnAmount"
-type="number"
-min="0"
-step="0.01"
-value="15000">
+    <!-- MAIN -->
 
-</div>
+    <div class="grid">
 
 
-<div class="form-group">
+      <!-- FORM -->
 
-<label for="additionalCosts">
-Custos adicionais
-</label>
+      <section class="card">
 
-<input
-id="additionalCosts"
-type="number"
-min="0"
-step="0.01"
-value="0">
+        <h2>Dados do investimento</h2>
 
-</div>
 
+        <div class="form-group">
 
-<div class="actions">
+          <label for="investment">
+            Valor investido
+          </label>
 
-<button
-class="btn-primary"
-onclick="calculate()">
-Calcular ROI
-</button>
+          <div class="input-wrapper">
 
-<button
-onclick="resetCalculator()">
-Limpar
-</button>
+            <span class="prefix">R$</span>
 
-</div>
+            <input
+              id="investment"
+              type="number"
+              min="0"
+              step="0.01"
+              value="10000">
 
+          </div>
 
-<p class="note">
-O ROI é calculado considerando o investimento inicial e os custos
-informados. Quanto maior o ROI, maior foi o retorno proporcional
-em relação ao capital investido.
-</p>
+          <div class="hint">
+            Informe quanto foi investido.
+          </div>
 
-</section>
+        </div>
 
 
-<section>
+        <div class="form-group">
 
-<div class="results">
+          <label for="return">
 
-<div class="metric highlight">
+            Receita ou valor gerado
 
-<div class="label">
-ROI
-</div>
+          </label>
 
-<div class="value"
-id="roiValue">
-0,00%
-</div>
+          <div class="input-wrapper">
 
-</div>
+            <span class="prefix">R$</span>
 
+            <input
+              id="return"
+              type="number"
+              min="0"
+              step="0.01"
+              value="15000">
 
-<div class="metric positive">
+          </div>
 
-<div class="label">
-Lucro líquido
-</div>
+          <div class="hint">
+            Informe quanto o investimento gerou de retorno.
+          </div>
 
-<div class="value"
-id="profitValue">
-R$ 0,00
-</div>
+        </div>
 
-</div>
 
+        <div class="actions">
 
-<div class="metric">
+          <button
+            class="btn-primary"
+            onclick="calculate()">
 
-<div class="label">
-Retorno total
-</div>
+            Calcular ROI
 
-<div class="value"
-id="returnValue">
-R$ 0,00
-</div>
+          </button>
 
-</div>
+          <button
+            onclick="resetCalculator()">
 
+            Limpar
 
-<div class="metric">
+          </button>
 
-<div class="label">
-Total investido
-</div>
+        </div>
 
-<div class="value"
-id="totalInvestment">
-R$ 0,00
-</div>
+      </section>
 
-</div>
 
-</div>
+      <!-- RESULTS -->
 
+      <section>
 
-<div class="ad-container">
+        <div class="results">
 
-<ins
-class="adsbygoogle"
-style="display:block"
-data-ad-client="ca-pub-5452382323898798"
-data-ad-slot="auto"
-data-ad-format="auto"
-data-full-width-responsive="true">
-</ins>
 
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+          <div class="metric highlight">
 
-</div>
+            <div class="label">
+              ROI
+            </div>
 
+            <div
+              class="value"
+              id="roiValue">
 
-<div class="card info-card">
+              0,00%
 
-<h2>Resultado da análise</h2>
+            </div>
 
-<div class="metric">
+          </div>
 
-<div class="label">
-Situação do investimento
-</div>
 
-<div class="value"
-id="status">
--
-</div>
+          <div class="metric positive">
 
-</div>
+            <div class="label">
+              Lucro / retorno líquido
+            </div>
 
-<p id="statusText" style="margin-top:16px;">
-Informe os valores para calcular o resultado.
-</p>
+            <div
+              class="value"
+              id="profitValue">
 
-</div>
+              R$ 0,00
 
+            </div>
 
-<div class="card info-card">
+          </div>
 
-<h2>Como o ROI é calculado?</h2>
 
-<p>
-ROI significa Return on Investment, ou Retorno sobre o Investimento.
-Ele mede quanto um investimento gerou de resultado em relação ao
-capital utilizado.
-</p>
+          <div class="metric">
 
-<div class="formula">
+            <div class="label">
+              Valor total gerado
+            </div>
 
-<strong>ROI = (Lucro líquido ÷ Investimento total) × 100</strong>
+            <div
+              class="value"
+              id="returnValue">
 
-</div>
+              R$ 0,00
 
-<p style="margin-top:14px;">
-Por exemplo, se você investiu R$ 10.000 e recebeu R$ 15.000,
-o lucro foi de R$ 5.000. Nesse caso, o ROI foi de 50%.
-</p>
+            </div>
 
-<p>
-O ROI é útil para comparar investimentos, campanhas de marketing,
-projetos, aquisição de clientes e outras iniciativas que tenham
-um custo e um retorno mensurável.
-</p>
+          </div>
 
-</div>
 
-</section>
+        </div>
 
-</div>
 
-</div>
+        <div class="interpretation">
 
+          <strong id="interpretationTitle">
+            Resultado da análise
+          </strong>
 
-<script>
+          <p id="interpretationText">
+            Informe os valores do investimento para calcular o ROI.
+          </p>
 
-const money = value =>
-value.toLocaleString('pt-BR', {
-style: 'currency',
-currency: 'BRL'
-});
+        </div>
 
 
-const percent = value =>
-value.toLocaleString('pt-BR', {
-minimumFractionDigits: 2,
-maximumFractionDigits: 2
-}) + '%';
+        <!-- TABLE -->
 
+        <div class="card" style="margin-top:18px">
 
-function calculate() {
+          <h2>Resumo do investimento</h2>
 
-const investment =
-Math.max(
-0,
-Number(
-document.getElementById('investment').value
-) || 0
-);
+          <div class="table-wrap">
 
+            <table>
 
-const returnAmount =
-Math.max(
-0,
-Number(
-document.getElementById('returnAmount').value
-) || 0
-);
+              <thead>
 
+                <tr>
 
-const additionalCosts =
-Math.max(
-0,
-Number(
-document.getElementById('additionalCosts').value
-) || 0
-);
+                  <th>Indicador</th>
 
+                  <th>Valor</th>
 
-const totalInvestment =
-investment + additionalCosts;
+                </tr>
 
+              </thead>
 
-const profit =
-returnAmount - totalInvestment;
+              <tbody id="tableBody">
 
+                <tr>
+                  <td>Valor investido</td>
+                  <td>R$ 10.000,00</td>
+                </tr>
 
-const roi =
-totalInvestment > 0
-? (profit / totalInvestment) * 100
-: 0;
+                <tr>
+                  <td>Valor gerado</td>
+                  <td>R$ 15.000,00</td>
+                </tr>
 
+                <tr>
+                  <td>Retorno líquido</td>
+                  <td>R$ 5.000,00</td>
+                </tr>
 
-document.getElementById('roiValue').textContent =
-percent(roi);
+                <tr>
+                  <td>ROI</td>
+                  <td>50,00%</td>
+                </tr>
 
+              </tbody>
 
-document.getElementById('profitValue').textContent =
-money(profit);
+            </table>
 
+          </div>
 
-document.getElementById('returnValue').textContent =
-money(returnAmount);
+        </div>
 
+      </section>
 
-document.getElementById('totalInvestment').textContent =
-money(totalInvestment);
+    </div>
 
 
-let status = '-';
-let statusText = '';
+    <!-- ADVERTISEMENT -->
 
+    <div class="ad-container">
 
-if (totalInvestment === 0) {
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5452382323898798"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true">
+      </ins>
 
-status = 'Informe os valores';
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
-statusText =
-'Informe um valor de investimento maior que zero.';
+    </div>
 
-}
-else if (profit > 0) {
 
-status = 'Investimento positivo';
+    <!-- INFORMATION -->
 
-statusText =
-'O investimento apresentou retorno superior ao capital total investido.';
+    <section class="card info">
 
-}
-else if (profit === 0) {
+      <h2>Como calcular o ROI?</h2>
 
-status = 'Empate';
+      <p>
+        ROI significa <strong>Return on Investment</strong>, ou Retorno
+        sobre o Investimento. É uma métrica utilizada para avaliar quanto
+        um investimento gerou em relação ao valor investido.
+      </p>
 
-statusText =
-'O retorno foi exatamente igual ao valor total investido.';
+      <p>
+        Para calcular o ROI, subtraia o valor investido do valor gerado
+        e divida o resultado pelo valor investido.
+      </p>
 
-}
-else {
+      <div class="formula">
 
-status = 'Prejuízo';
+        ROI = (Valor gerado − Valor investido) ÷ Valor investido × 100
 
-statusText =
-'O retorno foi inferior ao valor total investido.';
+      </div>
 
-}
+      <p style="margin-top:16px">
 
+        Por exemplo, se você investir R$ 10.000 e gerar R$ 15.000,
+        o lucro será de R$ 5.000 e o ROI será de 50%.
+      </p>
 
-document.getElementById('status').textContent =
-status;
+      <p>
+        O ROI pode ser utilizado para analisar campanhas de marketing,
+        investimentos, projetos, aquisição de clientes, negócios e
+        diversas outras situações.
+      </p>
 
+    </section>
 
-document.getElementById('statusText').textContent =
-statusText;
 
-}
+    <footer>
 
+      <p>
+        © 2026 Ferramentas Financeiras. Todos os direitos reservados.
+      </p>
 
-function resetCalculator() {
+      <p>
+        <a href="/">Voltar para todas as ferramentas</a>
+      </p>
 
-document.getElementById('investment').value = 10000;
+    </footer>
 
-document.getElementById('returnAmount').value = 15000;
+  </div>
 
-document.getElementById('additionalCosts').value = 0;
 
-calculate();
+  <script>
 
-}
+    function money(value) {
 
+      return value.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
 
-calculate();
+    }
 
-</script>
+
+    function percent(value) {
+
+      return value.toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }) + '%';
+
+    }
+
+
+    function calculate() {
+
+      const investment =
+        Math.max(
+          0,
+          Number(
+            document.getElementById('investment').value
+          ) || 0
+        );
+
+
+      const generated =
+        Math.max(
+          0,
+          Number(
+            document.getElementById('return').value
+          ) || 0
+        );
+
+
+      const profit =
+        generated - investment;
+
+
+      let roi = 0;
+
+
+      if (investment > 0) {
+
+        roi =
+          (profit / investment) * 100;
+
+      }
+
+
+      document.getElementById('roiValue').textContent =
+        percent(roi);
+
+
+      document.getElementById('profitValue').textContent =
+        money(profit);
+
+
+      document.getElementById('returnValue').textContent =
+        money(generated);
+
+
+      const profitElement =
+        document.getElementById('profitValue');
+
+
+      if (profit >= 0) {
+
+        profitElement.parentElement
+          .parentElement
+          .classList.remove('negative');
+
+        profitElement.parentElement
+          .parentElement
+          .classList.add('positive');
+
+      } else {
+
+        profitElement.parentElement
+          .parentElement
+          .classList.remove('positive');
+
+        profitElement.parentElement
+          .parentElement
+          .classList.add('negative');
+
+      }
+
+
+      updateInterpretation(roi, investment, generated, profit);
+
+      updateTable(
+        investment,
+        generated,
+        profit,
+        roi
+      );
+
+    }
+
+
+    function updateInterpretation(
+      roi,
+      investment,
+      generated,
+      profit
+    ) {
+
+      const title =
+        document.getElementById('interpretationTitle');
+
+      const text =
+        document.getElementById('interpretationText');
+
+
+      if (investment <= 0) {
+
+        title.textContent =
+          'Informe um investimento válido';
+
+        text.textContent =
+          'Digite um valor investido maior que zero para calcular o ROI.';
+
+        return;
+
+      }
+
+
+      if (roi > 0) {
+
+        title.textContent =
+          'Investimento com retorno positivo';
+
+        text.textContent =
+          `O investimento gerou ${money(profit)} de retorno líquido, representando um ROI de ${percent(roi)} sobre o valor investido.`;
+
+      }
+
+      else if (roi === 0) {
+
+        title.textContent =
+          'Investimento sem ganho líquido';
+
+        text.textContent =
+          'O valor gerado foi exatamente igual ao valor investido. Portanto, o ROI é de 0%.';
+
+      }
+
+      else {
+
+        title.textContent =
+          'Investimento com retorno negativo';
+
+        text.textContent =
+          `O investimento apresentou uma perda de ${money(Math.abs(profit))}, resultando em um ROI de ${percent(roi)}.`;
+
+      }
+
+    }
+
+
+    function updateTable(
+      investment,
+      generated,
+      profit,
+      roi
+    ) {
+
+      const tbody =
+        document.getElementById('tableBody');
+
+
+      tbody.innerHTML = `
+
+        <tr>
+
+          <td>
+            Valor investido
+          </td>
+
+          <td>
+            ${money(investment)}
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Valor gerado
+          </td>
+
+          <td>
+            ${money(generated)}
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Retorno líquido
+          </td>
+
+          <td>
+            ${money(profit)}
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            ROI
+          </td>
+
+          <td>
+            <strong>
+              ${percent(roi)}
+            </strong>
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+
+
+    function resetCalculator() {
+
+      document.getElementById('investment').value =
+        10000;
+
+      document.getElementById('return').value =
+        15000;
+
+      calculate();
+
+    }
+
+
+    calculate();
+
+  </script>
 
 </body>
 </html>
