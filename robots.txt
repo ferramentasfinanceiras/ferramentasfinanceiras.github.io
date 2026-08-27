@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ferramentasfinanceiras.github.io/sitemap.xml
