@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calculadora de Financiamento de Imóvel | SAC e Price</title>
+
+  <meta name="description" content="Calcule seu financiamento de imóvel, veja o valor da entrada, parcelas, juros totais e compare os sistemas SAC e Price. Simulador gratuito.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://ferramentasfinanceiras.github.io/financiamento-imovel/">
+
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W4NXFVNT');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+    crossorigin="anonymous">
+  </script>
+
+  <style>
+
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #e4e7ec;
+      --primary: #2457e6;
+      --primary-dark: #1946c4;
+      --success: #12805c;
+      --danger: #c43232;
+      --shadow: 0 10px 30px rgba(16,24,40,.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* HEADER */
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    nav a {
+      color: #475467;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 52px 0 28px;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 4vw, 42px);
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      max-width: 780px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* ADS */
+
+    .ad-container {
+      min-height: 90px;
+      margin: 10px 0 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* GRID */
+
+    .grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .card h2 {
+      margin: 0 0 18px;
+      font-size: 18px;
+    }
+
+    /* FORM */
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      border: 1px solid #d0d5dd;
+      border-radius: 10px;
+      padding: 12px 13px;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(36,87,230,.12);
+    }
+
+    .input-prefix {
+      position: relative;
+    }
+
+    .input-prefix span {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .input-prefix input {
+      padding-left: 38px;
+    }
+
+    .input-suffix {
+      position: relative;
+    }
+
+    .input-suffix span {
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 13px;
+      pointer-events: none;
+    }
+
+    .input-suffix input {
+      padding-right: 45px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .input-row input {
+      flex: 1;
+    }
+
+    .input-row select {
+      width: 125px;
+      flex: 0 0 125px;
+    }
+
+    .description {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: #fff;
+    }
+
+    .note {
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* RESULTS */
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 17px;
+    }
+
+    .metric.highlight {
+      background: #f0f5ff;
+      border-color: #cddcff;
+    }
+
+    .metric.positive {
+      background: #f0faf6;
+      border-color: #c8eadc;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .metric .value {
+      font-size: clamp(18px, 2.2vw, 25px);
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .metric.highlight .value {
+      color: var(--primary);
+    }
+
+    .metric.positive .value {
+      color: var(--success);
+    }
+
+    /* SUMMARY */
+
+    .summary {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .summary-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 15px;
+    }
+
+    .summary-label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .summary-value {
+      font-size: 17px;
+      font-weight: 750;
+    }
+
+    /* TABLE */
+
+    .table-card {
+      margin-top: 18px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 780px;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      border-bottom: 1px solid #eef0f3;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    th {
+      background: #f8f9fb;
+      color: #475467;
+      font-weight: 700;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    /* INFO */
+
+    .info {
+      margin-top: 18px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .info h2 {
+      margin: 0 0 12px;
+      font-size: 21px;
+    }
+
+    .info h3 {
+      margin: 24px 0 8px;
+      font-size: 17px;
+    }
+
+    .info p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      margin-top: 50px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-copy,
+    .footer-links a {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .results {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .header-inner {
+        min-height: 64px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 40px 0 24px;
+      }
+
+      .results {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .input-row {
+        flex-direction: column;
+      }
+
+      .input-row select {
+        width: 100%;
+        flex: 1;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .card {
+        padding: 17px;
+        border-radius: 14px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe
+      src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+      height="0"
+      width="0"
+      style="display:none;visibility:hidden">
+    </iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div class="container header-inner">
+
+      <a href="/" class="logo">
+        Ferramentas<span>Financeiras</span>
+      </a>
+
+      <nav>
+        <a href="/">Ferramentas</a>
+        <a href="/sobre/">Sobre</a>
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="container">
+
+        <h1>
+          Calculadora de Financiamento de Imóvel
+        </h1>
+
+        <p>
+          Simule seu financiamento imobiliário, calcule as parcelas,
+          os juros totais e veja quanto você pagará pelo imóvel ao longo
+          do financiamento.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ADVERTISEMENT -->
+
+    <div class="container">
+
+      <div class="ad-container">
+
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5452382323898798"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true">
+        </ins>
+
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
+      </div>
+
+    </div>
+
+
+    <!-- CALCULATOR -->
+
+    <div class="container">
+
+      <div class="grid">
+
+
+        <!-- INPUTS -->
+
+        <section class="card">
+
+          <h2>
+            Dados do financiamento
+          </h2>
+
+
+          <div class="form-group">
+
+            <label for="propertyValue">
+              Valor do imóvel
+            </label>
+
+            <div class="input-prefix">
+
+              <span>R$</span>
+
+              <input
+                id="propertyValue"
+                type="number"
+                min="0"
+                step="1000"
+                value="500000">
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="downPayment">
+              Entrada
+            </label>
+
+            <div class="input-prefix">
+
+              <span>R$</span>
+
+              <input
+                id="downPayment"
+                type="number"
+                min="0"
+                step="1000"
+                value="100000">
+
+            </div>
+
+            <p class="description">
+              Valor pago com recursos próprios antes do financiamento.
+            </p>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="rate">
+              Taxa de juros
+            </label>
+
+            <div class="input-row">
+
+              <div class="input-suffix" style="flex:1">
+
+                <input
+                  id="rate"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value="0.8">
+
+                <span>% ao mês</span>
+
+              </div>
+
+              <select id="ratePeriod">
+
+                <option value="month">
+                  Ao mês
+                </option>
+
+                <option value="year">
+                  Ao ano
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="term">
+              Prazo
+            </label>
+
+            <div class="input-row">
+
+              <input
+                id="term"
+                type="number"
+                min="1"
+                step="1"
+                value="30">
+
+              <select id="termPeriod">
+
+                <option value="year">
+                  Anos
+                </option>
+
+                <option value="month">
+                  Meses
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="system">
+              Sistema de amortização
+            </label>
+
+            <select id="system">
+
+              <option value="price">
+                Price — parcelas fixas
+              </option>
+
+              <option value="sac">
+                SAC — parcelas decrescentes
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="actions">
+
+            <button
+              class="btn-primary"
+              onclick="calculate()">
+              Calcular financiamento
+            </button>
+
+            <button
+              class="btn-secondary"
+              onclick="resetCalculator()">
+              Limpar
+            </button>
+
+          </div>
+
+
+          <p class="note">
+
+            Esta é uma simulação matemática. Um financiamento imobiliário
+            real pode incluir seguros, tarifas, correção monetária,
+            CET, taxas administrativas e outras despesas.
+
+          </p>
+
+        </section>
+
+
+        <!-- RESULTS -->
+
+        <section>
+
+
+          <div class="results">
+
+
+            <div class="metric highlight">
+
+              <div class="label">
+                Valor financiado
+              </div>
+
+              <div
+                class="value"
+                id="financedValue">
+                R$ 0,00
+              </div>
+
+            </div>
+
+
+            <div class="metric positive">
+
+              <div class="label">
+                Primeira parcela
+              </div>
+
+              <div
+                class="value"
+                id="firstInstallment">
+                R$ 0,00
+              </div>
+
+            </div>
+
+
+            <div class="metric">
+
+              <div class="label">
+                Total de juros
+              </div>
+
+              <div
+                class="value"
+                id="totalInterest">
+                R$ 0,00
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="summary">
+
+
+            <div class="summary-item">
+
+              <div class="summary-label">
+                Última parcela
+              </div>
+
+              <div
+                class="summary-value"
+                id="lastInstallment">
+                R$ 0,00
+              </div>
+
+            </div>
+
+
+            <div class="summary-item">
+
+              <div class="summary-label">
+                Total pago no financiamento
+              </div>
+
+              <div
+                class="summary-value"
+                id="totalPaid">
+                R$ 0,00
+              </div>
+
+            </div>
+
+
+            <div class="summary-item">
+
+              <div class="summary-label">
+                Total pago pelo imóvel
+              </div>
+
+              <div
+                class="summary-value"
+                id="totalPropertyCost">
+                R$ 0,00
+              </div>
+
+            </div>
+
+
+            <div class="summary-item">
+
+              <div class="summary-label">
+                Taxa mensal equivalente
+              </div>
+
+              <div
+                class="summary-value"
+                id="monthlyRateInfo">
+                0,00%
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- TABLE -->
+
+          <section class="card table-card">
+
+            <h2>
+              Evolução do financiamento
+            </h2>
+
+            <div class="table-wrap">
+
+              <table>
+
+                <thead>
+
+                  <tr>
+
+                    <th>
+                      Parcela
+                    </th>
+
+                    <th>
+                      Parcela
+                    </th>
+
+                    <th>
+                      Juros
+                    </th>
+
+                    <th>
+                      Amortização
+                    </th>
+
+                    <th>
+                      Saldo devedor
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody id="tableBody"></tbody>
+
+              </table>
+
+            </div>
+
+          </section>
+
+        </section>
+
+      </div>
+
+
+      <!-- SECOND AD -->
+
+      <div class="ad-container">
+
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5452382323898798"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true">
+        </ins>
+
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
+      </div>
+
+
+      <!-- INFORMATION -->
+
+      <section class="info">
+
+        <h2>
+          Como funciona o financiamento de imóvel?
+        </h2>
+
+        <p>
+          No financiamento imobiliário, uma instituição financeira
+          disponibiliza parte do valor necessário para a compra do imóvel.
+          O comprador paga uma entrada e financia o restante em parcelas.
+        </p>
+
+
+        <h3>
+          O que é o sistema Price?
+        </h3>
+
+        <p>
+          No sistema Price, as parcelas calculadas permanecem constantes
+          durante a simulação. No início do contrato, uma parcela maior
+          é destinada aos juros e uma parte menor à amortização do saldo
+          devedor.
+        </p>
+
+
+        <h3>
+          O que é o sistema SAC?
+        </h3>
+
+        <p>
+          No sistema SAC, o valor da amortização é constante. Como os juros
+          são calculados sobre um saldo devedor que diminui ao longo do tempo,
+          as parcelas tendem a começar maiores e diminuir gradualmente.
+        </p>
+
+
+        <h3>
+          Entrada do financiamento
+        </h3>
+
+        <p>
+          Quanto maior for a entrada, menor será o valor financiado e,
+          consequentemente, menor tende a ser o valor dos juros pagos
+          durante o contrato.
+        </p>
+
+
+        <h3>
+          Atenção ao custo real
+        </h3>
+
+        <p>
+          A parcela apresentada nesta calculadora é uma estimativa baseada
+          no principal, taxa de juros e prazo informados. Um contrato real
+          pode apresentar seguros, tarifas, impostos, custos de registro,
+          correção monetária e outros componentes que afetam o Custo Efetivo
+          Total (CET).
+        </p>
+
+
+        <h3>
+          Resultado da simulação
+        </h3>
+
+        <p>
+          Use os valores como referência para entender a ordem de grandeza
+          do financiamento. Antes de contratar um crédito imobiliário,
+          compare o CET e as condições oferecidas por diferentes instituições.
+        </p>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div class="footer-copy">
+
+        © 2026 Ferramentas Financeiras.
+        Todos os direitos reservados.
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="/">
+          Ferramentas
+        </a>
+
+        <a href="/sobre/">
+          Sobre
+        </a>
+
+        <a href="/contato/">
+          Contato
+        </a>
+
+        <a href="/politica-de-privacidade/">
+          Política de Privacidade
+        </a>
+
+        <a href="/termos-de-uso/">
+          Termos de Uso
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- CALCULATOR -->
+
+  <script>
+
+    const money = value =>
+      value.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+
+
+    const percent = value =>
+      value.toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }) + '%';
+
+
+    function getMonthlyRate(rate, period) {
+
+      if (period === 'month') {
+        return rate / 100;
+      }
+
+      return Math.pow(
+        1 + rate / 100,
+        1 / 12
+      ) - 1;
+
+    }
+
+
+    function calculate() {
+
+      const propertyValue =
+        Math.max(
+          0,
+          Number(
+            document.getElementById('propertyValue').value
+          ) || 0
+        );
+
+
+      const downPayment =
+        Math.max(
+          0,
+          Number(
+            document.getElementById('downPayment').value
+          ) || 0
+        );
+
+
+      const rate =
+        Math.max(
+          0,
+          Number(
+            document.getElementById('rate').value
+          ) || 0
+        );
+
+
+      const ratePeriod =
+        document.getElementById('ratePeriod').value;
+
+
+      const term =
+        Math.max(
+          1,
+          Math.floor(
+            Number(
+              document.getElementById('term').value
+            ) || 1
+          )
+        );
+
+
+      const termPeriod =
+        document.getElementById('termPeriod').value;
+
+
+      const system =
+        document.getElementById('system').value;
+
+
+      const financed =
+        Math.max(
+          0,
+          propertyValue - downPayment
+        );
+
+
+      const months =
+        termPeriod === 'year'
+          ? term * 12
+          : term;
+
+
+      const monthlyRate =
+        getMonthlyRate(
+          rate,
+          ratePeriod
+        );
+
+
+      document.getElementById(
+        'financedValue'
+      ).textContent = money(financed);
+
+
+      document.getElementById(
+        'monthlyRateInfo'
+      ).textContent =
+        percent(monthlyRate * 100);
+
+
+      if (financed <= 0) {
+
+        clearResults();
+
+        return;
+
+      }
+
+
+      let rows = [];
+
+
+      if (system === 'price') {
+
+        rows = calculatePrice(
+          financed,
+          monthlyRate,
+          months
+        );
+
+      } else {
+
+        rows = calculateSac(
+          financed,
+          monthlyRate,
+          months
+        );
+
+      }
+
+
+      renderResults(
+        rows,
+        downPayment
+      );
+
+    }
+
+
+    function calculatePrice(
+      principal,
+      rate,
+      months
+    ) {
+
+      const rows = [];
+
+      let balance = principal;
+
+
+      let payment;
+
+      if (rate === 0) {
+
+        payment =
+          principal / months;
+
+      } else {
+
+        payment =
+          principal *
+          (
+            rate *
+            Math.pow(1 + rate, months)
+          ) /
+          (
+            Math.pow(1 + rate, months) - 1
+          );
+
+      }
+
+
+      for (
+        let i = 1;
+        i <= months;
+        i++
+      ) {
+
+        const interest =
+          balance * rate;
+
+
+        const amortization =
+          Math.min(
+            balance,
+            payment - interest
+          );
+
+
+        const installment =
+          interest + amortization;
+
+
+        balance -= amortization;
+
+
+        if (balance < 0.01) {
+          balance = 0;
+        }
+
+
+        rows.push({
+
+          number: i,
+
+          payment:
+            installment,
+
+          interest:
+            interest,
+
+          amortization:
+            amortization,
+
+          balance:
+            balance
+
+        });
+
+      }
+
+
+      return rows;
+
+    }
+
+
+    function calculateSac(
+      principal,
+      rate,
+      months
+    ) {
+
+      const rows = [];
+
+      let balance = principal;
+
+      const amortization =
+        principal / months;
+
+
+      for (
+        let i = 1;
+        i <= months;
+        i++
+      ) {
+
+        const interest =
+          balance * rate;
+
+
+        const currentAmortization =
+          Math.min(
+            amortization,
+            balance
+          );
+
+
+        const payment =
+          currentAmortization +
+          interest;
+
+
+        balance -= currentAmortization;
+
+
+        if (balance < 0.01) {
+          balance = 0;
+        }
+
+
+        rows.push({
+
+          number: i,
+
+          payment:
+            payment,
+
+          interest:
+            interest,
+
+          amortization:
+            currentAmortization,
+
+          balance:
+            balance
+
+        });
+
+      }
+
+
+      return rows;
+
+    }
+
+
+    function renderResults(
+      rows,
+      downPayment
+    ) {
+
+      if (!rows.length) {
+
+        clearResults();
+
+        return;
+
+      }
+
+
+      const first =
+        rows[0];
+
+
+      const last =
+        rows[rows.length - 1];
+
+
+      const totalPaid =
+        rows.reduce(
+          (sum, row) =>
+            sum + row.payment,
+          0
+        );
+
+
+      const totalInterest =
+        rows.reduce(
+          (sum, row) =>
+            sum + row.interest,
+          0
+        );
+
+
+      const totalPropertyCost =
+        totalPaid +
+        downPayment;
+
+
+      document.getElementById(
+        'firstInstallment'
+      ).textContent =
+        money(first.payment);
+
+
+      document.getElementById(
+        'lastInstallment'
+      ).textContent =
+        money(last.payment);
+
+
+      document.getElementById(
+        'totalInterest'
+      ).textContent =
+        money(totalInterest);
+
+
+      document.getElementById(
+        'totalPaid'
+      ).textContent =
+        money(totalPaid);
+
+
+      document.getElementById(
+        'totalPropertyCost'
+      ).textContent =
+        money(totalPropertyCost);
+
+
+      renderTable(rows);
+
+    }
+
+
+    function renderTable(rows) {
+
+      const tbody =
+        document.getElementById(
+          'tableBody'
+        );
+
+
+      /*
+       * Para não deixar a página enorme,
+       * mostramos todas as parcelas até 60.
+       * Em financiamentos maiores,
+       * mostramos pontos estratégicos.
+       */
+
+      let displayRows = [];
+
+
+      if (rows.length <= 60) {
+
+        displayRows = rows;
+
+      } else {
+
+        const positions = new Set();
+
+        positions.add(0);
+
+        positions.add(1);
+
+        positions.add(2);
+
+        positions.add(5);
+
+        positions.add(11);
+
+        positions.add(23);
+
+        positions.add(35);
+
+        positions.add(47);
+
+        positions.add(59);
+
+        positions.add(rows.length - 1);
+
+
+        rows.forEach((row, index) => {
+
+          if (
+            index % 60 === 0
+          ) {
+            positions.add(index);
+          }
+
+        });
+
+
+        displayRows =
+          [...positions]
+            .sort((a,b) => a-b)
+            .map(index => rows[index]);
+
+      }
+
+
+      tbody.innerHTML =
+        displayRows.map(row => `
+
+          <tr>
+
+            <td>
+              ${row.number}
+            </td>
+
+            <td>
+              ${money(row.payment)}
+            </td>
+
+            <td>
+              ${money(row.interest)}
+            </td>
+
+            <td>
+              ${money(row.amortization)}
+            </td>
+
+            <td>
+              ${money(row.balance)}
+            </td>
+
+          </tr>
+
+        `).join('');
+
+    }
+
+
+    function clearResults() {
+
+      document.getElementById(
+        'firstInstallment'
+      ).textContent =
+        'R$ 0,00';
+
+
+      document.getElementById(
+        'lastInstallment'
+      ).textContent =
+        'R$ 0,00';
+
+
+      document.getElementById(
+        'totalInterest'
+      ).textContent =
+        'R$ 0,00';
+
+
+      document.getElementById(
+        'totalPaid'
+      ).textContent =
+        'R$ 0,00';
+
+
+      document.getElementById(
+        'totalPropertyCost'
+      ).textContent =
+        'R$ 0,00';
+
+
+      document.getElementById(
+        'tableBody'
+      ).innerHTML = '';
+
+    }
+
+
+    function resetCalculator() {
+
+      document.getElementById(
+        'propertyValue'
+      ).value = 500000;
+
+
+      document.getElementById(
+        'downPayment'
+      ).value = 100000;
+
+
+      document.getElementById(
+        'rate'
+      ).value = 0.8;
+
+
+      document.getElementById(
+        'ratePeriod'
+      ).value = 'month';
+
+
+      document.getElementById(
+        'term'
+      ).value = 30;
+
+
+      document.getElementById(
+        'termPeriod'
+      ).value = 'year';
+
+
+      document.getElementById(
+        'system'
+      ).value = 'price';
+
+
+      calculate();
+
+    }
+
+
+    calculate();
+
+  </script>
+
+</body>
+</html>
