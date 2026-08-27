@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de CAC | Custo de Aquisição de Clientes</title>
+
+<meta name="description" content="Calcule seu CAC (Custo de Aquisição de Clientes), analise seus investimentos em marketing e vendas e descubra quanto custa conquistar cada novo cliente.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/cac/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous"></script>
+
+<style>
+:root {
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e4e7ec;
+  --primary:#2457e6;
+  --primary-dark:#1946c4;
+  --success:#12805c;
+  --danger:#d92d20;
+  --shadow:0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
+  "Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+.container {
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 18px;
+}
+
+/* HEADER */
+
+header {
+  background:#fff;
+  border-bottom:1px solid var(--border);
+}
+
+.header-inner {
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo {
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:-.5px;
+}
+
+.logo span {
+  color:var(--primary);
+}
+
+nav {
+  display:flex;
+  gap:22px;
+}
+
+nav a {
+  color:#475467;
+  font-size:14px;
+  font-weight:600;
+}
+
+nav a:hover {
+  color:var(--primary);
+}
+
+/* MAIN */
+
+main {
+  padding:42px 0 60px;
+}
+
+.page-header {
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 30px;
+}
+
+.page-header h1 {
+  margin:0 0 12px;
+  font-size:clamp(30px,5vw,44px);
+  line-height:1.1;
+  letter-spacing:-1px;
+}
+
+.page-header p {
+  margin:0;
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* ADS */
+
+.ad-container {
+  min-height:90px;
+  margin:10px 0 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* CALCULATOR */
+
+.calculator {
+  display:grid;
+  grid-template-columns:350px 1fr;
+  gap:20px;
+  align-items:start;
+}
+
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+.card h2 {
+  margin:0 0 20px;
+  font-size:19px;
+}
+
+.form-group {
+  margin-bottom:17px;
+}
+
+label {
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+input {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 13px;
+  font:inherit;
+  color:var(--text);
+  background:#fff;
+  outline:none;
+}
+
+input:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(36,87,230,.12);
+}
+
+.hint {
+  margin-top:6px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.4;
+}
+
+.actions {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+button {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 14px;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn-primary {
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
+}
+
+.btn-primary:hover {
+  background:var(--primary-dark);
+}
+
+.btn-secondary {
+  background:#fff;
+}
+
+/* RESULTS */
+
+.results {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.metric {
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  background:#fff;
+}
+
+.metric .label {
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.metric .value {
+  font-size:clamp(22px,3vw,30px);
+  font-weight:800;
+  letter-spacing:-.5px;
+}
+
+.metric.highlight {
+  background:#f0f5ff;
+  border-color:#cddcff;
+}
+
+.metric.highlight .value {
+  color:var(--primary);
+}
+
+.metric.positive .value {
+  color:var(--success);
+}
+
+.metric.danger .value {
+  color:var(--danger);
+}
+
+/* BREAKDOWN */
+
+.breakdown {
+  margin-top:18px;
+}
+
+.breakdown-item {
+  padding:15px 0;
+  border-bottom:1px solid #eef0f3;
+}
+
+.breakdown-item:last-child {
+  border-bottom:0;
+}
+
+.breakdown-row {
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  font-size:13px;
+}
+
+.breakdown-label {
+  color:var(--muted);
+}
+
+.breakdown-value {
+  font-weight:750;
+}
+
+/* INFO */
+
+.info {
+  margin-top:20px;
+}
+
+.info h2 {
+  font-size:19px;
+  margin:0 0 12px;
+}
+
+.info p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+  margin:0 0 12px;
+}
+
+.formula {
+  background:#f8f9fb;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:15px;
+  margin-top:15px;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* FOOTER */
+
+footer {
+  background:#fff;
+  border-top:1px solid var(--border);
+  padding:32px 0;
+}
+
+.footer-inner {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.footer-copy {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.footer-links {
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+}
+
+.footer-links a {
+  color:#475467;
+  font-size:12px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px) {
+
+  .calculator {
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:600px) {
+
+  .header-inner {
+    min-height:64px;
+  }
+
+  nav {
+    display:none;
+  }
+
+  main {
+    padding:30px 0 45px;
+  }
+
+  .card {
+    padding:17px;
+    border-radius:14px;
+  }
+
+  .results {
+    grid-template-columns:1fr;
+  }
+
+  .actions {
+    flex-direction:column;
+  }
+
+  .footer-inner {
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<header>
+
+  <div class="container header-inner">
+
+    <a href="/" class="logo">
+      Ferramentas<span>Financeiras</span>
+    </a>
+
+    <nav>
+      <a href="/">Ferramentas</a>
+      <a href="/#sobre">Sobre</a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <div class="container">
+
+    <section class="page-header">
+
+      <h1>Calculadora de CAC</h1>
+
+      <p>
+        Descubra quanto sua empresa investe, em média, para conquistar cada novo cliente.
+        Calcule o Custo de Aquisição de Clientes de forma rápida e gratuita.
+      </p>
+
+    </section>
+
+
+    <!-- ADVERTISEMENT -->
+
+    <div class="ad-container">
+
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5452382323898798"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+    </div>
+
+
+    <div class="calculator">
+
+      <!-- INPUTS -->
+
+      <section class="card">
+
+        <h2>Dados da empresa</h2>
+
+        <div class="form-group">
+
+          <label for="marketing">
+            Investimento em Marketing
+          </label>
+
+          <input
+            id="marketing"
+            type="number"
+            min="0"
+            step="0.01"
+            value="10000">
+
+          <div class="hint">
+            Inclua mídia paga, conteúdo, ferramentas e outros custos de marketing.
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="sales">
+            Investimento em Vendas
+          </label>
+
+          <input
+            id="sales"
+            type="number"
+            min="0"
+            step="0.01"
+            value="5000">
+
+          <div class="hint">
+            Inclua salários, comissões e demais custos diretamente relacionados às vendas.
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="customers">
+            Novos clientes conquistados
+          </label>
+
+          <input
+            id="customers"
+            type="number"
+            min="1"
+            step="1"
+            value="10">
+
+          <div class="hint">
+            Número de novos clientes adquiridos no mesmo período.
+          </div>
+
+        </div>
+
+
+        <div class="actions">
+
+          <button
+            class="btn-primary"
+            onclick="calculate()">
+            Calcular CAC
+          </button>
+
+          <button
+            class="btn-secondary"
+            onclick="resetCalculator()">
+            Limpar
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- RESULTS -->
+
+      <section>
+
+        <div class="results">
+
+          <div class="metric highlight">
+
+            <div class="label">
+              CAC
+            </div>
+
+            <div
+              class="value"
+              id="cacValue">
+              R$ 0,00
+            </div>
+
+          </div>
+
+
+          <div class="metric">
+
+            <div class="label">
+              Investimento total
+            </div>
+
+            <div
+              class="value"
+              id="totalInvestment">
+              R$ 0,00
+            </div>
+
+          </div>
+
+
+          <div class="metric positive">
+
+            <div class="label">
+              Investimento por cliente
+            </div>
+
+            <div
+              class="value"
+              id="investmentPerCustomer">
+              R$ 0,00
+            </div>
+
+          </div>
+
+
+          <div class="metric">
+
+            <div class="label">
+              Novos clientes
+            </div>
+
+            <div
+              class="value"
+              id="customerValue">
+              0
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card breakdown">
+
+          <h2>Composição do CAC</h2>
+
+
+          <div class="breakdown-item">
+
+            <div class="breakdown-row">
+
+              <span class="breakdown-label">
+                Marketing
+              </span>
+
+              <span
+                class="breakdown-value"
+                id="marketingResult">
+                R$ 0,00
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="breakdown-item">
+
+            <div class="breakdown-row">
+
+              <span class="breakdown-label">
+                Vendas
+              </span>
+
+              <span
+                class="breakdown-value"
+                id="salesResult">
+                R$ 0,00
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="breakdown-item">
+
+            <div class="breakdown-row">
+
+              <span class="breakdown-label">
+                Participação de Marketing
+              </span>
+
+              <span
+                class="breakdown-value"
+                id="marketingShare">
+                0,00%
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="breakdown-item">
+
+            <div class="breakdown-row">
+
+              <span class="breakdown-label">
+                Participação de Vendas
+              </span>
+
+              <span
+                class="breakdown-value"
+                id="salesShare">
+                0,00%
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- SECOND AD -->
+
+    <div class="ad-container">
+
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5452382323898798"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+    </div>
+
+
+    <!-- EXPLANATION -->
+
+    <section class="card info">
+
+      <h2>O que é CAC?</h2>
+
+      <p>
+        CAC significa <strong>Custo de Aquisição de Clientes</strong>.
+        É uma das principais métricas utilizadas para avaliar a eficiência
+        das estratégias de marketing e vendas de uma empresa.
+      </p>
+
+      <p>
+        O cálculo mostra quanto a empresa precisa investir, em média,
+        para conquistar cada novo cliente em determinado período.
+      </p>
+
+      <div class="formula">
+
+        <strong>Fórmula do CAC:</strong><br><br>
+
+        CAC = (Investimento em Marketing + Investimento em Vendas)
+        ÷ Número de novos clientes
+
+      </div>
+
+      <p style="margin-top:15px">
+
+        Por exemplo, se uma empresa investiu R$ 15.000 em marketing e vendas
+        e conquistou 10 novos clientes, seu CAC será de R$ 1.500.
+      </p>
+
+      <p>
+        Para analisar se esse custo é saudável, o ideal é compará-lo com
+        métricas como <strong>LTV</strong>, margem de contribuição,
+        ticket médio e período de retorno do investimento.
+      </p>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <div class="container footer-inner">
+
+    <div class="footer-copy">
+      © 2026 Ferramentas Financeiras. Todos os direitos reservados.
+    </div>
+
+    <div class="footer-links">
+
+      <a href="/sobre/">Sobre</a>
+
+      <a href="/contato/">Contato</a>
+
+      <a href="/politica-de-privacidade/">
+        Política de Privacidade
+      </a>
+
+      <a href="/termos-de-uso/">
+        Termos de Uso
+      </a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+const money = value =>
+  value.toLocaleString('pt-BR', {
+    style:'currency',
+    currency:'BRL'
+  });
+
+
+const number = value =>
+  value.toLocaleString('pt-BR');
+
+
+const percent = value =>
+  value.toLocaleString('pt-BR', {
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  }) + '%';
+
+
+function calculate() {
+
+  const marketing =
+    Math.max(
+      0,
+      Number(document.getElementById('marketing').value) || 0
+    );
+
+  const sales =
+    Math.max(
+      0,
+      Number(document.getElementById('sales').value) || 0
+    );
+
+  const customers =
+    Math.max(
+      1,
+      Math.floor(
+        Number(document.getElementById('customers').value) || 1
+      )
+    );
+
+
+  const totalInvestment = marketing + sales;
+
+  const cac = totalInvestment / customers;
+
+  const marketingShare =
+    totalInvestment > 0
+      ? marketing / totalInvestment * 100
+      : 0;
+
+  const salesShare =
+    totalInvestment > 0
+      ? sales / totalInvestment * 100
+      : 0;
+
+
+  document.getElementById('cacValue').textContent =
+    money(cac);
+
+  document.getElementById('totalInvestment').textContent =
+    money(totalInvestment);
+
+  document.getElementById('investmentPerCustomer').textContent =
+    money(cac);
+
+  document.getElementById('customerValue').textContent =
+    number(customers);
+
+  document.getElementById('marketingResult').textContent =
+    money(marketing);
+
+  document.getElementById('salesResult').textContent =
+    money(sales);
+
+  document.getElementById('marketingShare').textContent =
+    percent(marketingShare);
+
+  document.getElementById('salesShare').textContent =
+    percent(salesShare);
+
+}
+
+
+function resetCalculator() {
+
+  document.getElementById('marketing').value = 10000;
+
+  document.getElementById('sales').value = 5000;
+
+  document.getElementById('customers').value = 10;
+
+  calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
