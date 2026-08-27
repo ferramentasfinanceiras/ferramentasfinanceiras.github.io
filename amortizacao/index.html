@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de Amortização | Simule a Redução da Dívida</title>
+
+<meta name="description" content="Calcule como a amortização reduz o saldo devedor, os juros e o prazo do seu financiamento. Simulador de amortização gratuito.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/amortizacao/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous"></script>
+
+<style>
+:root {
+  --bg:#f5f7fb;
+  --card:#fff;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e4e7ec;
+  --primary:#2457e6;
+  --primary-dark:#1946c4;
+  --success:#12805c;
+  --danger:#c43232;
+  --shadow:0 10px 30px rgba(16,24,40,.08);
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
+  "Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+.container {
+  max-width:1180px;
+  margin:0 auto;
+  padding:32px 18px 48px;
+}
+
+header {
+  margin-bottom:24px;
+}
+
+.back {
+  display:inline-block;
+  color:var(--primary);
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:18px;
+}
+
+h1 {
+  margin:0 0 8px;
+  font-size:clamp(28px,4vw,40px);
+  letter-spacing:-1px;
+}
+
+.subtitle {
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+  line-height:1.6;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:20px;
+  align-items:start;
+}
+
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+.card h2 {
+  font-size:18px;
+  margin:0 0 18px;
+}
+
+.form-group {
+  margin-bottom:16px;
+}
+
+label {
+  display:block;
+  font-size:13px;
+  font-weight:650;
+  margin-bottom:7px;
+}
+
+input,select,button {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 13px;
+  font:inherit;
+  background:#fff;
+  color:var(--text);
+  outline:none;
+}
+
+input:focus,select:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(36,87,230,.12);
+}
+
+.input-row {
+  display:flex;
+  gap:8px;
+}
+
+.input-row input {
+  flex:1;
+}
+
+.input-row select {
+  width:115px;
+  flex:0 0 115px;
+}
+
+.actions {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+button {
+  cursor:pointer;
+  font-weight:700;
+}
+
+.btn-primary {
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
+}
+
+.btn-primary:hover {
+  background:var(--primary-dark);
+}
+
+.btn-secondary {
+  background:#fff;
+}
+
+.note {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+  margin-top:14px;
+}
+
+.results {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.metric {
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  background:#fff;
+}
+
+.metric .label {
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.metric .value {
+  font-size:clamp(17px,2.2vw,24px);
+  font-weight:800;
+  letter-spacing:-.4px;
+}
+
+.metric.highlight {
+  background:#f0f5ff;
+  border-color:#cddcff;
+}
+
+.metric.highlight .value {
+  color:var(--primary);
+}
+
+.metric.positive .value {
+  color:var(--success);
+}
+
+.metric.warning .value {
+  color:var(--danger);
+}
+
+.ad-container {
+  min-height:90px;
+  margin:20px 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.table-wrap {
+  margin-top:18px;
+  overflow-x:auto;
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+  font-size:13px;
+}
+
+th,td {
+  padding:11px 12px;
+  border-bottom:1px solid #eef0f3;
+  text-align:right;
+  white-space:nowrap;
+}
+
+th:first-child,
+td:first-child {
+  text-align:left;
+}
+
+th {
+  background:#f8f9fb;
+  color:#475467;
+  font-weight:700;
+}
+
+tbody tr:last-child td {
+  border-bottom:0;
+}
+
+.info {
+  margin-top:20px;
+}
+
+.info p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+.footer-note {
+  margin-top:12px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+@media(max-width:900px) {
+  .grid {
+    grid-template-columns:1fr;
+  }
+
+  .results {
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:520px) {
+  .container {
+    padding:22px 12px 36px;
+  }
+
+  .card {
+    padding:16px;
+    border-radius:14px;
+  }
+
+  .results {
+    grid-template-columns:1fr;
+  }
+
+  .input-row {
+    flex-direction:column;
+  }
+
+  .input-row select {
+    width:100%;
+  }
+
+  .actions {
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="container">
+
+<header>
+
+<a href="/" class="back">← Ferramentas Financeiras</a>
+
+<h1>Calculadora de Amortização</h1>
+
+<p class="subtitle">
+Simule quanto você pode economizar em juros ao fazer uma amortização
+e compare diferentes valores de pagamento antecipado.
+</p>
+
+</header>
+
+<div class="grid">
+
+<section class="card">
+
+<h2>Dados do financiamento</h2>
+
+<div class="form-group">
+
+<label for="balance">Saldo devedor</label>
+
+<input
+id="balance"
+type="number"
+min="0"
+step="0.01"
+value="200000">
+
+</div>
+
+<div class="form-group">
+
+<label for="installment">Parcela atual</label>
+
+<input
+id="installment"
+type="number"
+min="0"
+step="0.01"
+value="2500">
+
+</div>
+
+<div class="form-group">
+
+<label for="rate">Taxa de juros</label>
+
+<div class="input-row">
+
+<input
+id="rate"
+type="number"
+min="0"
+step="0.001"
+value="0.8">
+
+<select id="ratePeriod">
+<option value="month">Ao mês</option>
+<option value="year">Ao ano</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="remaining">Prazo restante</label>
+
+<div class="input-row">
+
+<input
+id="remaining"
+type="number"
+min="1"
+step="1"
+value="120">
+
+<select id="remainingPeriod">
+<option value="month">Meses</option>
+<option value="year">Anos</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="amortization">Valor da amortização</label>
+
+<input
+id="amortization"
+type="number"
+min="0"
+step="0.01"
+value="20000">
+
+</div>
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Calcular
+</button>
+
+<button
+class="btn-secondary"
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+<p class="note">
+A simulação considera juros compostos mensais e amortização imediata
+do saldo devedor. O resultado real pode variar conforme o contrato,
+sistema de amortização, seguros, tarifas e regras da instituição financeira.
+</p>
+
+</section>
+
+
+<section>
+
+<div class="results">
+
+<div class="metric highlight">
+
+<div class="label">Saldo após amortização</div>
+
+<div class="value" id="newBalance">
+R$ 0,00
+</div>
+
+</div>
+
+<div class="metric">
+
+<div class="label">Economia estimada em juros</div>
+
+<div class="value" id="interestSaved">
+R$ 0,00
+</div>
+
+</div>
+
+<div class="metric positive">
+
+<div class="label">Prazo antes</div>
+
+<div class="value" id="oldTerm">
+0 meses
+</div>
+
+</div>
+
+<div class="metric">
+
+<div class="label">Prazo estimado depois</div>
+
+<div class="value" id="newTerm">
+0 meses
+</div>
+
+</div>
+
+</div>
+
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true">
+</ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<div class="card">
+
+<h2>Comparação</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Indicador</th>
+<th>Sem amortização</th>
+<th>Com amortização</th>
+<th>Diferença</th>
+</tr>
+
+</thead>
+
+<tbody id="comparisonBody"></tbody>
+
+</table>
+
+</div>
+
+<div class="footer-note">
+A economia representa uma estimativa dos juros que deixariam de ser pagos
+caso a amortização seja realizada imediatamente.
+</div>
+
+</div>
+
+
+<div class="card info">
+
+<h2>Como funciona a amortização?</h2>
+
+<p>
+Amortizar significa utilizar um valor adicional para reduzir o saldo
+devedor de um financiamento. Como os juros normalmente são calculados
+sobre o saldo restante, uma redução antecipada da dívida pode diminuir
+o total de juros pagos ao longo do contrato.
+</p>
+
+<p>
+Quanto maior for o valor amortizado e quanto mais cedo a amortização
+for realizada, maior tende a ser o impacto sobre os juros futuros.
+</p>
+
+<p>
+Esta calculadora é uma ferramenta de simulação e não substitui o
+cálculo oficial apresentado pela instituição financeira.
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+
+<script>
+
+const money = value =>
+value.toLocaleString('pt-BR',{
+style:'currency',
+currency:'BRL'
+});
+
+
+const number = value =>
+value.toLocaleString('pt-BR',{
+minimumFractionDigits:0,
+maximumFractionDigits:0
+});
+
+
+function getMonthlyRate(rate,period){
+
+if(period === 'month'){
+return rate / 100;
+}
+
+return Math.pow(1 + rate / 100,1 / 12) - 1;
+
+}
+
+
+function calculate(){
+
+const balance =
+Math.max(
+0,
+Number(document.getElementById('balance').value) || 0
+);
+
+const installment =
+Math.max(
+0,
+Number(document.getElementById('installment').value) || 0
+);
+
+const rate =
+Math.max(
+0,
+Number(document.getElementById('rate').value) || 0
+);
+
+const ratePeriod =
+document.getElementById('ratePeriod').value;
+
+const remaining =
+Math.max(
+1,
+Math.floor(
+Number(document.getElementById('remaining').value) || 1
+)
+);
+
+const remainingPeriod =
+document.getElementById('remainingPeriod').value;
+
+const amortization =
+Math.max(
+0,
+Number(document.getElementById('amortization').value) || 0
+);
+
+
+const months =
+remainingPeriod === 'year'
+? remaining * 12
+: remaining;
+
+
+const monthlyRate =
+getMonthlyRate(rate,ratePeriod);
+
+
+let balanceWithout = balance;
+
+let totalInterestWithout = 0;
+
+let monthsWithout = 0;
+
+
+while(
+balanceWithout > 0.01 &&
+monthsWithout < 1200
+){
+
+const interest =
+balanceWithout * monthlyRate;
+
+let principal =
+installment - interest;
+
+if(principal <= 0){
+
+monthsWithout = 1200;
+break;
+
+}
+
+if(principal > balanceWithout){
+principal = balanceWithout;
+}
+
+balanceWithout -= principal;
+
+totalInterestWithout += interest;
+
+monthsWithout++;
+
+}
+
+
+let newBalance =
+Math.max(
+0,
+balance - amortization
+);
+
+
+let balanceWith =
+newBalance;
+
+let totalInterestWith = 0;
+
+let monthsWith = 0;
+
+
+while(
+balanceWith > 0.01 &&
+monthsWith < 1200
+){
+
+const interest =
+balanceWith * monthlyRate;
+
+let principal =
+installment - interest;
+
+if(principal <= 0){
+
+monthsWith = 1200;
+break;
+
+}
+
+if(principal > balanceWith){
+principal = balanceWith;
+}
+
+balanceWith -= principal;
+
+totalInterestWith += interest;
+
+monthsWith++;
+
+}
+
+
+const interestSaved =
+Math.max(
+0,
+totalInterestWithout - totalInterestWith
+);
+
+
+document.getElementById('newBalance')
+.textContent = money(newBalance);
+
+document.getElementById('interestSaved')
+.textContent = money(interestSaved);
+
+document.getElementById('oldTerm')
+.textContent =
+monthsWithout >= 1200
+? 'Não calculável'
+: number(monthsWithout) + ' meses';
+
+document.getElementById('newTerm')
+.textContent =
+monthsWith >= 1200
+? 'Não calculável'
+: number(monthsWith) + ' meses';
+
+
+const termDifference =
+monthsWithout - monthsWith;
+
+
+const totalWithout =
+balance + totalInterestWithout;
+
+const totalWith =
+amortization + newBalance + totalInterestWith;
+
+
+document.getElementById('comparisonBody')
+.innerHTML = `
+
+<tr>
+
+<td>Saldo devedor</td>
+
+<td>${money(balance)}</td>
+
+<td>${money(newBalance)}</td>
+
+<td>${money(amortization)}</td>
+
+</tr>
+
+<tr>
+
+<td>Juros futuros estimados</td>
+
+<td>${money(totalInterestWithout)}</td>
+
+<td>${money(totalInterestWith)}</td>
+
+<td>${money(interestSaved)}</td>
+
+</tr>
+
+<tr>
+
+<td>Prazo estimado</td>
+
+<td>${monthsWithout >= 1200 ? 'Não calculável' : monthsWithout + ' meses'}</td>
+
+<td>${monthsWith >= 1200 ? 'Não calculável' : monthsWith + ' meses'}</td>
+
+<td>${termDifference >= 0 ? termDifference + ' meses a menos' : '—'}</td>
+
+</tr>
+
+`;
+
+}
+
+
+function resetCalculator(){
+
+document.getElementById('balance').value = 200000;
+
+document.getElementById('installment').value = 2500;
+
+document.getElementById('rate').value = 0.8;
+
+document.getElementById('ratePeriod').value = 'month';
+
+document.getElementById('remaining').value = 120;
+
+document.getElementById('remainingPeriod').value = 'month';
+
+document.getElementById('amortization').value = 20000;
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
