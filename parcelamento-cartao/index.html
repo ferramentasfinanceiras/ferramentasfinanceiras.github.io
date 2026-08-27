@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de Parcelamento do Cartão | Ferramentas Financeiras</title>
+
+<meta name="description" content="Calcule o custo real de uma compra parcelada no cartão, os juros pagos e o valor total da dívida. Simulador gratuito de parcelamento.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/parcelamento-cartao/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous">
+</script>
+
+<style>
+
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #667085;
+  --border: #e4e7ec;
+  --primary: #2457e6;
+  --primary-dark: #1946c4;
+  --success: #12805c;
+  --danger: #c43232;
+  --shadow: 0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* HEADER */
+
+header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+}
+
+nav a {
+  color: #475467;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+/* MAIN */
+
+main {
+  padding: 40px 0 60px;
+}
+
+.page-header {
+  margin-bottom: 26px;
+}
+
+.page-header h1 {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -1px;
+}
+
+.page-header p {
+  margin: 0;
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ADS */
+
+.ad-container {
+  min-height: 90px;
+  margin: 20px 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* GRID */
+
+.grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* CARD */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.card h2 {
+  margin: 0 0 20px;
+  font-size: 18px;
+}
+
+/* FORM */
+
+.form-group {
+  margin-bottom: 17px;
+}
+
+label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+input,
+select,
+button {
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font: inherit;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(36,87,230,.12);
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.input-row input {
+  flex: 1;
+}
+
+.input-row select {
+  width: 120px;
+  flex: 0 0 120px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: #fff;
+}
+
+.note {
+  margin-top: 15px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* RESULTS */
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.metric {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.metric-label {
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.metric-value {
+  font-size: clamp(18px, 2.2vw, 25px);
+  font-weight: 800;
+  letter-spacing: -.4px;
+}
+
+.metric.highlight {
+  background: #f0f5ff;
+  border-color: #cddcff;
+}
+
+.metric.highlight .metric-value {
+  color: var(--primary);
+}
+
+.metric.positive .metric-value {
+  color: var(--success);
+}
+
+.metric.danger .metric-value {
+  color: var(--danger);
+}
+
+/* TABLE */
+
+.table-card {
+  margin-top: 18px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+  font-size: 13px;
+}
+
+th,
+td {
+  padding: 11px 12px;
+  border-bottom: 1px solid #eef0f3;
+  text-align: right;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+th {
+  background: #f8f9fb;
+  color: #475467;
+  font-weight: 700;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* INFO */
+
+.info {
+  margin-top: 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.info h2 {
+  margin: 0 0 14px;
+  font-size: 21px;
+}
+
+.info h3 {
+  margin: 22px 0 8px;
+  font-size: 17px;
+}
+
+.info p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* FOOTER */
+
+footer {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-copy {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.footer-links a {
+  color: #475467;
+  font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .header-inner {
+    min-height: 64px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  main {
+    padding: 28px 0 45px;
+  }
+
+  .card {
+    padding: 17px;
+    border-radius: 14px;
+  }
+
+  .results {
+    grid-template-columns: 1fr;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .input-row select {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="container header-inner">
+
+<a href="/" class="logo">
+Ferramentas<span>Financeiras</span>
+</a>
+
+<nav>
+<a href="/">Ferramentas</a>
+<a href="/#sobre">Sobre</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main>
+
+<div class="container">
+
+<div class="page-header">
+
+<h1>
+Calculadora de Parcelamento do Cartão
+</h1>
+
+<p>
+Descubra quanto você realmente vai pagar em uma compra parcelada,
+quanto custa o parcelamento e qual será o valor de cada parcela.
+</p>
+
+</div>
+
+
+<!-- AD -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<div class="grid">
+
+
+<!-- FORM -->
+
+<section class="card">
+
+<h2>Dados do parcelamento</h2>
+
+
+<div class="form-group">
+
+<label for="cashPrice">
+Valor da compra
+</label>
+
+<input
+id="cashPrice"
+type="number"
+min="0"
+step="0.01"
+value="5000">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="installments">
+Número de parcelas
+</label>
+
+<select id="installments">
+
+<option value="2">2 parcelas</option>
+<option value="3">3 parcelas</option>
+<option value="4">4 parcelas</option>
+<option value="5">5 parcelas</option>
+<option value="6">6 parcelas</option>
+<option value="8">8 parcelas</option>
+<option value="10">10 parcelas</option>
+<option value="12" selected>12 parcelas</option>
+<option value="18">18 parcelas</option>
+<option value="24">24 parcelas</option>
+<option value="36">36 parcelas</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="interest">
+Taxa de juros mensal
+</label>
+
+<div class="input-row">
+
+<input
+id="interest"
+type="number"
+min="0"
+step="0.01"
+value="2">
+
+<span style="
+display:flex;
+align-items:center;
+padding:0 8px;
+color:#667085;
+font-weight:600;
+">
+%
+</span>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="entry">
+Entrada
+</label>
+
+<input
+id="entry"
+type="number"
+min="0"
+step="0.01"
+value="0">
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Calcular
+</button>
+
+<button
+class="btn-secondary"
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+
+<p class="note">
+A calculadora utiliza o sistema de parcelas fixas (Tabela Price)
+para estimar o valor das prestações quando há juros.
+</p>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section>
+
+<div class="results">
+
+<div class="metric highlight">
+
+<div class="metric-label">
+Valor da parcela
+</div>
+
+<div
+class="metric-value"
+id="installmentValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="metric-label">
+Total financiado
+</div>
+
+<div
+class="metric-value"
+id="financedValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric positive">
+
+<div class="metric-label">
+Total pago
+</div>
+
+<div
+class="metric-value"
+id="totalPaidValue">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric danger">
+
+<div class="metric-label">
+Total de juros
+</div>
+
+<div
+class="metric-value"
+id="interestValue">
+R$ 0,00
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TABLE -->
+
+<div class="card table-card">
+
+<h2>
+Evolução do parcelamento
+</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Parcela
+</th>
+
+<th>
+Valor
+</th>
+
+<th>
+Juros
+</th>
+
+<th>
+Amortização
+</th>
+
+<th>
+Saldo devedor
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableBody">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- AD -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<!-- INFORMATION -->
+
+<section class="info">
+
+<h2>
+Como funciona o parcelamento do cartão?
+</h2>
+
+<p>
+Ao parcelar uma compra, o valor de cada parcela depende do número
+de prestações e, quando aplicável, da taxa de juros cobrada pela
+instituição financeira.
+</p>
+
+<h3>
+O que são os juros do parcelamento?
+</h3>
+
+<p>
+Os juros representam o custo adicional pago pelo consumidor para
+dividir o pagamento ao longo do tempo. Quanto maior a taxa ou o
+número de parcelas, maior tende a ser o custo total da operação.
+</p>
+
+<h3>
+Parcelamento sem juros
+</h3>
+
+<p>
+Quando uma compra é anunciada como parcelada sem juros, o valor
+total das parcelas corresponde ao preço da compra, sem acréscimo
+de juros explícitos. Ainda assim, pode existir diferença entre
+o preço à vista e o preço parcelado.
+</p>
+
+<h3>
+Vale a pena parcelar?
+</h3>
+
+<p>
+A decisão depende do custo do parcelamento, da disponibilidade de
+dinheiro e do rendimento que poderia ser obtido mantendo o dinheiro
+investido. Compare sempre o valor total pago e não apenas o valor
+da parcela.
+</p>
+
+<p>
+Esta calculadora apresenta uma simulação e não representa uma
+proposta de crédito ou condição específica de uma instituição
+financeira.
+</p>
+
+</section>
+
+</div>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container footer-inner">
+
+<div class="footer-copy">
+© 2026 Ferramentas Financeiras. Todos os direitos reservados.
+</div>
+
+<div class="footer-links">
+
+<a href="/">
+Ferramentas
+</a>
+
+<a href="/sobre/">
+Sobre
+</a>
+
+<a href="/contato/">
+Contato
+</a>
+
+<a href="/politica-de-privacidade/">
+Política de Privacidade
+</a>
+
+<a href="/termos-de-uso/">
+Termos de Uso
+</a>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- CALCULATOR -->
+
+<script>
+
+const money = value =>
+value.toLocaleString(
+'pt-BR',
+{
+style:'currency',
+currency:'BRL'
+}
+);
+
+
+function calculate() {
+
+const price =
+Math.max(
+0,
+Number(
+document.getElementById('cashPrice').value
+) || 0
+);
+
+const installments =
+Math.max(
+1,
+Number(
+document.getElementById('installments').value
+) || 1
+);
+
+const rate =
+Math.max(
+0,
+Number(
+document.getElementById('interest').value
+) || 0
+) / 100;
+
+const entry =
+Math.min(
+price,
+Math.max(
+0,
+Number(
+document.getElementById('entry').value
+) || 0
+)
+);
+
+
+const financed =
+Math.max(
+0,
+price - entry
+);
+
+
+let installment = 0;
+let totalInstallments = 0;
+
+
+/*
+Tabela Price
+
+PMT =
+PV × i × (1+i)^n
+-----------------
+(1+i)^n - 1
+*/
+
+if (rate === 0) {
+
+installment =
+financed / installments;
+
+} else {
+
+installment =
+financed *
+(
+rate *
+Math.pow(
+1 + rate,
+installments
+)
+) /
+(
+Math.pow(
+1 + rate,
+installments
+) - 1
+);
+
+}
+
+
+totalInstallments =
+installment * installments;
+
+
+const totalPaid =
+entry + totalInstallments;
+
+
+const totalInterest =
+totalInstallments - financed;
+
+
+document.getElementById(
+'installmentValue'
+).textContent =
+money(installment);
+
+
+document.getElementById(
+'financedValue'
+).textContent =
+money(financed);
+
+
+document.getElementById(
+'totalPaidValue'
+).textContent =
+money(totalPaid);
+
+
+document.getElementById(
+'interestValue'
+).textContent =
+money(totalInterest);
+
+
+renderTable(
+financed,
+installments,
+rate,
+installment
+);
+
+}
+
+
+function renderTable(
+principal,
+installments,
+rate,
+payment
+) {
+
+const tbody =
+document.getElementById(
+'tableBody'
+);
+
+let balance = principal;
+
+let html = '';
+
+
+for (
+let i = 1;
+i <= installments;
+i++
+) {
+
+let interest =
+balance * rate;
+
+let amortization =
+payment - interest;
+
+
+/*
+Evita pequenas diferenças
+de arredondamento na última parcela.
+*/
+
+if (i === installments) {
+
+amortization =
+balance;
+
+payment =
+amortization + interest;
+
+}
+
+
+balance -= amortization;
+
+if (balance < 0.01) {
+
+balance = 0;
+
+}
+
+
+html += `
+
+<tr>
+
+<td>
+${i}
+</td>
+
+<td>
+${money(payment)}
+</td>
+
+<td>
+${money(interest)}
+</td>
+
+<td>
+${money(amortization)}
+</td>
+
+<td>
+${money(balance)}
+</td>
+
+</tr>
+
+`;
+
+}
+
+
+tbody.innerHTML =
+html;
+
+}
+
+
+function resetCalculator() {
+
+document.getElementById(
+'cashPrice'
+).value = 5000;
+
+document.getElementById(
+'installments'
+).value = 12;
+
+document.getElementById(
+'interest'
+).value = 2;
+
+document.getElementById(
+'entry'
+).value = 0;
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
