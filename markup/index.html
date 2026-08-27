@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de Markup | Ferramentas Financeiras</title>
+
+<meta name="description" content="Calcule o markup de produtos de forma rápida e gratuita. Descubra o preço de venda ideal a partir do custo, impostos, despesas e margem de lucro desejada.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/markup/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous"></script>
+
+<style>
+
+:root {
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e4e7ec;
+  --primary:#2457e6;
+  --primary-dark:#1946c4;
+  --success:#12805c;
+  --shadow:0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+.container {
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 18px;
+}
+
+/* HEADER */
+
+header {
+  background:#fff;
+  border-bottom:1px solid var(--border);
+}
+
+.header-inner {
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo {
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:-.5px;
+}
+
+.logo span {
+  color:var(--primary);
+}
+
+nav {
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+
+nav a {
+  color:#475467;
+  font-size:14px;
+  font-weight:600;
+}
+
+nav a:hover {
+  color:var(--primary);
+}
+
+/* MAIN */
+
+main {
+  padding:42px 0 60px;
+}
+
+.page-header {
+  max-width:760px;
+  margin:0 auto 30px;
+  text-align:center;
+}
+
+.page-header h1 {
+  margin:0 0 12px;
+  font-size:clamp(30px,5vw,44px);
+  line-height:1.1;
+  letter-spacing:-1px;
+}
+
+.page-header p {
+  margin:0;
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* ADS */
+
+.ad-container {
+  min-height:90px;
+  margin:10px 0 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* CALCULATOR */
+
+.calculator {
+  display:grid;
+  grid-template-columns:350px 1fr;
+  gap:20px;
+  align-items:start;
+}
+
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+.card h2 {
+  margin:0 0 20px;
+  font-size:19px;
+}
+
+.form-group {
+  margin-bottom:17px;
+}
+
+label {
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.input-wrapper {
+  position:relative;
+}
+
+input {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 13px;
+  font:inherit;
+  color:var(--text);
+  background:#fff;
+  outline:none;
+}
+
+input:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(36,87,230,.12);
+}
+
+.hint {
+  margin-top:6px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.4;
+}
+
+.actions {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+button {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 14px;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn-primary {
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
+}
+
+.btn-primary:hover {
+  background:var(--primary-dark);
+}
+
+.btn-secondary {
+  background:#fff;
+}
+
+/* RESULTS */
+
+.results {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.metric {
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  background:#fff;
+}
+
+.metric .label {
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.metric .value {
+  font-size:clamp(21px,3vw,29px);
+  font-weight:800;
+  letter-spacing:-.5px;
+}
+
+.metric.highlight {
+  background:#f0f5ff;
+  border-color:#cddcff;
+}
+
+.metric.highlight .value {
+  color:var(--primary);
+}
+
+.metric.positive .value {
+  color:var(--success);
+}
+
+/* BREAKDOWN */
+
+.breakdown {
+  margin-top:18px;
+}
+
+.breakdown h2 {
+  margin-bottom:8px;
+}
+
+.breakdown-description {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+  margin:0 0 15px;
+}
+
+.breakdown-item {
+  padding:14px 0;
+  border-bottom:1px solid #eef0f3;
+}
+
+.breakdown-item:last-child {
+  border-bottom:0;
+}
+
+.breakdown-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  font-size:13px;
+}
+
+.breakdown-label {
+  color:var(--muted);
+}
+
+.breakdown-value {
+  font-weight:750;
+}
+
+/* INFO */
+
+.info {
+  margin-top:20px;
+}
+
+.info h2 {
+  font-size:19px;
+  margin:0 0 12px;
+}
+
+.info h3 {
+  font-size:16px;
+  margin:24px 0 8px;
+}
+
+.info p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+  margin:0 0 12px;
+}
+
+.formula {
+  background:#f8f9fb;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+  margin-top:15px;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.example {
+  background:#f0f5ff;
+  border:1px solid #cddcff;
+  border-radius:12px;
+  padding:16px;
+  margin-top:15px;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* FOOTER */
+
+footer {
+  background:#fff;
+  border-top:1px solid var(--border);
+  padding:32px 0;
+}
+
+.footer-inner {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.footer-copy {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.footer-links {
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+}
+
+.footer-links a {
+  color:#475467;
+  font-size:12px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px) {
+
+  .calculator {
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:600px) {
+
+  .header-inner {
+    min-height:64px;
+  }
+
+  nav {
+    display:none;
+  }
+
+  main {
+    padding:30px 0 45px;
+  }
+
+  .card {
+    padding:17px;
+    border-radius:14px;
+  }
+
+  .results {
+    grid-template-columns:1fr;
+  }
+
+  .actions {
+    flex-direction:column;
+  }
+
+  .footer-inner {
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<header>
+
+  <div class="container header-inner">
+
+    <a href="/" class="logo">
+      Ferramentas<span>Financeiras</span>
+    </a>
+
+    <nav>
+      <a href="/">Ferramentas</a>
+      <a href="/#sobre">Sobre</a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <div class="container">
+
+    <section class="page-header">
+
+      <h1>Calculadora de Markup</h1>
+
+      <p>
+        Calcule o preço de venda ideal de um produto considerando
+        custo, impostos, despesas e margem de lucro desejada.
+      </p>
+
+    </section>
+
+
+    <!-- ADVERTISEMENT -->
+
+    <div class="ad-container">
+
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5452382323898798"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+    </div>
+
+
+    <div class="calculator">
+
+      <!-- INPUTS -->
+
+      <section class="card">
+
+        <h2>Dados do produto</h2>
+
+
+        <div class="form-group">
+
+          <label for="cost">
+            Custo do produto
+          </label>
+
+          <input
+            id="cost"
+            type="number"
+            min="0"
+            step="0.01"
+            value="100">
+
+          <div class="hint">
+            Valor pago para adquirir ou produzir o produto.
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="taxes">
+            Impostos (%)
+          </label>
+
+          <input
+            id="taxes"
+            type="number"
+            min="0"
+            max="99.99"
+            step="0.01"
+            value="10">
+
+          <div class="hint">
+            Percentual de impostos incidentes sobre o preço de venda.
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="expenses">
+            Despesas (%)
+          </label>
+
+          <input
+            id="expenses"
+            type="number"
+            min="0"
+            max="99.99"
+            step="0.01"
+            value="10">
+
+          <div class="hint">
+            Despesas variáveis, taxas, comissões e outros custos sobre a venda.
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="profit">
+            Margem de lucro desejada (%)
+          </label>
+
+          <input
+            id="profit"
+            type="number"
+            min="0"
+            max="99.99"
+            step="0.01"
+            value="20">
+
+          <div class="hint">
+            Percentual do preço de venda que você deseja obter como lucro.
+          </div>
+
+        </div>
+
+
+        <div class="actions">
+
+          <button
+            class="btn-primary"
+            onclick="calculate()">
+            Calcular Markup
+          </button>
+
+          <button
+            class="btn-secondary"
+            onclick="resetCalculator()">
+            Limpar
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- RESULTS -->
+
+      <section>
+
+        <div class="results">
+
+          <div class="metric highlight">
+
+            <div class="label">
+              Preço de venda sugerido
+            </div>
+
+            <div
+              class="value"
+              id="sellingPrice">
+              R$ 0,00
+            </div>
+
+          </div>
+
+
+          <div class="metric">
+
+            <div class="label">
+              Markup multiplicador
+            </div>
+
+            <div
+              class="value"
+              id="markupMultiplier">
+              0,00x
+            </div>
+
+          </div>
+
+
+          <div class="metric positive">
+
+            <div class="label">
+              Lucro por unidade
+            </div>
+
+            <div
+              class="value"
+              id="profitValue">
+              R$ 0,00
+            </div>
+
+          </div>
+
+
+          <div class="metric">
+
+            <div class="label">
+              Total de custos e despesas
+            </div>
+
+            <div
+              class="value"
+              id="totalCosts">
+              R$ 0,00
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card breakdown">
+
+          <h2>Composição do preço</h2>
+
+          <p class="breakdown-description">
+            Veja quanto cada componente representa no preço de venda calculado.
+          </p>
+
+
+          <div class="breakdown-item">
+
+            <div class="breakdown-row">
+
+              <span class="breakdown-label">
+                Custo do produto
+              </span>
+
+              <span
+                class="breakdown-value"
+                id="costResult">
+                R$ 0,00
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="breakdown-item">
+
+            <div class="breakdown-row">
+
+              <span class="breakdown-label">
+                Impostos
+              </span>
+
+              <span
+                class="breakdown-value"
+                id="taxResult">
+                R$ 0,00
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="breakdown-item">
+
+            <div class="breakdown-row">
+
+              <span class="breakdown-label">
+                Despesas
+              </span>
+
+              <span
+                class="breakdown-value"
+                id="expenseResult">
+                R$ 0,00
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="breakdown-item">
+
+            <div class="breakdown-row">
+
+              <span class="breakdown-label">
+                Lucro
+              </span>
+
+              <span
+                class="breakdown-value"
+                id="profitResult">
+                R$ 0,00
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- SECOND AD -->
+
+    <div class="ad-container">
+
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5452382323898798"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+    </div>
+
+
+    <!-- EXPLANATION -->
+
+    <section class="card info">
+
+      <h2>O que é Markup?</h2>
+
+      <p>
+        Markup é um índice utilizado para definir o preço de venda
+        de um produto ou serviço a partir do seu custo.
+      </p>
+
+      <p>
+        Diferentemente de simplesmente adicionar uma porcentagem ao custo,
+        o markup pode considerar impostos, despesas variáveis e a margem
+        de lucro desejada sobre o preço final.
+      </p>
+
+
+      <h3>Como calcular o Markup?</h3>
+
+      <div class="formula">
+
+        <strong>Markup multiplicador:</strong><br><br>
+
+        Markup =
+        1 ÷ [1 − (Impostos + Despesas + Margem de lucro)]
+
+        <br><br>
+
+        <strong>Preço de venda:</strong><br><br>
+
+        Preço de venda = Custo × Markup
+
+      </div>
+
+
+      <div class="example">
+
+        <strong>Exemplo:</strong><br><br>
+
+        Se um produto custa R$ 100, possui 10% de impostos,
+        10% de despesas e você deseja obter 20% de margem de lucro,
+        o preço de venda precisa ser superior ao custo para acomodar
+        todos esses componentes.
+
+      </div>
+
+
+      <h3>Markup x margem de lucro</h3>
+
+      <p>
+        Markup e margem de lucro não são exatamente a mesma coisa.
+        O markup é aplicado sobre o custo para chegar ao preço de venda,
+        enquanto a margem representa quanto do preço final permanece
+        como lucro depois dos custos e despesas.
+      </p>
+
+      <p>
+        Por isso, simplesmente adicionar 20% ao custo não significa
+        necessariamente obter uma margem de lucro de 20% sobre o preço
+        final.
+      </p>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <div class="container footer-inner">
+
+    <div class="footer-copy">
+      © 2026 Ferramentas Financeiras. Todos os direitos reservados.
+    </div>
+
+    <div class="footer-links">
+
+      <a href="/sobre/">Sobre</a>
+
+      <a href="/contato/">Contato</a>
+
+      <a href="/politica-de-privacidade/">
+        Política de Privacidade
+      </a>
+
+      <a href="/termos-de-uso/">
+        Termos de Uso
+      </a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+const money = value =>
+  value.toLocaleString('pt-BR', {
+    style:'currency',
+    currency:'BRL'
+  });
+
+
+const number = value =>
+  value.toLocaleString('pt-BR', {
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  });
+
+
+function calculate() {
+
+  const cost =
+    Math.max(
+      0,
+      Number(document.getElementById('cost').value) || 0
+    );
+
+  const taxes =
+    Math.max(
+      0,
+      Number(document.getElementById('taxes').value) || 0
+    ) / 100;
+
+  const expenses =
+    Math.max(
+      0,
+      Number(document.getElementById('expenses').value) || 0
+    ) / 100;
+
+  const profit =
+    Math.max(
+      0,
+      Number(document.getElementById('profit').value) || 0
+    ) / 100;
+
+
+  const totalPercentage =
+    taxes + expenses + profit;
+
+
+  /*
+   * Para que a soma dos impostos,
+   * despesas e margem não ultrapasse 100%.
+   */
+
+  if (totalPercentage >= 1) {
+
+    document.getElementById('sellingPrice').textContent =
+      'Valores inválidos';
+
+    document.getElementById('markupMultiplier').textContent =
+      '—';
+
+    document.getElementById('profitValue').textContent =
+      '—';
+
+    document.getElementById('totalCosts').textContent =
+      '—';
+
+    document.getElementById('costResult').textContent =
+      '—';
+
+    document.getElementById('taxResult').textContent =
+      '—';
+
+    document.getElementById('expenseResult').textContent =
+      '—';
+
+    document.getElementById('profitResult').textContent =
+      '—';
+
+    return;
+  }
+
+
+  const markup =
+    1 / (1 - totalPercentage);
+
+
+  const sellingPrice =
+    cost * markup;
+
+
+  const taxValue =
+    sellingPrice * taxes;
+
+
+  const expenseValue =
+    sellingPrice * expenses;
+
+
+  const profitValue =
+    sellingPrice * profit;
+
+
+  const totalCosts =
+    cost + taxValue + expenseValue;
+
+
+  document.getElementById('sellingPrice').textContent =
+    money(sellingPrice);
+
+
+  document.getElementById('markupMultiplier').textContent =
+    number(markup) + 'x';
+
+
+  document.getElementById('profitValue').textContent =
+    money(profitValue);
+
+
+  document.getElementById('totalCosts').textContent =
+    money(totalCosts);
+
+
+  document.getElementById('costResult').textContent =
+    money(cost);
+
+
+  document.getElementById('taxResult').textContent =
+    money(taxValue);
+
+
+  document.getElementById('expenseResult').textContent =
+    money(expenseValue);
+
+
+  document.getElementById('profitResult').textContent =
+    money(profitValue);
+
+}
+
+
+function resetCalculator() {
+
+  document.getElementById('cost').value = 100;
+
+  document.getElementById('taxes').value = 10;
+
+  document.getElementById('expenses').value = 10;
+
+  document.getElementById('profit').value = 20;
+
+  calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
