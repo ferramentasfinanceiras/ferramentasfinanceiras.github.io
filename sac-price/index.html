@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora SAC x Price | Compare Financiamentos</title>
+
+<meta name="description" content="Compare financiamento pelo sistema SAC e Tabela Price. Veja parcelas, juros totais, valor total pago e evolução do saldo devedor.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/sac-price/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous"></script>
+
+<style>
+
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #667085;
+  --border: #e4e7ec;
+  --primary: #2457e6;
+  --primary-dark: #1946c4;
+  --sac: #12805c;
+  --price: #2457e6;
+  --shadow: 0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* HEADER */
+
+header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+}
+
+nav a {
+  color: #475467;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+/* PAGE */
+
+main {
+  padding: 42px 0 60px;
+}
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  margin: 0 0 10px;
+  font-size: clamp(30px, 5vw, 42px);
+  letter-spacing: -1px;
+}
+
+.page-header p {
+  margin: 0;
+  max-width: 760px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* GRID */
+
+.grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.card h2 {
+  margin: 0 0 18px;
+  font-size: 18px;
+}
+
+/* FORM */
+
+.form-group {
+  margin-bottom: 17px;
+}
+
+label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-prefix {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  font: inherit;
+  color: var(--text);
+  outline: none;
+  background: #fff;
+}
+
+.money-input {
+  padding-left: 42px;
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(36,87,230,.12);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.note {
+  margin: 15px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* ADS */
+
+.ad-container {
+  min-height: 90px;
+  margin: 0 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* RESULTS */
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.metric {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.metric .label {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.metric .value {
+  font-size: clamp(17px, 2vw, 24px);
+  font-weight: 800;
+}
+
+.metric.sac {
+  border-top: 3px solid var(--sac);
+}
+
+.metric.price {
+  border-top: 3px solid var(--price);
+}
+
+/* COMPARISON */
+
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.system-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.system-card h3 {
+  margin: 0 0 16px;
+  font-size: 20px;
+}
+
+.system-card.sac h3 {
+  color: var(--sac);
+}
+
+.system-card.price h3 {
+  color: var(--price);
+}
+
+.system-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eef0f3;
+  font-size: 13px;
+}
+
+.system-row:last-child {
+  border-bottom: 0;
+}
+
+.system-row span:first-child {
+  color: var(--muted);
+}
+
+.system-row strong {
+  text-align: right;
+}
+
+/* TABLE */
+
+.table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th,
+td {
+  padding: 11px 12px;
+  border-bottom: 1px solid #eef0f3;
+  text-align: right;
+  white-space: nowrap;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+th {
+  background: #f8f9fb;
+  color: #475467;
+  font-weight: 700;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.sac-text {
+  color: var(--sac);
+  font-weight: 700;
+}
+
+.price-text {
+  color: var(--price);
+  font-weight: 700;
+}
+
+/* INFO */
+
+.info {
+  margin-top: 20px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.info h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+
+.info p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.info p:last-child {
+  margin-bottom: 0;
+}
+
+/* FOOTER */
+
+footer {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: 30px 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-copy {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: #475467;
+  font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  main {
+    padding-top: 30px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .results {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<header>
+
+<div class="container header-inner">
+
+<a href="/" class="logo">
+Ferramentas<span>Financeiras</span>
+</a>
+
+<nav>
+<a href="/">Ferramentas</a>
+<a href="/#sobre">Sobre</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<main>
+
+<div class="container">
+
+<div class="page-header">
+
+<h1>Calculadora SAC x Price</h1>
+
+<p>
+Compare os dois principais sistemas de amortização utilizados em financiamentos.
+Veja a diferença entre parcelas, juros totais, valor total pago e saldo devedor.
+</p>
+
+</div>
+
+
+<!-- ADVERTISEMENT -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<div class="grid">
+
+<!-- FORM -->
+
+<section class="card">
+
+<h2>Dados do financiamento</h2>
+
+<div class="form-group">
+
+<label for="amount">
+Valor financiado
+</label>
+
+<div class="input-wrapper">
+
+<span class="input-prefix">R$</span>
+
+<input
+id="amount"
+class="money-input"
+type="number"
+min="0"
+step="100"
+value="300000">
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="rate">
+Taxa de juros mensal (%)
+</label>
+
+<input
+id="rate"
+type="number"
+min="0"
+step="0.01"
+value="1">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="months">
+Prazo do financiamento
+</label>
+
+<input
+id="months"
+type="number"
+min="1"
+step="1"
+value="360">
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Calcular
+</button>
+
+<button
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+
+<p class="note">
+A simulação considera apenas principal e juros. Seguros,
+tarifas, correção monetária, impostos e outros encargos
+não são considerados.
+</p>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section>
+
+<div class="results">
+
+<div class="metric sac">
+
+<div class="label">
+SAC — 1ª parcela
+</div>
+
+<div class="value" id="sacFirst">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric price">
+
+<div class="label">
+Price — parcela
+</div>
+
+<div class="value" id="pricePayment">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric sac">
+
+<div class="label">
+Juros totais SAC
+</div>
+
+<div class="value" id="sacInterest">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric price">
+
+<div class="label">
+Juros totais Price
+</div>
+
+<div class="value" id="priceInterest">
+R$ 0,00
+</div>
+
+</div>
+
+</div>
+
+
+<div class="comparison">
+
+<div class="system-card sac">
+
+<h3>SAC</h3>
+
+<div class="system-row">
+
+<span>1ª parcela</span>
+
+<strong id="sacFirst2">
+R$ 0,00
+</strong>
+
+</div>
+
+<div class="system-row">
+
+<span>Última parcela</span>
+
+<strong id="sacLast">
+R$ 0,00
+</strong>
+
+</div>
+
+<div class="system-row">
+
+<span>Total de juros</span>
+
+<strong id="sacInterest2">
+R$ 0,00
+</strong>
+
+</div>
+
+<div class="system-row">
+
+<span>Total pago</span>
+
+<strong id="sacTotal">
+R$ 0,00
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="system-card price">
+
+<h3>Tabela Price</h3>
+
+<div class="system-row">
+
+<span>Parcela</span>
+
+<strong id="pricePayment2">
+R$ 0,00
+</strong>
+
+</div>
+
+<div class="system-row">
+
+<span>Última parcela</span>
+
+<strong id="priceLast">
+R$ 0,00
+</strong>
+
+</div>
+
+<div class="system-row">
+
+<span>Total de juros</span>
+
+<strong id="priceInterest2">
+R$ 0,00
+</strong>
+
+</div>
+
+<div class="system-row">
+
+<span>Total pago</span>
+
+<strong id="priceTotal">
+R$ 0,00
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+Comparação mês a mês
+</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Mês</th>
+
+<th class="sac-text">
+SAC — Parcela
+</th>
+
+<th class="price-text">
+Price — Parcela
+</th>
+
+<th class="sac-text">
+Saldo SAC
+</th>
+
+<th class="price-text">
+Saldo Price
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- SECOND AD -->
+
+<div class="ad-container" style="margin-top:25px">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<section class="info">
+
+<h2>SAC ou Price: qual é melhor?</h2>
+
+<p>
+No sistema SAC, a amortização do principal é constante. Por isso,
+as parcelas começam maiores e diminuem ao longo do financiamento.
+</p>
+
+<p>
+Na Tabela Price, as parcelas são constantes quando a taxa de juros
+permanece constante. No início, uma parcela maior do pagamento
+corresponde aos juros e, ao longo do tempo, a amortização ganha
+participação.
+</p>
+
+<p>
+Em condições equivalentes, a SAC normalmente apresenta menor
+custo total de juros, enquanto a Price oferece uma parcela inicial
+menor. A escolha depende principalmente da capacidade de pagamento
+e do custo total que você está disposto a assumir.
+</p>
+
+<p>
+Esta calculadora é uma ferramenta de simulação e não representa
+uma proposta de financiamento. As condições reais podem incluir
+seguros, tarifas, impostos, indexadores e outros encargos.
+</p>
+
+</section>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="container footer-inner">
+
+<div class="footer-copy">
+© 2026 Ferramentas Financeiras. Todos os direitos reservados.
+</div>
+
+<div class="footer-links">
+
+<a href="/">
+Ferramentas
+</a>
+
+<a href="/sobre/">
+Sobre
+</a>
+
+<a href="/contato/">
+Contato
+</a>
+
+<a href="/politica-de-privacidade/">
+Política de Privacidade
+</a>
+
+<a href="/termos-de-uso/">
+Termos de Uso
+</a>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+const money = value =>
+value.toLocaleString('pt-BR', {
+style: 'currency',
+currency: 'BRL'
+});
+
+
+function calculate() {
+
+const amount =
+Math.max(
+0,
+Number(document.getElementById('amount').value) || 0
+);
+
+const rate =
+Math.max(
+0,
+Number(document.getElementById('rate').value) || 0
+) / 100;
+
+const months =
+Math.max(
+1,
+Math.floor(
+Number(document.getElementById('months').value) || 1
+)
+);
+
+
+/* =========================
+SAC
+========================= */
+
+const sacAmortization =
+amount / months;
+
+let sacBalance = amount;
+
+let sacInterestTotal = 0;
+
+let sacTotal = 0;
+
+let sacFirst = 0;
+
+let sacLast = 0;
+
+
+/* =========================
+PRICE
+========================= */
+
+let pricePayment;
+
+if (rate === 0) {
+
+pricePayment = amount / months;
+
+} else {
+
+pricePayment =
+amount *
+(
+rate *
+Math.pow(1 + rate, months)
+) /
+(
+Math.pow(1 + rate, months) - 1
+);
+
+}
+
+let priceBalance = amount;
+
+let priceInterestTotal = 0;
+
+let priceTotal = 0;
+
+const rows = [];
+
+
+for (let month = 1; month <= months; month++) {
+
+
+/* SAC */
+
+const sacInterest =
+sacBalance * rate;
+
+const sacPayment =
+sacAmortization + sacInterest;
+
+sacBalance =
+Math.max(
+0,
+sacBalance - sacAmortization
+);
+
+sacInterestTotal += sacInterest;
+
+sacTotal += sacPayment;
+
+if (month === 1) {
+sacFirst = sacPayment;
+}
+
+if (month === months) {
+sacLast = sacPayment;
+}
+
+
+/* PRICE */
+
+const priceInterest =
+priceBalance * rate;
+
+const priceAmortization =
+pricePayment - priceInterest;
+
+priceBalance =
+Math.max(
+0,
+priceBalance - priceAmortization
+);
+
+priceInterestTotal += priceInterest;
+
+priceTotal += pricePayment;
+
+
+rows.push({
+
+month,
+
+sacPayment,
+
+pricePayment,
+
+sacBalance,
+
+priceBalance
+
+});
+
+}
+
+
+/* =========================
+RESULTS
+========================= */
+
+document.getElementById('sacFirst').textContent =
+money(sacFirst);
+
+document.getElementById('sacFirst2').textContent =
+money(sacFirst);
+
+document.getElementById('sacLast').textContent =
+money(sacLast);
+
+document.getElementById('sacInterest').textContent =
+money(sacInterestTotal);
+
+document.getElementById('sacInterest2').textContent =
+money(sacInterestTotal);
+
+document.getElementById('sacTotal').textContent =
+money(sacTotal);
+
+
+document.getElementById('pricePayment').textContent =
+money(pricePayment);
+
+document.getElementById('pricePayment2').textContent =
+money(pricePayment);
+
+document.getElementById('priceLast').textContent =
+money(pricePayment);
+
+document.getElementById('priceInterest').textContent =
+money(priceInterestTotal);
+
+document.getElementById('priceInterest2').textContent =
+money(priceInterestTotal);
+
+document.getElementById('priceTotal').textContent =
+money(priceTotal);
+
+
+/* =========================
+TABLE
+========================= */
+
+const tbody =
+document.getElementById('tableBody');
+
+tbody.innerHTML = rows.map(row => `
+
+<tr>
+
+<td>
+${row.month}
+</td>
+
+<td class="sac-text">
+${money(row.sacPayment)}
+</td>
+
+<td class="price-text">
+${money(row.pricePayment)}
+</td>
+
+<td class="sac-text">
+${money(row.sacBalance)}
+</td>
+
+<td class="price-text">
+${money(row.priceBalance)}
+</td>
+
+</tr>
+
+`).join('');
+
+}
+
+
+function resetCalculator() {
+
+document.getElementById('amount').value = 300000;
+
+document.getElementById('rate').value = 1;
+
+document.getElementById('months').value = 360;
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
