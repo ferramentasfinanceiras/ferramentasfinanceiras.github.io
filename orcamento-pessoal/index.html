@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de Orçamento Pessoal | Organize suas Finanças</title>
+
+<meta name="description" content="Organize sua vida financeira com uma calculadora de orçamento pessoal gratuita. Veja receitas, despesas, saldo mensal e quanto você pode economizar.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/orcamento-pessoal/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous"></script>
+
+<style>
+
+:root {
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e4e7ec;
+  --primary:#2457e6;
+  --primary-dark:#1946c4;
+  --success:#12805c;
+  --danger:#c43232;
+  --warning:#b54708;
+  --shadow:0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,
+  BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+.container {
+  max-width:1180px;
+  margin:0 auto;
+  padding:32px 18px 48px;
+}
+
+header {
+  margin-bottom:24px;
+}
+
+.back {
+  display:inline-block;
+  color:var(--primary);
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:18px;
+}
+
+h1 {
+  margin:0 0 8px;
+  font-size:clamp(28px,4vw,40px);
+  letter-spacing:-1px;
+}
+
+.subtitle {
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+  line-height:1.6;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:20px;
+  align-items:start;
+}
+
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+.card h2 {
+  font-size:18px;
+  margin:0 0 18px;
+}
+
+.form-group {
+  margin-bottom:16px;
+}
+
+label {
+  display:block;
+  font-size:13px;
+  font-weight:650;
+  margin-bottom:7px;
+}
+
+input,
+select,
+button {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 13px;
+  font:inherit;
+  background:#fff;
+  color:var(--text);
+  outline:none;
+}
+
+input:focus,
+select:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(36,87,230,.12);
+}
+
+.input-row {
+  display:flex;
+  gap:8px;
+}
+
+.input-row input {
+  flex:1;
+}
+
+.input-row select {
+  width:120px;
+  flex:0 0 120px;
+}
+
+.actions {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+button {
+  cursor:pointer;
+  font-weight:700;
+}
+
+.btn-primary {
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
+}
+
+.btn-primary:hover {
+  background:var(--primary-dark);
+}
+
+.btn-secondary {
+  background:#fff;
+}
+
+.note {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+  margin-top:14px;
+}
+
+.results {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.metric {
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  background:#fff;
+}
+
+.metric .label {
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.metric .value {
+  font-size:clamp(18px,2.2vw,25px);
+  font-weight:800;
+  letter-spacing:-.4px;
+}
+
+.metric.highlight {
+  background:#f0f5ff;
+  border-color:#cddcff;
+}
+
+.metric.highlight .value {
+  color:var(--primary);
+}
+
+.metric.positive .value {
+  color:var(--success);
+}
+
+.metric.negative .value {
+  color:var(--danger);
+}
+
+.metric.warning .value {
+  color:var(--warning);
+}
+
+.ad-container {
+  min-height:90px;
+  margin:20px 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.breakdown {
+  margin-top:18px;
+}
+
+.breakdown-item {
+  margin-bottom:18px;
+}
+
+.breakdown-header {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:7px;
+  font-size:13px;
+}
+
+.breakdown-header span:last-child {
+  font-weight:700;
+}
+
+.progress {
+  height:9px;
+  background:#eef0f3;
+  border-radius:99px;
+  overflow:hidden;
+}
+
+.progress-bar {
+  height:100%;
+  border-radius:99px;
+  background:var(--primary);
+  transition:width .3s ease;
+}
+
+.summary {
+  margin-top:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.summary-row {
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:13px 15px;
+  border-bottom:1px solid #eef0f3;
+  font-size:13px;
+}
+
+.summary-row:last-child {
+  border-bottom:0;
+}
+
+.summary-row span:first-child {
+  color:var(--muted);
+}
+
+.summary-row strong {
+  text-align:right;
+}
+
+.info {
+  margin-top:20px;
+}
+
+.info p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+  margin:0 0 12px;
+}
+
+.tip {
+  margin-top:18px;
+  padding:15px;
+  background:#f8f9fb;
+  border:1px solid var(--border);
+  border-radius:12px;
+  color:#475467;
+  font-size:13px;
+  line-height:1.6;
+}
+
+@media(max-width:900px) {
+
+  .grid {
+    grid-template-columns:1fr;
+  }
+
+  .results {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:520px) {
+
+  .container {
+    padding:22px 12px 36px;
+  }
+
+  .card {
+    padding:16px;
+    border-radius:14px;
+  }
+
+  .results {
+    grid-template-columns:1fr;
+  }
+
+  .input-row {
+    flex-direction:column;
+  }
+
+  .input-row select {
+    width:100%;
+  }
+
+  .actions {
+    flex-direction:column;
+  }
+
+  .summary-row {
+    flex-direction:column;
+    gap:5px;
+  }
+
+  .summary-row strong {
+    text-align:left;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="container">
+
+<header>
+
+<a href="/" class="back">← Ferramentas Financeiras</a>
+
+<h1>Calculadora de Orçamento Pessoal</h1>
+
+<p class="subtitle">
+Organize suas receitas e despesas, descubra quanto sobra no mês
+e veja qual percentual da sua renda está comprometido.
+</p>
+
+</header>
+
+
+<div class="grid">
+
+
+<!-- FORMULÁRIO -->
+
+<section class="card">
+
+<h2>Seu orçamento mensal</h2>
+
+
+<div class="form-group">
+
+<label for="income">
+Renda mensal líquida
+</label>
+
+<input
+id="income"
+type="number"
+min="0"
+step="0.01"
+value="5000">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="housing">
+Moradia
+</label>
+
+<input
+id="housing"
+type="number"
+min="0"
+step="0.01"
+value="1200">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="food">
+Alimentação
+</label>
+
+<input
+id="food"
+type="number"
+min="0"
+step="0.01"
+value="700">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="transport">
+Transporte
+</label>
+
+<input
+id="transport"
+type="number"
+min="0"
+step="0.01"
+value="400">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="utilities">
+Contas e serviços
+</label>
+
+<input
+id="utilities"
+type="number"
+min="0"
+step="0.01"
+value="400">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="health">
+Saúde
+</label>
+
+<input
+id="health"
+type="number"
+min="0"
+step="0.01"
+value="250">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="leisure">
+Lazer e entretenimento
+</label>
+
+<input
+id="leisure"
+type="number"
+min="0"
+step="0.01"
+value="300">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="debts">
+Dívidas e parcelas
+</label>
+
+<input
+id="debts"
+type="number"
+min="0"
+step="0.01"
+value="300">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="other">
+Outras despesas
+</label>
+
+<input
+id="other"
+type="number"
+min="0"
+step="0.01"
+value="200">
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Calcular orçamento
+</button>
+
+<button
+class="btn-secondary"
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+
+<p class="note">
+Informe valores médios mensais. O resultado é uma estimativa para
+ajudar no planejamento financeiro e não substitui um controle detalhado
+das suas despesas.
+</p>
+
+</section>
+
+
+<!-- RESULTADOS -->
+
+<section>
+
+
+<div class="results">
+
+
+<div class="metric highlight">
+
+<div class="label">
+Saldo disponível
+</div>
+
+<div class="value" id="balance">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+Total de despesas
+</div>
+
+<div class="value" id="expenses">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric positive">
+
+<div class="label">
+Percentual comprometido
+</div>
+
+<div class="value" id="committed">
+0,00%
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+Potencial de economia anual
+</div>
+
+<div class="value" id="annualSaving">
+R$ 0,00
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- ADSENSE -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true">
+</ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<!-- DISTRIBUIÇÃO -->
+
+<div class="card">
+
+<h2>Distribuição das despesas</h2>
+
+<div class="breakdown">
+
+
+<div class="breakdown-item">
+
+<div class="breakdown-header">
+
+<span>Moradia</span>
+
+<span id="housingPercent">0%</span>
+
+</div>
+
+<div class="progress">
+<div
+class="progress-bar"
+id="housingBar"
+style="width:0%">
+</div>
+</div>
+
+</div>
+
+
+<div class="breakdown-item">
+
+<div class="breakdown-header">
+
+<span>Alimentação</span>
+
+<span id="foodPercent">0%</span>
+
+</div>
+
+<div class="progress">
+<div
+class="progress-bar"
+id="foodBar"
+style="width:0%">
+</div>
+</div>
+
+</div>
+
+
+<div class="breakdown-item">
+
+<div class="breakdown-header">
+
+<span>Transporte</span>
+
+<span id="transportPercent">0%</span>
+
+</div>
+
+<div class="progress">
+<div
+class="progress-bar"
+id="transportBar"
+style="width:0%">
+</div>
+</div>
+
+</div>
+
+
+<div class="breakdown-item">
+
+<div class="breakdown-header">
+
+<span>Contas e serviços</span>
+
+<span id="utilitiesPercent">0%</span>
+
+</div>
+
+<div class="progress">
+<div
+class="progress-bar"
+id="utilitiesBar"
+style="width:0%">
+</div>
+</div>
+
+</div>
+
+
+<div class="breakdown-item">
+
+<div class="breakdown-header">
+
+<span>Saúde</span>
+
+<span id="healthPercent">0%</span>
+
+</div>
+
+<div class="progress">
+<div
+class="progress-bar"
+id="healthBar"
+style="width:0%">
+</div>
+</div>
+
+</div>
+
+
+<div class="breakdown-item">
+
+<div class="breakdown-header">
+
+<span>Lazer</span>
+
+<span id="leisurePercent">0%</span>
+
+</div>
+
+<div class="progress">
+<div
+class="progress-bar"
+id="leisureBar"
+style="width:0%">
+</div>
+</div>
+
+</div>
+
+
+<div class="breakdown-item">
+
+<div class="breakdown-header">
+
+<span>Dívidas e parcelas</span>
+
+<span id="debtsPercent">0%</span>
+
+</div>
+
+<div class="progress">
+<div
+class="progress-bar"
+id="debtsBar"
+style="width:0%">
+</div>
+</div>
+
+</div>
+
+
+<div class="breakdown-item">
+
+<div class="breakdown-header">
+
+<span>Outras despesas</span>
+
+<span id="otherPercent">0%</span>
+
+</div>
+
+<div class="progress">
+<div
+class="progress-bar"
+id="otherBar"
+style="width:0%">
+</div>
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- RESUMO -->
+
+<div class="card" style="margin-top:18px">
+
+<h2>Resumo financeiro</h2>
+
+<div class="summary">
+
+<div class="summary-row">
+<span>Renda mensal</span>
+<strong id="summaryIncome">R$ 0,00</strong>
+</div>
+
+<div class="summary-row">
+<span>Despesas mensais</span>
+<strong id="summaryExpenses">R$ 0,00</strong>
+</div>
+
+<div class="summary-row">
+<span>Saldo mensal</span>
+<strong id="summaryBalance">R$ 0,00</strong>
+</div>
+
+<div class="summary-row">
+<span>Renda anual</span>
+<strong id="summaryAnnualIncome">R$ 0,00</strong>
+</div>
+
+<div class="summary-row">
+<span>Despesas anuais</span>
+<strong id="summaryAnnualExpenses">R$ 0,00</strong>
+</div>
+
+<div class="summary-row">
+<span>Saldo potencial em 12 meses</span>
+<strong id="summaryAnnualBalance">R$ 0,00</strong>
+</div>
+
+</div>
+
+
+<div class="tip" id="statusMessage">
+Informe seus valores para analisar seu orçamento.
+</div>
+
+</div>
+
+
+<!-- INFORMAÇÕES -->
+
+<div class="card info">
+
+<h2>Como organizar um orçamento pessoal?</h2>
+
+<p>
+Um orçamento pessoal permite visualizar quanto dinheiro entra,
+quanto sai e quanto permanece disponível todos os meses.
+</p>
+
+<p>
+O primeiro passo é listar sua renda líquida e separar as despesas
+entre categorias. Isso facilita identificar gastos que podem ser
+reduzidos e definir um valor para investimentos ou reserva financeira.
+</p>
+
+<p>
+Uma boa prática é acompanhar o orçamento todos os meses e comparar
+o planejado com o que realmente foi gasto.
+</p>
+
+</div>
+
+
+</section>
+
+</div>
+
+</div>
+
+
+<script>
+
+const money = value =>
+value.toLocaleString('pt-BR',{
+style:'currency',
+currency:'BRL'
+});
+
+
+const percent = value =>
+value.toLocaleString('pt-BR',{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}) + '%';
+
+
+function getValue(id){
+
+return Math.max(
+0,
+Number(document.getElementById(id).value) || 0
+);
+
+}
+
+
+function calculate(){
+
+const income = getValue('income');
+
+const categories = {
+
+housing:getValue('housing'),
+
+food:getValue('food'),
+
+transport:getValue('transport'),
+
+utilities:getValue('utilities'),
+
+health:getValue('health'),
+
+leisure:getValue('leisure'),
+
+debts:getValue('debts'),
+
+other:getValue('other')
+
+};
+
+
+const expenses =
+Object.values(categories)
+.reduce((sum,value)=>sum+value,0);
+
+
+const balance =
+income - expenses;
+
+
+const committed =
+income > 0
+? expenses / income * 100
+: 0;
+
+
+const annualSaving =
+Math.max(0,balance * 12);
+
+
+document.getElementById('balance').textContent =
+money(balance);
+
+document.getElementById('expenses').textContent =
+money(expenses);
+
+document.getElementById('committed').textContent =
+percent(committed);
+
+document.getElementById('annualSaving').textContent =
+money(annualSaving);
+
+
+document.getElementById('summaryIncome').textContent =
+money(income);
+
+document.getElementById('summaryExpenses').textContent =
+money(expenses);
+
+document.getElementById('summaryBalance').textContent =
+money(balance);
+
+document.getElementById('summaryAnnualIncome').textContent =
+money(income * 12);
+
+document.getElementById('summaryAnnualExpenses').textContent =
+money(expenses * 12);
+
+document.getElementById('summaryAnnualBalance').textContent =
+money(balance * 12);
+
+
+Object.entries(categories).forEach(
+([category,value]) => {
+
+const categoryPercent =
+expenses > 0
+? value / expenses * 100
+: 0;
+
+document.getElementById(
+category + 'Percent'
+).textContent =
+percent(categoryPercent);
+
+document.getElementById(
+category + 'Bar'
+).style.width =
+Math.min(100,categoryPercent) + '%';
+
+});
+
+
+const status =
+document.getElementById('statusMessage');
+
+
+if(income <= 0){
+
+status.textContent =
+'Informe uma renda mensal para analisar seu orçamento.';
+
+status.style.color = '#667085';
+
+}
+
+else if(balance < 0){
+
+status.textContent =
+'Seu orçamento está negativo. As despesas estão maiores que sua renda. O primeiro objetivo deve ser reduzir o déficit mensal.';
+
+status.style.color = '#c43232';
+
+}
+
+else if(committed > 90){
+
+status.textContent =
+'Seu orçamento está bastante comprometido. Pequenas despesas inesperadas podem gerar um déficit.';
+
+status.style.color = '#b54708';
+
+}
+
+else if(committed > 70){
+
+status.textContent =
+'Uma parcela significativa da sua renda está comprometida. Vale revisar despesas e buscar aumentar sua margem mensal.';
+
+status.style.color = '#b54708';
+
+}
+
+else if(balance > 0){
+
+status.textContent =
+'Seu orçamento apresenta saldo positivo. Esse valor pode ser direcionado para reserva financeira, investimentos ou objetivos de médio e longo prazo.';
+
+status.style.color = '#12805c';
+
+}
+
+else{
+
+status.textContent =
+'Sua renda está praticamente toda comprometida com despesas.';
+
+status.style.color = '#667085';
+
+}
+
+}
+
+
+function resetCalculator(){
+
+document.getElementById('income').value = 5000;
+
+document.getElementById('housing').value = 1200;
+
+document.getElementById('food').value = 700;
+
+document.getElementById('transport').value = 400;
+
+document.getElementById('utilities').value = 400;
+
+document.getElementById('health').value = 250;
+
+document.getElementById('leisure').value = 300;
+
+document.getElementById('debts').value = 300;
+
+document.getElementById('other').value = 200;
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
