@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>À Vista ou Parcelado? | Calculadora Financeira</title>
+
+<meta name="description" content="Descubra se vale mais a pena pagar uma compra à vista ou parcelado. Compare o desconto, os juros e o rendimento do seu dinheiro.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ferramentasfinanceiras.github.io/a-vista-ou-parcelado/">
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+i:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4NXFVNT');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5452382323898798"
+crossorigin="anonymous">
+</script>
+
+<style>
+
+:root {
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e4e7ec;
+  --primary:#2457e6;
+  --primary-dark:#1946c4;
+  --success:#12805c;
+  --danger:#c43232;
+  --shadow:0 10px 30px rgba(16,24,40,.08);
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,
+  BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.container {
+  max-width:1180px;
+  margin:0 auto;
+  padding:32px 18px 48px;
+}
+
+header {
+  margin-bottom:24px;
+}
+
+h1 {
+  margin:0 0 8px;
+  font-size:clamp(28px,4vw,40px);
+  letter-spacing:-1px;
+}
+
+.subtitle {
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+  line-height:1.5;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:20px;
+  align-items:start;
+}
+
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+.card h2 {
+  font-size:18px;
+  margin:0 0 18px;
+}
+
+.form-group {
+  margin-bottom:16px;
+}
+
+label {
+  display:block;
+  font-size:13px;
+  font-weight:650;
+  margin-bottom:7px;
+}
+
+input,
+select,
+button {
+  width:100%;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  padding:12px 13px;
+  font:inherit;
+  background:#fff;
+  color:var(--text);
+  outline:none;
+}
+
+input:focus,
+select:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(36,87,230,.12);
+}
+
+.actions {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+button {
+  cursor:pointer;
+  font-weight:700;
+}
+
+.btn-primary {
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
+}
+
+.btn-primary:hover {
+  background:var(--primary-dark);
+}
+
+.btn-secondary {
+  background:#fff;
+}
+
+.note {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+  margin-top:14px;
+}
+
+.results {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.metric {
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  background:#fff;
+}
+
+.metric .label {
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.metric .value {
+  font-size:clamp(18px,2.2vw,25px);
+  font-weight:800;
+  letter-spacing:-.4px;
+}
+
+.metric.highlight {
+  background:#f0f5ff;
+  border-color:#cddcff;
+}
+
+.metric.highlight .value {
+  color:var(--primary);
+}
+
+.metric.positive .value {
+  color:var(--success);
+}
+
+.metric.negative .value {
+  color:var(--danger);
+}
+
+.comparison {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:18px;
+}
+
+.option {
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  background:#fff;
+}
+
+.option h3 {
+  margin:0 0 14px;
+  font-size:16px;
+}
+
+.option-row {
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:9px 0;
+  border-bottom:1px solid #eef0f3;
+  font-size:13px;
+}
+
+.option-row:last-child {
+  border-bottom:0;
+}
+
+.option-row span:first-child {
+  color:var(--muted);
+}
+
+.option-row strong {
+  text-align:right;
+}
+
+.verdict {
+  margin-top:18px;
+  padding:18px;
+  border-radius:14px;
+  background:#f0f5ff;
+  border:1px solid #cddcff;
+}
+
+.verdict h3 {
+  margin:0 0 7px;
+  color:var(--primary);
+  font-size:16px;
+}
+
+.verdict p {
+  margin:0;
+  font-size:13px;
+  line-height:1.6;
+  color:#475467;
+}
+
+.ad-container {
+  min-height:90px;
+  margin:10px 0 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.footer-note {
+  margin-top:14px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+@media(max-width:900px) {
+
+  .grid {
+    grid-template-columns:1fr;
+  }
+
+  .results {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:600px) {
+
+  .comparison {
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:520px) {
+
+  .container {
+    padding:22px 12px 36px;
+  }
+
+  .card {
+    padding:16px;
+    border-radius:14px;
+  }
+
+  .results {
+    grid-template-columns:1fr;
+  }
+
+  .actions {
+    flex-direction:column;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+
+<noscript>
+<iframe
+src="https://www.googletagmanager.com/ns.html?id=GTM-W4NXFVNT"
+height="0"
+width="0"
+style="display:none;visibility:hidden">
+</iframe>
+</noscript>
+
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="container">
+
+<header>
+
+<h1>À Vista ou Parcelado?</h1>
+
+<p class="subtitle">
+Compare o preço à vista com o parcelamento e descubra qual opção pode ser mais vantajosa para o seu dinheiro.
+</p>
+
+</header>
+
+
+<!-- ADVERTISEMENT -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true">
+</ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<div class="grid">
+
+
+<!-- FORM -->
+
+<section class="card">
+
+<h2>Dados da compra</h2>
+
+
+<div class="form-group">
+
+<label for="cashPrice">
+Preço à vista
+</label>
+
+<input
+id="cashPrice"
+type="number"
+min="0"
+step="0.01"
+value="5000">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="installments">
+Número de parcelas
+</label>
+
+<input
+id="installments"
+type="number"
+min="1"
+step="1"
+value="10">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="installmentValue">
+Valor de cada parcela
+</label>
+
+<input
+id="installmentValue"
+type="number"
+min="0"
+step="0.01"
+value="550">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="rate">
+Rendimento do dinheiro</label>
+
+<div style="display:flex;gap:8px;">
+
+<input
+id="rate"
+type="number"
+min="0"
+step="0.01"
+value="1">
+
+<select
+id="ratePeriod"
+style="width:120px;flex:0 0 120px;">
+
+<option value="month">Ao mês</option>
+<option value="year">Ao ano</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn-primary"
+onclick="calculate()">
+Comparar
+</button>
+
+<button
+class="btn-secondary"
+onclick="resetCalculator()">
+Limpar
+</button>
+
+</div>
+
+
+<p class="note">
+A comparação considera que o dinheiro que não foi usado na compra à vista permanece investido e rende durante o período das parcelas.
+</p>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section>
+
+<div class="results">
+
+
+<div class="metric highlight">
+
+<div class="label">
+Custo à vista
+</div>
+
+<div
+class="value"
+id="cashResult">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+Total parcelado
+</div>
+
+<div
+class="value"
+id="installmentResult">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric positive">
+
+<div class="label">
+Valor final investido
+</div>
+
+<div
+class="value"
+id="investmentResult">
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="label">
+Diferença
+</div>
+
+<div
+class="value"
+id="differenceResult">
+R$ 0,00
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="comparison">
+
+
+<div class="option">
+
+<h3>Pagamento à vista</h3>
+
+<div class="option-row">
+
+<span>Valor pago</span>
+
+<strong id="cashOption">
+R$ 0,00
+</strong>
+
+</div>
+
+<div class="option-row">
+
+<span>Dinheiro restante</span>
+
+<strong id="cashRemaining">
+R$ 0,00
+</strong>
+
+</div>
+
+<div class="option-row">
+
+<span>Valor após o período</span>
+
+<strong id="cashFinal">
+R$ 0,00
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="option">
+
+<h3>Pagamento parcelado</h3>
+
+<div class="option-row">
+
+<span>Valor por parcela</span>
+
+<strong id="installmentOption">
+R$ 0,00
+</strong>
+
+</div>
+
+<div class="option-row">
+
+<span>Número de parcelas</span>
+
+<strong id="numberOption">
+0
+</strong>
+
+</div>
+
+<div class="option-row">
+
+<span>Total pago</span>
+
+<strong id="totalOption">
+R$ 0,00
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="verdict">
+
+<h3 id="verdictTitle">
+Resultado
+</h3>
+
+<p id="verdictText">
+Informe os dados para comparar as opções.
+</p>
+
+</div>
+
+
+<div class="card" style="margin-top:18px;">
+
+<h2>Entenda a comparação</h2>
+
+<p class="footer-note">
+Quando você paga à vista, perde imediatamente o rendimento que poderia obter mantendo o dinheiro investido.
+Quando parcela sem juros, você mantém parte do dinheiro aplicado e pode obter rendimento durante o período.
+Por isso, o parcelamento pode ser vantajoso mesmo quando o valor total das parcelas é maior que o preço à vista, dependendo da taxa de rendimento.
+</p>
+
+<p class="footer-note">
+A calculadora considera pagamentos no início de cada período e utiliza capitalização composta para estimar o rendimento.
+Os resultados são simulativos e não constituem recomendação financeira.
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- SECOND AD -->
+
+<div class="ad-container">
+
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5452382323898798"
+data-ad-slot="auto"
+data-ad-format="auto"
+data-full-width-responsive="true">
+</ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+const money = value =>
+value.toLocaleString('pt-BR',{
+style:'currency',
+currency:'BRL'
+});
+
+
+function getMonthlyRate(rate, period) {
+
+if (period === 'month') {
+return rate / 100;
+}
+
+return Math.pow(
+1 + rate / 100,
+1 / 12
+) - 1;
+
+}
+
+
+function calculate() {
+
+const cashPrice =
+Math.max(
+0,
+Number(
+document.getElementById('cashPrice').value
+) || 0
+);
+
+const installments =
+Math.max(
+1,
+Math.floor(
+Number(
+document.getElementById('installments').value
+) || 1
+)
+);
+
+const installmentValue =
+Math.max(
+0,
+Number(
+document.getElementById('installmentValue').value
+) || 0
+);
+
+const rate =
+Math.max(
+0,
+Number(
+document.getElementById('rate').value
+) || 0
+);
+
+const ratePeriod =
+document.getElementById('ratePeriod').value;
+
+
+const monthlyRate =
+getMonthlyRate(
+rate,
+ratePeriod
+);
+
+
+const totalInstallments =
+installments * installmentValue;
+
+
+/*
+Cenário à vista:
+
+O comprador paga o preço à vista imediatamente.
+O dinheiro restante continua investido durante
+o período equivalente ao parcelamento.
+*/
+
+let cashRemaining = 0;
+
+
+// Neste modelo usamos o preço parcelado como
+// referência para o capital que o comprador teria
+// disponível inicialmente.
+
+let initialCapital =
+Math.max(
+cashPrice,
+totalInstallments
+);
+
+
+// Dinheiro que sobra após pagar à vista
+
+cashRemaining =
+initialCapital - cashPrice;
+
+
+// Valor futuro do dinheiro restante
+
+let cashFinal =
+cashRemaining *
+Math.pow(
+1 + monthlyRate,
+installments
+);
+
+
+/*
+Cenário parcelado:
+
+O comprador mantém inicialmente o capital.
+A cada mês paga uma parcela.
+O saldo restante rende durante o período.
+*/
+
+let balance =
+initialCapital;
+
+
+for (
+let i = 1;
+i <= installments;
+i++
+) {
+
+balance =
+balance *
+(1 + monthlyRate);
+
+balance -= installmentValue;
+
+}
+
+
+const installmentFinal =
+Math.max(
+0,
+balance
+);
+
+
+// Diferença econômica entre os cenários
+
+const difference =
+installmentFinal - cashFinal;
+
+
+// Atualização dos resultados
+
+document.getElementById('cashResult')
+.textContent =
+money(cashPrice);
+
+document.getElementById('installmentResult')
+.textContent =
+money(totalInstallments);
+
+document.getElementById('investmentResult')
+.textContent =
+money(Math.max(
+cashFinal,
+installmentFinal
+));
+
+document.getElementById('differenceResult')
+.textContent =
+money(Math.abs(difference));
+
+
+document.getElementById('cashOption')
+.textContent =
+money(cashPrice);
+
+document.getElementById('cashRemaining')
+.textContent =
+money(cashRemaining);
+
+document.getElementById('cashFinal')
+.textContent =
+money(cashFinal);
+
+
+document.getElementById('installmentOption')
+.textContent =
+money(installmentValue);
+
+document.getElementById('numberOption')
+.textContent =
+installments;
+
+document.getElementById('totalOption')
+.textContent =
+money(totalInstallments);
+
+
+// Veredito
+
+const title =
+document.getElementById('verdictTitle');
+
+const text =
+document.getElementById('verdictText');
+
+
+if (difference > 0) {
+
+title.textContent =
+'Parcelado pode ser mais vantajoso';
+
+text.textContent =
+`Considerando o rendimento de ${rate.toLocaleString('pt-BR',{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+})}% ${ratePeriod === 'month' ? 'ao mês' : 'ao ano'}, manter o dinheiro investido enquanto paga as parcelas gera um resultado estimado superior ao cenário à vista em ${money(Math.abs(difference))}.`;
+
+}
+else if (difference < 0) {
+
+title.textContent =
+'À vista pode ser mais vantajoso';
+
+text.textContent =
+`Neste cenário, pagar à vista apresenta um resultado financeiro estimado melhor em ${money(Math.abs(difference))} considerando o rendimento informado.`;
+
+}
+else {
+
+title.textContent =
+'As opções são equivalentes';
+
+text.textContent =
+'Com os valores informados, os dois cenários apresentam resultados financeiros praticamente iguais.';
+
+}
+
+}
+
+
+function resetCalculator() {
+
+document.getElementById('cashPrice')
+.value = 5000;
+
+document.getElementById('installments')
+.value = 10;
+
+document.getElementById('installmentValue')
+.value = 550;
+
+document.getElementById('rate')
+.value = 1;
+
+document.getElementById('ratePeriod')
+.value = 'month';
+
+calculate();
+
+}
+
+
+calculate();
+
+</script>
+
+</body>
+</html>
